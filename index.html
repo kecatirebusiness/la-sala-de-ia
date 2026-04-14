@@ -753,6 +753,9 @@
     submitBtn.innerHTML = 'Enviando…';
 
     const raw = Object.fromEntries(new FormData(formEl));
+    // Phone: escapar el "+" para que Google Sheets no lo lea como fórmula
+    const safePhone = raw.phone && /^[+=\-@]/.test(raw.phone) ? "'" + raw.phone : raw.phone;
+
     const payload = {
       name: raw.name,
       email: raw.email,
@@ -763,22 +766,20 @@
       _captcha: 'false',
     };
 
-    let ok = false;
     try {
       // 1. FormSubmit → email a lasaladeia@gmail.com
-      const r1 = await fetch('https://formsubmit.co/ajax/lasaladeia@gmail.com', {
+      fetch('https://formsubmit.co/ajax/lasaladeia@gmail.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(payload),
-      });
-      ok = r1.ok;
+      }).catch(() => {});
 
-      // 2. (opcional) Si hay Apps Script webhook configurado, también se guarda al sheet
+      // 2. Apps Script → guarda al Google Sheet (CRM dashboard)
       if (window.APPS_SCRIPT_URL) {
         fetch(window.APPS_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
-          body: JSON.stringify(raw),
+          body: JSON.stringify({ ...raw, phone: safePhone }),
         }).catch(() => {});
       }
     } catch (err) {
@@ -794,8 +795,8 @@
     document.getElementById('formCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
-  // Placeholder: cuando Kevin configure Apps Script, se pega aquí y también guarda al sheet
-  // window.APPS_SCRIPT_URL = 'https://script.google.com/macros/s/XXX/exec';
+  // Apps Script webhook → guarda cada lead al Google Sheet del CRM
+  window.APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx4lMpMjSD4aGnMNOdu3DwnnV8XITHB6t2smF7vh5KYa-OdztslQIxufsgmWrbaI32J/exec';
 </script>
 
 </body>
