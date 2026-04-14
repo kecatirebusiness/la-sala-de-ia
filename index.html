@@ -159,6 +159,13 @@
     padding: 20px 24px 60px;
     text-align: center;
   }
+  .kicker-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
   .kicker {
     display: inline-flex;
     align-items: center;
@@ -170,17 +177,47 @@
     border-radius: 999px;
     font-size: 13px;
     font-weight: 500;
-    margin-bottom: 24px;
     letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .kicker.live {
+    background: rgba(220, 38, 38, 0.12);
+    color: #FF6B6B;
+    border-color: rgba(220, 38, 38, 0.35);
   }
   .kicker .dot {
     width: 6px; height: 6px; border-radius: 50%; background: var(--emerald);
     box-shadow: 0 0 0 0 rgba(0, 210, 106, 0.6);
     animation: pulse 1.8s ease-out infinite;
   }
+  .kicker .live-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: #FF4545;
+    box-shadow: 0 0 0 0 rgba(255, 69, 69, 0.7);
+    animation: livePulse 1.2s ease-out infinite;
+  }
+  .viewer-count {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+  #viewerNum {
+    font-variant-numeric: tabular-nums;
+    display: inline-block;
+    min-width: 22px;
+    text-align: right;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  #viewerNum.flip {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
   @keyframes pulse {
     0%   { box-shadow: 0 0 0 0 rgba(0, 210, 106, 0.7); }
     100% { box-shadow: 0 0 0 10px rgba(0, 210, 106, 0); }
+  }
+  @keyframes livePulse {
+    0%   { box-shadow: 0 0 0 0 rgba(255, 69, 69, 0.7); }
+    100% { box-shadow: 0 0 0 8px rgba(255, 69, 69, 0); }
   }
 
   h1 {
@@ -466,12 +503,49 @@
   }
   .skip-intro:hover { opacity: 1; }
 
-  @media (max-width: 600px) {
-    nav { padding: 16px 20px; }
+  @media (max-width: 768px) {
+    nav { padding: 14px 18px; }
     .nav-right { display: none; }
-    .hero { padding: 10px 20px 50px; }
-    .trust { grid-template-columns: 1fr; gap: 20px; padding: 30px 24px 60px; }
-    .modal { padding: 28px 24px; }
+    .logo { font-size: 15px; gap: 10px; }
+    .logo svg { width: 32px; height: 32px; }
+
+    .hero { padding: 4px 18px 40px; }
+    .kicker-row { gap: 8px; margin-bottom: 20px; }
+    .kicker { font-size: 11.5px; padding: 7px 12px; gap: 6px; }
+    h1 { font-size: clamp(30px, 9vw, 44px); margin-bottom: 14px; }
+    .hero p.lead { font-size: 15px; margin-bottom: 24px; padding: 0 4px; }
+
+    .video-wrap { border-radius: 14px; margin-bottom: 20px; }
+    .video-caption { font-size: 12px; margin-bottom: 22px; }
+
+    .unmute-btn { top: 10px; right: 10px; padding: 8px 14px; font-size: 12px; gap: 6px; }
+    .unmute-btn svg { width: 14px; height: 14px; }
+
+    .cta-btn { padding: 16px 28px; font-size: 16px; width: 100%; max-width: 360px; justify-content: center; }
+    .cta-note { font-size: 12px; padding: 0 10px; }
+
+    .trust {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 24px 18px 50px;
+    }
+    .trust-item .num { font-size: 26px; }
+    .trust-item .label { font-size: 11px; }
+
+    .modal { padding: 24px 20px; border-radius: 20px; }
+    .modal h2 { font-size: 22px; }
+    .modal p.sub { font-size: 14px; margin-bottom: 18px; }
+
+    .intro-logo { width: 110px; height: 110px; }
+    .intro-tag { font-size: 18px; bottom: 22%; }
+
+    .skip-intro { bottom: 14px; right: 14px; font-size: 11px; padding: 5px 12px; }
+  }
+
+  @media (max-width: 380px) {
+    h1 { font-size: 26px; }
+    .kicker { font-size: 11px; padding: 6px 10px; }
+    .kicker-row { flex-direction: column; align-items: center; gap: 6px; }
   }
 </style>
 </head>
@@ -509,7 +583,13 @@
   </nav>
 
   <section class="hero">
-    <div class="kicker"><span class="dot"></span> Cupos limitados esta semana</div>
+    <div class="kicker-row">
+      <div class="kicker"><span class="dot"></span> Cupos limitados esta semana</div>
+      <div class="kicker live">
+        <span class="live-dot"></span>
+        <span class="viewer-count"><span id="viewerNum">47</span> personas viendo ahora</span>
+      </div>
+    </div>
     <h1>Tu cerebro + <span class="serif">IA</span><br/>= un negocio que escala.</h1>
     <p class="lead">Mira el video completo — te muestro exactamente cómo monetizar con AI desde cero, sin depender de tendencias y sin gastar en software caro.</p>
 
@@ -616,6 +696,27 @@
 </div>
 
 <script>
+  // Live viewer counter — cambia cada 5s
+  (function() {
+    const el = document.getElementById('viewerNum');
+    if (!el) return;
+    let current = parseInt(el.textContent, 10) || 47;
+    setInterval(() => {
+      // Random walk: ±3 to ±8, mantiene entre 38-68
+      const delta = Math.floor(Math.random() * 11) - 5;
+      let next = current + delta;
+      if (next < 38) next = 38 + Math.floor(Math.random() * 5);
+      if (next > 68) next = 68 - Math.floor(Math.random() * 5);
+      if (next === current) next += (Math.random() < 0.5 ? -1 : 1);
+      el.classList.add('flip');
+      setTimeout(() => {
+        el.textContent = next;
+        el.classList.remove('flip');
+        current = next;
+      }, 300);
+    }, 5000);
+  })();
+
   // Intro
   function skipIntro() {
     const intro = document.getElementById('intro');
