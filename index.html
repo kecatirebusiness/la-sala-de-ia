@@ -744,16 +744,58 @@
   });
 
   // Inline form submit
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.target));
-    console.log('Form submitted:', data);
-    // TODO: Conectar a backend / webhook / Zapier / Google Form
+    const formEl = e.target;
+    const submitBtn = formEl.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Enviando…';
+
+    const raw = Object.fromEntries(new FormData(formEl));
+    const payload = {
+      name: raw.name,
+      email: raw.email,
+      phone: raw.phone,
+      goal: raw.goal,
+      _subject: `🔥 Nuevo lead La Sala — ${raw.name}`,
+      _template: 'table',
+      _captcha: 'false',
+    };
+
+    let ok = false;
+    try {
+      // 1. FormSubmit → email a lasaladeia@gmail.com
+      const r1 = await fetch('https://formsubmit.co/ajax/lasaladeia@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      ok = r1.ok;
+
+      // 2. (opcional) Si hay Apps Script webhook configurado, también se guarda al sheet
+      if (window.APPS_SCRIPT_URL) {
+        fetch(window.APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: JSON.stringify(raw),
+        }).catch(() => {});
+      }
+    } catch (err) {
+      console.error('Form submit failed:', err);
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalBtnText;
+
+    // Mostramos éxito igual (el lead ya envió, no queremos bloquearlo si falla el backend)
     document.getElementById('formState').style.display = 'none';
     document.getElementById('successState').classList.add('show');
-    // Scroll al card de éxito
     document.getElementById('formCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
+
+  // Placeholder: cuando Kevin configure Apps Script, se pega aquí y también guarda al sheet
+  // window.APPS_SCRIPT_URL = 'https://script.google.com/macros/s/XXX/exec';
 </script>
 
 </body>
