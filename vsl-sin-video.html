@@ -250,8 +250,8 @@
   /* Early access block */
   .early-access {
     max-width: 600px;
-    margin: 10px auto 30px;
-    padding: 26px 28px;
+    margin: 50px auto 36px;
+    padding: 32px 28px;
     border-radius: 20px;
     background:
       radial-gradient(circle at 20% 10%, rgba(0, 210, 106, 0.15), transparent 60%),
@@ -348,31 +348,65 @@
     .nav-right { display: none; }
     .logo { font-size: 15px; gap: 10px; }
     .logo svg { width: 32px; height: 32px; }
-    .hero { padding: 4px 18px 40px; }
-    .kicker-row { gap: 8px; margin-bottom: 20px; }
-    .kicker { font-size: 11.5px; padding: 7px 12px; gap: 6px; }
+
+    .hero { padding: 8px 18px 40px; }
+    .kicker-row { gap: 8px; margin-bottom: 20px; flex-direction: column; align-items: center; }
+    .kicker { font-size: 12px; padding: 7px 14px; gap: 6px; }
     h1 { font-size: clamp(30px, 9vw, 44px); margin-bottom: 14px; }
     .hero p.lead { font-size: 15px; margin-bottom: 24px; padding: 0 4px; }
-    .hero-image-wrap { border-radius: 14px; margin-bottom: 20px; }
+
+    .hero-image-wrap { border-radius: 14px; margin: 28px auto 40px; }
+    .hero-image-inner { border-radius: 16px; }
     .hero-image-fallback .brand-logo { width: 90px; height: 90px; }
     .image-caption { font-size: 12px; margin-bottom: 22px; }
+    .sparkle { width: 6px; height: 6px; }
+
+    .early-access { margin: 36px auto 28px; padding: 24px 20px; border-radius: 16px; }
+    .early-access-badge { font-size: 10.5px; padding: 5px 12px; margin-bottom: 10px; }
+    .early-access-title { font-size: 20px; margin-bottom: 8px; }
+    .early-access-text { font-size: 14px; line-height: 1.5; padding: 0 4px; }
+
     .cta-btn { padding: 16px 28px; font-size: 16px; width: 100%; max-width: 360px; justify-content: center; }
     .cta-note { font-size: 12px; padding: 0 10px; }
-    .trust { grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 24px 18px 50px; }
-    .trust-item .num { font-size: 26px; }
-    .trust-item .label { font-size: 11px; }
-    .inline-form-card { padding: 28px 22px; border-radius: 20px; }
+
+    .trust { grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 24px 18px 60px; }
+    .trust-item .num { font-size: 24px; }
+    .trust-item .label { font-size: 10.5px; }
+
+    .inline-form-card { padding: 28px 20px; border-radius: 20px; max-width: 100%; }
     .form-title { font-size: 22px; }
     .form-sub { font-size: 13px; margin-bottom: 18px; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { font-size: 12.5px; }
+    .form-group input, .form-group select { padding: 11px 12px; font-size: 16px; border-radius: 10px; }
+
     .intro-logo { width: 110px; height: 110px; }
     .intro-tag { font-size: 18px; bottom: 22%; }
     .skip-intro { bottom: 14px; right: 14px; font-size: 11px; padding: 5px 12px; }
   }
 
-  @media (max-width: 380px) {
+  @media (max-width: 420px) {
+    .hero { padding: 4px 14px 32px; }
+    h1 { font-size: 30px; line-height: 1.1; }
+    .hero p.lead { font-size: 14px; }
+    .kicker { font-size: 11.5px; padding: 6px 12px; }
+
+    .early-access { padding: 20px 16px; margin: 28px auto 22px; }
+    .early-access-title { font-size: 18px; }
+    .early-access-text { font-size: 13.5px; }
+
+    .inline-form-card { padding: 22px 16px; border-radius: 16px; }
+    .form-title { font-size: 20px; }
+    .cta-btn { padding: 14px 22px; font-size: 15px; }
+
+    .trust { padding: 20px 12px 50px; gap: 6px; }
+    .trust-item .num { font-size: 20px; }
+    .trust-item .label { font-size: 10px; }
+  }
+
+  @media (max-width: 340px) {
     h1 { font-size: 26px; }
-    .kicker { font-size: 11px; padding: 6px 10px; }
-    .kicker-row { flex-direction: column; align-items: center; gap: 6px; }
+    .kicker { font-size: 10.5px; padding: 5px 10px; }
   }
 </style>
 </head>
@@ -413,7 +447,7 @@
       <div class="kicker coming-soon"><span class="dot"></span> Coming Soon · Lanzamiento próximo</div>
       <div class="kicker live">
         <span class="live-dot"></span>
-        <span class="viewer-count"><span id="viewerNum">47</span> personas en la lista</span>
+        <span class="viewer-count"><span id="viewerNum">47</span> personas viendo ahora</span>
       </div>
     </div>
     <h1>Tu cerebro + <span class="serif">IA</span><br/>= un negocio que escala.</h1>
@@ -497,8 +531,8 @@
 
   <section class="trust">
     <div class="trust-item">
-      <div class="num">Pronto</div>
-      <div class="label">Lanzamiento oficial</div>
+      <div class="num"><span id="leadCount">—</span></div>
+      <div class="label">Personas ya registradas</div>
     </div>
     <div class="trust-item">
       <div class="num">24/7</div>
@@ -595,6 +629,27 @@
   }
 
   window.APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx4lMpMjSD4aGnMNOdu3DwnnV8XITHB6t2smF7vh5KYa-OdztslQIxufsgmWrbaI32J/exec';
+
+  // Live lead counter — fetch registrados desde Google Sheet
+  (async function() {
+    const el = document.getElementById('leadCount');
+    if (!el) return;
+    try {
+      const r = await fetch(window.APPS_SCRIPT_URL + '?action=list');
+      const data = await r.json();
+      const n = (data.leads || []).length;
+      // Animación de conteo
+      let current = 0;
+      const step = Math.max(1, Math.ceil(n / 30));
+      const tick = setInterval(() => {
+        current += step;
+        if (current >= n) { current = n; clearInterval(tick); }
+        el.textContent = '+' + current;
+      }, 40);
+    } catch (err) {
+      el.textContent = '—';
+    }
+  })();
 </script>
 
 </body>
