@@ -604,17 +604,13 @@
       -->
       <iframe
         id="vslVideo"
-        src="https://player.vimeo.com/video/1189448862?autoplay=1&muted=1&controls=1&title=0&byline=0&portrait=0&dnt=1&playsinline=1"
+        src="https://www.youtube.com/embed/WhLWOESV4Kw?controls=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3"
         title="La Sala de IA — VSL"
         frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
         allowfullscreen>
       </iframe>
-      <button class="unmute-btn" id="unmuteBtn" onclick="unmuteVideo()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
-        Activar sonido
-      </button>
     </div>
 
     <div class="video-caption">Mira el video antes de continuar — dura ~8 minutos</div>
@@ -719,29 +715,6 @@
     const btn = document.querySelector('.skip-intro');
     if (btn) btn.style.display = 'none';
   }, 3400);
-
-  // Unmute via Vimeo Player postMessage API
-  function vimeoCommand(method, value) {
-    const iframe = document.getElementById('vslVideo');
-    if (!iframe || !iframe.contentWindow) return;
-    const msg = value !== undefined ? { method, value } : { method };
-    iframe.contentWindow.postMessage(JSON.stringify(msg), '*');
-  }
-  function unmuteVideo() {
-    vimeoCommand('setMuted', false);
-    vimeoCommand('setVolume', 1);
-    vimeoCommand('play');
-    document.getElementById('unmuteBtn').classList.add('hidden');
-  }
-  let unmuted = false;
-  document.addEventListener('click', function (e) {
-    if (unmuted) return;
-    if (e.target.closest('.inline-form-card, .cta-btn, .skip-intro')) return;
-    unmuted = true;
-    vimeoCommand('setMuted', false);
-    vimeoCommand('setVolume', 1);
-    document.getElementById('unmuteBtn')?.classList.add('hidden');
-  });
 
   // Inline form submit
   async function handleSubmit(e) {
