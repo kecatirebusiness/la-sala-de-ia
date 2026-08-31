@@ -46,7 +46,9 @@ a{color:inherit}
 .kicker.c::after{content:"";width:22px;height:1px;background:var(--em)}
 
 /* ---------- tipografía ---------- */
-h1{font-size:clamp(29px,7.4vw,50px);font-weight:600;letter-spacing:-.035em;line-height:1.03}
+h1{font-size:clamp(28px,7vw,48px);font-weight:600;letter-spacing:-.035em;line-height:1.04}
+.brk{display:none}
+@media(min-width:720px){.brk{display:inline}}
 h2{font-size:clamp(22px,4.6vw,32px);font-weight:600;letter-spacing:-.028em;line-height:1.14}
 h3{font-size:16.5px;font-weight:600;letter-spacing:-.012em}
 p{color:var(--mint)}
@@ -260,7 +262,7 @@ footer{text-align:center;padding:26px 20px 40px;font-family:var(--mono);font-siz
   <!-- ================= HERO ================= -->
   <section class="hero">
     <div class="pill rv"><i></i> Abierto 24 horas</div>
-    <h1 class="rv">Acabas de conocer a <span class="serif em">Maia</span>.<br/>La tuya empieza <span class="serif em">hoy</span>.</h1>
+    <h1 class="rv">Acabas de conocer a <span class="serif em">Maia</span>.<br/>Crear tu co-fundador<br class="brk"/> empieza <span class="serif em">hoy</span>.</h1>
     <p class="sub rv">El paso a paso para construir tu agente co-fundador: recuerda cada decisión, te dice la verdad en vez de aplaudirte, y amanece con el trabajo hecho. <b>Sin escribir una línea de código.</b></p>
     <div class="rv">
       <a href="https://la-sala-de-ia-3829bf.circle.so/checkout/cohort-acceso-limitado" class="cta">Construir el mío</a>
