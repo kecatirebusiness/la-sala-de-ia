@@ -165,12 +165,50 @@
     .weeks{grid-template-columns:1fr}
     .folders{grid-template-columns:1fr;gap:24px}
   }
+  /* ===== BARRA FIJA DE COMPRA (solo móvil) ===== */
+  .sticky{display:none}
+  @media(max-width:820px){
+    .sticky{
+      display:flex;position:fixed;left:0;right:0;bottom:0;z-index:80;
+      align-items:center;gap:12px;padding:11px 14px calc(11px + env(safe-area-inset-bottom));
+      background:rgba(11,29,23,.94);backdrop-filter:blur(14px);
+      border-top:1px solid rgba(0,210,106,.28);
+      transform:translateY(110%);transition:transform .28s cubic-bezier(.22,1,.36,1)
+    }
+    .sticky.show{transform:translateY(0)}
+    .sticky .t{flex:1;min-width:0;line-height:1.25}
+    .sticky .t b{display:block;font-size:13px;font-weight:600;color:var(--snow)}
+    .sticky .t span{display:block;font-size:11.5px;color:var(--amber);font-variant-numeric:tabular-nums}
+    .sticky a{
+      flex:0 0 auto;padding:14px 22px;background:var(--emerald);color:var(--deep);
+      border-radius:999px;font-size:15px;font-weight:600;text-decoration:none;white-space:nowrap;
+      box-shadow:0 6px 20px rgba(0,210,106,.4)
+    }
+    body{padding-bottom:76px}
+  }
+
   @media(max-width:640px){
     nav{padding:14px 18px;flex-direction:column;gap:10px}
     .wrap{padding:0 18px}
     h1{font-size:clamp(29px,8.5vw,40px)}
     .lead{font-size:15.5px}
-    section.block{padding:46px 0}
+    section.block{padding:38px 0}
+    .head{margin-bottom:28px}
+    .hero{padding:14px 0 4px}
+    .lead{margin-bottom:24px}
+    h2{font-size:clamp(24px,6.6vw,32px)}
+    .head p{font-size:14.5px}
+    .probs,.cases,.weeks{gap:10px}
+    .prob{padding:20px 18px}
+    .case{padding:20px 18px}
+    .case h3{font-size:17.5px}
+    .cap{padding:8px 0}
+    .cap span{font-size:14.5px}
+    .team{gap:14px}
+    .mem img{width:76px;height:76px}
+    .mem .n{font-size:13.5px} .mem .r{font-size:11.5px}
+    .qa summary{font-size:15px;padding:16px 30px 16px 0}
+    .final{padding:48px 0 30px}
     .btn{width:100%;padding:17px 24px;font-size:16.5px}
     .agent,.buy{padding:28px 20px;border-radius:18px}
     .cd{padding:18px 14px 16px}
@@ -201,7 +239,7 @@
     <h1>Acabas de conocer a <span class="serif">Maia</span>.<br/>Ahora construye la tuya.</h1>
     <p class="lead">El paso a paso completo para armar tu <strong>agente co-fundador</strong>: uno que recuerda cada decisión, te dice la verdad en vez de aplaudirte, y llega en la mañana con el trabajo hecho. <strong>Aunque no sepas nada de tecnología.</strong></p>
 
-    <a href="#entrar" class="btn">Quiero construir el mío</a>
+    <a href="https://la-sala-de-ia-3829bf.circle.so/checkout/cohort-acceso-limitado" class="btn">Quiero construir el mío</a>
     <div class="btn-note">Acceso inmediato y <strong>de por vida</strong> · la puerta cierra en 24 horas</div>
 
     <div class="cd" id="cdCard">
@@ -406,6 +444,15 @@
 
 </div>
 
+<!-- Barra fija de compra — aparece al bajar, solo en móvil -->
+<div class="sticky" id="sticky">
+  <div class="t">
+    <b>Acceso de por vida</b>
+    <span id="stickyTime">Cierra en 24 horas</span>
+  </div>
+  <a href="https://la-sala-de-ia-3829bf.circle.so/checkout/cohort-acceso-limitado">Entrar ahora</a>
+</div>
+
 <footer>
   La Sala de IA · Kevin, Manuel y Elsa<br/>
   Página para asistentes de BEfest — septiembre 2026
@@ -456,7 +503,27 @@
     document.getElementById('cdS').textContent=pad(Math.floor(diff/1000)%60);
     pie.textContent = 'Cierra el ' + fmt(CIERRA) + ' (hora de Miami).';
   }
-  tick(); setInterval(tick,1000);
+  // --- barra fija: mostrarla al dejar atrás el hero ---
+  const bar=document.getElementById('sticky');
+  const disparador=document.querySelector('.hero');
+  if(bar && disparador && 'IntersectionObserver' in window){
+    new IntersectionObserver(([e])=>bar.classList.toggle('show',!e.isIntersecting),
+      {rootMargin:'-120px 0px 0px 0px'}).observe(disparador);
+  }
+
+  // --- reloj de la barra, mismo cálculo que el contador ---
+  function tickBar(){
+    const el=document.getElementById('stickyTime'); if(!el) return;
+    const now=new Date();
+    if(now<ABRE){ el.textContent='Solo 24 horas'; return; }
+    const d=CIERRA-now;
+    if(d<=0){ el.textContent='Acceso cerrado'; return; }
+    const h=Math.floor(d/3600000), m=Math.floor(d/60000)%60, sg=Math.floor(d/1000)%60;
+    el.textContent='Cierra en '+pad(h)+':'+pad(m)+':'+pad(sg);
+  }
+
+  tick(); tickBar();
+  setInterval(()=>{tick();tickBar();},1000);
 </script>
 </body>
 </html>
