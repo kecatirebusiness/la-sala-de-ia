@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Tu agente co-fundador — La Sala de IA</title>
-<meta name="description" content="Cada día que esperas es un día de contexto que tu agente no tiene. Construye el tuyo. Acceso abierto 24 horas."/>
+<meta name="description" content="Cada día que esperas es un día de contexto que tu agente no tiene. Construye el tuyo. El acceso cierra el domingo a las 7:00 PM."/>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Ccircle cx='60' cy='60' r='54' fill='%2300D26A'/%3E%3Ccircle cx='46' cy='52' r='4.5' fill='%230B1D17'/%3E%3Ccircle cx='74' cy='52' r='4.5' fill='%230B1D17'/%3E%3Crect x='48' y='70' width='24' height='4.5' rx='2.25' fill='%230B1D17'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,12 +82,20 @@ h1 .em{color:var(--em)}
 .cta-sub{font-family:var(--mono);font-size:11px;letter-spacing:.09em;color:var(--sage);margin-top:11px}
 .cta-sub b{color:var(--mint);font-weight:500}
 
-/* reloj en línea */
-.clock{display:inline-flex;align-items:baseline;gap:8px;margin-top:22px;
-  font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--sage);
-  border:1px solid var(--line);border-radius:10px;padding:9px 14px;background:rgba(0,0,0,.24)}
-.clock b{color:var(--amber);font-size:15px;font-weight:500;font-variant-numeric:tabular-nums}
-.clock.off b{color:var(--sage)}
+/* ---------- contador ---------- */
+.cd{margin-top:24px}
+.cd .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.19em;text-transform:uppercase;
+  color:var(--sage);margin-bottom:9px}
+.cd .lbl b{color:var(--loss);font-weight:500}
+.cd .grid{display:flex;gap:8px;max-width:340px}
+.cd .u{flex:1;background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:12px;
+  padding:11px 4px 9px;text-align:center}
+.cd .u b{display:block;font-family:var(--mono);font-size:clamp(21px,6.6vw,27px);font-weight:500;
+  color:var(--amber);font-variant-numeric:tabular-nums;line-height:1.05}
+.cd .u span{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--sage);margin-top:5px}
+.cd.off .u b{color:var(--sage)}
+.cd.off .lbl b{color:var(--sage)}
 
 /* ---------- EL COSTO ---------- */
   .losses{margin-top:16px !important}
@@ -221,6 +229,54 @@ footer{text-align:center;padding:26px 20px 40px;font-family:var(--mono);font-siz
   body{padding-bottom:72px}
 }
 
+/* ---------- precio ---------- */
+.price{margin:20px 0 24px}
+.price .row{display:flex;align-items:baseline;justify-content:center;gap:14px;flex-wrap:wrap}
+.price .old{font-family:var(--mono);font-size:20px;color:var(--sage);position:relative;opacity:.75}
+.price .old::after{content:"";position:absolute;left:-4px;right:-4px;top:45%;height:1.5px;
+  background:var(--loss);transform:rotate(-7deg)}
+.price .now{font-size:clamp(46px,13vw,66px);font-weight:600;letter-spacing:-.045em;
+  line-height:1;color:var(--em);font-variant-numeric:tabular-nums}
+.price .now sup{font-size:.42em;font-weight:500;vertical-align:.72em;margin-right:2px;letter-spacing:0}
+.price .tag{display:inline-flex;align-items:center;gap:7px;margin-top:13px;
+  background:rgba(255,200,87,.11);border:1px solid rgba(255,200,87,.3);color:var(--amber);
+  padding:6px 13px;border-radius:99px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.13em;text-transform:uppercase}
+.price .note{margin-top:11px;font-size:13.5px;color:var(--sage)}
+
+/* ---------- testimonios ---------- */
+.tst{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  margin:0 -20px;padding:2px 20px 8px}
+.tst::-webkit-scrollbar{display:none}
+.tst .t{flex:0 0 min(84vw,340px);scroll-snap-align:center;background:var(--card);
+  border:1px solid var(--line);border-radius:16px;padding:12px;cursor:zoom-in;
+  transition:border-color .2s,transform .2s;-webkit-tap-highlight-color:transparent}
+.tst .t:hover{border-color:var(--line-2);transform:translateY(-2px)}
+.tst .shot{position:relative;height:min(54vh,390px);border-radius:11px;overflow:hidden;
+  background:#050C09;display:flex;align-items:center;justify-content:center}
+.tst .shot img{width:100%;height:100%;object-fit:contain;display:block}
+.tst .who{margin-top:12px;padding:0 2px}
+.tst .who b{display:block;font-size:14px;font-weight:600;letter-spacing:-.012em}
+.tst .who span{display:block;font-size:12.6px;color:var(--sage);line-height:1.42;margin-top:3px}
+.dots{display:flex;justify-content:center;gap:7px;margin-top:16px}
+.dots i{width:6px;height:6px;border-radius:50%;background:var(--line-2);
+  transition:background .22s,transform .22s}
+.dots i.on{background:var(--em);transform:scale(1.4)}
+.tst-hint{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--sage);opacity:.65;margin-top:10px;text-align:center}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:200;background:rgba(4,9,7,.975);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  display:none;overflow-y:auto;padding:58px 14px 44px;cursor:zoom-out}
+.lb.on{display:block}
+.lb img{display:block;margin:0 auto;width:min(94vw,600px);height:auto;border-radius:12px}
+.lb .cap{max-width:600px;margin:14px auto 0;text-align:center;font-size:13px;color:var(--sage)}
+.lb .x{position:fixed;top:14px;right:14px;width:38px;height:38px;border-radius:50%;
+  background:rgba(255,255,255,.09);border:1px solid var(--line-2);color:var(--snow);
+  font-size:19px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer}
+
 /* reveal al hacer scroll */
 .anim .rv{opacity:0;transform:translateY(14px);
   transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
@@ -244,6 +300,9 @@ footer{text-align:center;padding:26px 20px 40px;font-family:var(--mono);font-siz
   .buy{padding:44px 40px}
   .head{margin-bottom:34px}
   .mem{width:112px} .mem img{width:88px;height:88px}
+  .tst{margin:0 -28px;padding:2px 28px 10px;gap:16px}
+  .tst .t{flex:0 0 336px}
+  .tst .shot{height:400px}
 }
 </style>
 </head>
@@ -254,22 +313,28 @@ footer{text-align:center;padding:26px 20px 40px;font-family:var(--mono);font-siz
     <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="#00D26A"/><circle cx="46" cy="52" r="4.5" fill="#08120E"/><circle cx="74" cy="52" r="4.5" fill="#08120E"/><rect x="48" y="70" width="24" height="4.5" rx="2.25" fill="#08120E"/></svg>
     La Sala de IA
   </div>
-  <div class="badge">Acceso <b>24 horas</b></div>
+  <div class="badge">Cierra <b>domingo 7 PM</b></div>
 </nav>
 
 <div class="wrap">
 
   <!-- ================= HERO ================= -->
   <section class="hero">
-    <div class="pill rv"><i></i> Abierto 24 horas</div>
+    <div class="pill rv"><i></i> Cierra domingo 7 PM</div>
     <h1 class="rv">Crear tu co-fundador<br class="brk"/> empieza <span class="serif em">hoy</span>.</h1>
     <p class="sub rv">El paso a paso para construir tu agente co-fundador: recuerda cada decisión, te dice la verdad en vez de aplaudirte, y amanece con el trabajo hecho. <b>Sin escribir una línea de código.</b></p>
     <div class="rv">
       <a href="https://la-sala-de-ia-3829bf.circle.so/checkout/cohort-acceso-limitado" class="cta">Construir el mío</a>
-      <div class="cta-sub">Acceso inmediato · <b>de por vida</b></div>
+      <div class="cta-sub"><s style="color:var(--sage);opacity:.7">$375</s> · <b>$180</b> pago único · de por vida</div>
     </div>
-    <div class="clock rv" id="clock" style="display:none">
-      Cierra en <b id="clockN">00:00:00</b>
+    <div class="cd rv" id="clock">
+      <div class="lbl" id="clockLbl">Cierra en · <b>domingo 7:00 PM, hora Miami</b></div>
+      <div class="grid">
+        <div class="u"><b id="cdD">0</b><span>días</span></div>
+        <div class="u"><b id="cdH">00</b><span>horas</span></div>
+        <div class="u"><b id="cdM">00</b><span>min</span></div>
+        <div class="u"><b id="cdS">00</b><span>seg</span></div>
+      </div>
     </div>
   </section>
 
@@ -394,12 +459,62 @@ footer{text-align:center;padding:26px 20px 40px;font-family:var(--mono);font-siz
     </div>
   </section>
 
+  <!-- ================= TESTIMONIOS ================= -->
+  <section>
+    <div class="head rv">
+      <div class="kicker">La Generación 01</div>
+      <h2>No lo decimos nosotros.<br/>Lo dicen sus agentes.</h2>
+      <p>Capturas tal cual del grupo. Ninguna la pedimos.</p>
+    </div>
+
+    <div class="rv">
+      <div class="tst" id="tst">
+        <figure class="t" data-src="img/testimonios/felix-double-agent.jpg" data-cap="Félix J. Torres Tavárez">
+          <div class="shot"><img src="img/testimonios/felix-double-agent.jpg" alt="Testimonio de Félix J. Torres Tavárez" loading="lazy"/></div>
+          <figcaption class="who"><b>Félix J. Torres Tavárez</b><span>Construyó a Javitron, su agente co-fundador. Ya se conecta a Asana y le arma los playbooks solo.</span></figcaption>
+        </figure>
+        <figure class="t" data-src="img/testimonios/maria-cora.jpg" data-cap="Maria Ayala">
+          <div class="shot"><img src="img/testimonios/maria-cora.jpg" alt="Testimonio de Maria Ayala" loading="lazy"/></div>
+          <figcaption class="who"><b>Maria Ayala</b><span>Cora le cuadró dos años de contabilidad al centavo — y le encontró fugas que ella no había visto.</span></figcaption>
+        </figure>
+        <figure class="t" data-src="img/testimonios/suzette-mia.jpg" data-cap="Suzette Mirabal · Brain Connections">
+          <div class="shot"><img src="img/testimonios/suzette-mia.jpg" alt="Testimonio de Suzette Mirabal · Brain Connections" loading="lazy"/></div>
+          <figcaption class="who"><b>Suzette Mirabal · Brain Connections</b><span>Mía ya tiene dos sub-agentes bajo ella: finanzas y mercadeo, trabajando en paralelo.</span></figcaption>
+        </figure>
+        <figure class="t" data-src="img/testimonios/margarita.jpg" data-cap="Margarita Blanco">
+          <div class="shot"><img src="img/testimonios/margarita.jpg" alt="Testimonio de Margarita Blanco" loading="lazy"/></div>
+          <figcaption class="who"><b>Margarita Blanco</b><span>«Volvería a participar sin pensarlo dos veces.»</span></figcaption>
+        </figure>
+        <figure class="t" data-src="img/testimonios/heidii-felix.jpg" data-cap="Heidii Rosa y Félix">
+          <div class="shot"><img src="img/testimonios/heidii-felix.jpg" alt="Testimonio de Heidii Rosa y Félix" loading="lazy"/></div>
+          <figcaption class="who"><b>Heidii Rosa y Félix</b><span>«Excelente experiencia — si hubiera una continuación de La Sala, me apunto.»</span></figcaption>
+        </figure>
+        <figure class="t" data-src="img/testimonios/sala-gracias.jpg" data-cap="La Generación 01, el último día">
+          <div class="shot"><img src="img/testimonios/sala-gracias.jpg" alt="Testimonio de La Generación 01, el último día" loading="lazy"/></div>
+          <figcaption class="who"><b>La Generación 01, el último día</b><span>El chat cuando cerró el cohort. Sin pedirlo, sin guion.</span></figcaption>
+        </figure>
+      </div>
+      <div class="dots" id="tstDots"></div>
+      <div class="tst-hint">Desliza → · toca para ampliar</div>
+    </div>
+  </section>
+
   <!-- ================= COMPRA ================= -->
   <section id="entrar">
     <div class="buy rv">
       <div class="kicker c">Acceso limitado</div>
       <h2>Empieza a construirlo hoy</h2>
       <p>Acceso inmediato a todo. Sin esperar a que arranque nada.</p>
+
+      <div class="price">
+        <div class="row">
+          <span class="old">$375</span>
+          <span class="now"><sup>$</sup>180</span>
+        </div>
+        <div class="tag">Ahorras $195 · solo en esta ventana</div>
+        <div class="note">Pago único. No es suscripción, no se renueva.</div>
+      </div>
+
       <div class="incl">
         <div><span class="t">✓</span> Las 6 semanas completas, grabadas</div>
         <div><span class="t">✓</span> Las dos marcas demo construidas desde cero</div>
@@ -407,7 +522,7 @@ footer{text-align:center;padding:26px 20px 40px;font-family:var(--mono);font-siz
         <div><span class="t">✓</span> Todo el material, desde el minuto que entras</div>
       </div>
       <a href="https://la-sala-de-ia-3829bf.circle.so/checkout/cohort-acceso-limitado" class="cta">Entrar ahora</a>
-      <div class="cta-sub">La ventana es de <b>24 horas</b> y no la extendemos</div>
+      <div class="cta-sub">Cierra el <b>domingo 7:00 PM</b> y no lo extendemos</div>
     </div>
   </section>
 
@@ -438,6 +553,7 @@ footer{text-align:center;padding:26px 20px 40px;font-family:var(--mono);font-siz
       <details class="qa"><summary>¿Tengo que salir en cámara?</summary><p>En ningún momento. Esto es para que tu negocio opere mejor, no para volverte creadora de contenido.</p></details>
       <details class="qa"><summary>¿Necesito pagar herramientas caras?</summary><p>No. El cerebro son tus carpetas, y eso es gratis. Necesitas una suscripción al modelo que elijas, y adentro te decimos cuál conviene según lo que vayas a hacer.</p></details>
       <details class="qa"><summary>¿Y si mañana sale un modelo mejor?</summary><p>Te lo llevas. Esa es la gracia de que el cerebro viva en tus carpetas: conectas el agente al modelo que quieras, cuando quieras.</p></details>
+      <details class="qa"><summary>¿Los $180 son un pago único?</summary><p>Sí. Un solo pago de $180 y te queda todo: las 6 semanas grabadas y La Sala de por vida. No hay mensualidad, no se renueva nada. El precio normal es $375 — los $180 son solo por esta ventana.</p></details>
       <details class="qa"><summary>¿Hasta cuándo tengo acceso?</summary><p>De por vida. El material no caduca y te quedas en La Sala con el resto de los graduados.</p></details>
     </div>
   </section>
@@ -452,39 +568,83 @@ footer{text-align:center;padding:26px 20px 40px;font-family:var(--mono);font-siz
 </div>
 
 <div class="bar" id="bar">
-  <div class="t"><b>Acceso de por vida</b><span id="barN">Solo 24 horas</span></div>
+  <div class="t"><b>$180 <s style="opacity:.55;font-weight:400">$375</s> · de por vida</b><span id="barN">Cierra domingo 7 PM</span></div>
   <a href="https://la-sala-de-ia-3829bf.circle.so/checkout/cohort-acceso-limitado">Entrar</a>
+</div>
+
+<div class="lb" id="lb">
+  <button class="x" id="lbX" aria-label="Cerrar">×</button>
+  <img id="lbImg" src="" alt=""/>
+  <div class="cap" id="lbCap"></div>
 </div>
 
 <footer>La Sala de IA · Kevin, Manuel y Elsa · 2026</footer>
 
 <script>
 // =====================================================================
-// VENTANA DE 24 HORAS
-// ABRE = miércoles 2 de septiembre, cuando Elsa presenta.
-// Cambiá SOLO esta línea: el cierre se calcula solo (+24h).
-// -04:00 = hora de Miami en septiembre (EDT).
+// CIERRE DEL ACCESO
+// Cambiá SOLO esta línea. -04:00 = hora de Miami en septiembre (EDT).
 // =====================================================================
-const ABRE   = new Date('2026-09-02T19:00:00-04:00');
-const CIERRA = new Date(ABRE.getTime() + 24*3600*1000);
+const CIERRA = new Date('2026-09-06T19:00:00-04:00');
 
 const pad = n => String(Math.max(0,n)).padStart(2,'0');
 
 function reloj(){
-  const now=new Date();
-  const box=document.getElementById('clock'), n=document.getElementById('clockN'), bn=document.getElementById('barN');
-  if(now<ABRE){ box.style.display='none'; bn.textContent='Solo 24 horas'; return; }
-  const d=CIERRA-now;
+  const d   = CIERRA - new Date();
+  const box = document.getElementById('clock');
+  const lbl = document.getElementById('clockLbl');
+  const bn  = document.getElementById('barN');
+
   if(d<=0){
-    box.style.display=''; box.classList.add('off');
-    n.textContent='00:00:00'; box.firstChild.textContent='Se cerró ';
-    bn.textContent='Acceso cerrado'; return;
+    box.classList.add('off');
+    lbl.innerHTML='El acceso <b>se cerró</b>';
+    ['cdD','cdH','cdM','cdS'].forEach(i=>document.getElementById(i).textContent='0');
+    document.getElementById('cdD').textContent='0';
+    bn.textContent='Acceso cerrado';
+    return;
   }
-  box.style.display=''; box.classList.remove('off');
-  const t=pad(Math.floor(d/3600000))+':'+pad(Math.floor(d/60000)%60)+':'+pad(Math.floor(d/1000)%60);
-  n.textContent=t; bn.textContent='Cierra en '+t;
+  const dias = Math.floor(d/86400000);
+  const hrs  = Math.floor(d/3600000)%24;
+  const min  = Math.floor(d/60000)%60;
+  const seg  = Math.floor(d/1000)%60;
+
+  document.getElementById('cdD').textContent=dias;
+  document.getElementById('cdH').textContent=pad(hrs);
+  document.getElementById('cdM').textContent=pad(min);
+  document.getElementById('cdS').textContent=pad(seg);
+
+  bn.textContent='Cierra en '+(dias>0 ? dias+'d ' : '')+pad(hrs)+':'+pad(min)+':'+pad(seg);
 }
 reloj(); setInterval(reloj,1000);
+
+// ---- testimonios: dots + lightbox ----
+(function(){
+  const car=document.getElementById('tst'); if(!car) return;
+  const cards=[...car.querySelectorAll('.t')];
+  const dots=document.getElementById('tstDots');
+  cards.forEach((_,i)=>{ const d=document.createElement('i'); if(!i)d.className='on';
+    d.addEventListener('click',()=>cards[i].scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'}));
+    dots.appendChild(d); });
+  const marks=[...dots.children];
+  let raf;
+  car.addEventListener('scroll',()=>{
+    cancelAnimationFrame(raf);
+    raf=requestAnimationFrame(()=>{
+      const mid=car.scrollLeft+car.clientWidth/2;
+      let best=0,dist=1e9;
+      cards.forEach((c,i)=>{ const d=Math.abs(c.offsetLeft+c.offsetWidth/2-mid); if(d<dist){dist=d;best=i;} });
+      marks.forEach((m,i)=>m.classList.toggle('on',i===best));
+    });
+  },{passive:true});
+
+  const lb=document.getElementById('lb'), img=document.getElementById('lbImg'), cap=document.getElementById('lbCap');
+  const abrir=c=>{ img.src=c.dataset.src; img.alt=c.dataset.cap; cap.textContent=c.dataset.cap;
+    lb.classList.add('on'); lb.scrollTop=0; document.body.style.overflow='hidden'; };
+  const cerrar=()=>{ lb.classList.remove('on'); document.body.style.overflow=''; };
+  cards.forEach(c=>c.addEventListener('click',()=>abrir(c)));
+  lb.addEventListener('click',cerrar);
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') cerrar(); });
+})();
 
 // ---- contador de horas: sube mientras se lee ----
 (function(){
