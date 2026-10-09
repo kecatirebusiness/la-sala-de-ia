@@ -137,6 +137,7 @@ h1 .l3{display:block;font-family:var(--serif);font-style:italic;font-weight:600;
 .marquee{margin:16px calc(var(--pad)*-1) 0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent);mask-image:linear-gradient(90deg,transparent,#000 15%,#000 85%,transparent)}
 .track{display:flex;align-items:center;gap:38px;width:max-content;animation:marq 26s linear infinite}
 .track img{height:22px;width:auto;filter:brightness(0) invert(1);opacity:.55}
+.track .wm{font-weight:700;font-size:19px;letter-spacing:-.03em;color:var(--text);opacity:.55;white-space:nowrap}
 @keyframes marq{to{transform:translateX(-50%)}}
 
 /* ---------- Loss ---------- */
@@ -176,7 +177,8 @@ h1 .l3{display:block;font-family:var(--serif);font-style:italic;font-weight:600;
 /* ---------- Programa (stack cards) ---------- */
 .weeks{margin-top:28px;display:flex;flex-direction:column;gap:14px}
 .wk{position:sticky;border-radius:22px;padding:22px 20px 22px;min-height:206px;border:1px solid var(--line-2);background:linear-gradient(170deg,#11291F 0%,#0A1813 100%);box-shadow:0 -20px 40px -20px rgba(0,0,0,.8);transform-origin:50% 0;display:flex;flex-direction:column}
-.wk:nth-child(1){top:78px}.wk:nth-child(2){top:88px}.wk:nth-child(3){top:98px}.wk:nth-child(4){top:108px}.wk:nth-child(5){top:118px}.wk:nth-child(6){top:128px}
+.wk:nth-child(1){top:76px}.wk:nth-child(2){top:84px}.wk:nth-child(3){top:92px}.wk:nth-child(4){top:100px}.wk:nth-child(5){top:108px}.wk:nth-child(6){top:116px}
+.wk::after{content:"";position:absolute;inset:-1px;border-radius:inherit;background:#050B08;opacity:var(--wkdim,0);pointer-events:none}
 .wk-top{display:flex;align-items:center;justify-content:space-between}
 .wk-top span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 .wk-n{font-family:var(--serif);font-style:italic;font-weight:700;font-size:56px;line-height:.8;color:transparent;-webkit-text-stroke:1.2px var(--emerald);letter-spacing:-.04em}
@@ -186,6 +188,7 @@ h1 .l3{display:block;font-family:var(--serif);font-style:italic;font-weight:600;
 .wk.last{background:linear-gradient(170deg,#0F3A26 0%,#0A1E15 100%);border-color:rgba(0,210,106,.4)}
 
 /* ---------- Hub orbit ---------- */
+.hub{overflow-x:clip}
 .orbit{position:relative;width:300px;height:300px;margin:34px auto 0;max-width:100%}
 .ring{position:absolute;inset:24px;border-radius:50%;border:1px dashed rgba(181,235,207,.18)}
 .ring.r2{inset:70px;border-style:solid;border-color:rgba(0,210,106,.18)}
@@ -208,6 +211,20 @@ h1 .l3{display:block;font-family:var(--serif);font-style:italic;font-weight:600;
 .step::before{content:"";position:absolute;left:-27px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--emerald)}
 .step b{display:block;font-size:17px;letter-spacing:-.02em}
 .step span{display:block;font-size:14.5px;color:var(--muted);margin-top:3px}
+
+/* ---------- Lo nuevo ---------- */
+.news{margin-top:24px;display:flex;flex-direction:column;gap:10px}
+.nw{position:relative;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center;padding:16px;border-radius:18px;background:linear-gradient(120deg,rgba(0,210,106,.09),rgba(255,255,255,.02) 55%);border:1px solid var(--line-2);overflow:hidden}
+.nw .mk{grid-row:span 2;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-family:var(--serif);font-style:italic;font-weight:700;font-size:22px;color:#03130b;background:var(--emerald)}
+.nw .nm{display:flex;align-items:center;gap:8px;font-weight:700;font-size:17px;letter-spacing:-.02em;min-width:0}
+.nw .nm small{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.nw .new{margin-left:auto;font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.16em;color:#03130b;background:var(--emerald);padding:4px 7px;border-radius:6px;animation:newp 2.2s ease-in-out infinite}
+@keyframes newp{50%{box-shadow:0 0 16px rgba(0,210,106,.8)}}
+.nw p{font-size:14px;color:var(--muted);line-height:1.45;min-width:0}
+.nw::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-50%;background:linear-gradient(90deg,transparent,rgba(181,235,207,.08),transparent);transform:skewX(-20deg);animation:sweep 4.5s ease-in-out infinite}
+.nw:nth-child(2)::after{animation-delay:.5s}.nw:nth-child(3)::after{animation-delay:1s}
+@keyframes sweep{0%{left:-50%}40%,100%{left:120%}}
+.news-foot{margin-top:14px;font-size:14px;color:var(--soft)}
 
 /* ---------- Para quien ---------- */
 .toggle{position:relative;display:grid;grid-template-columns:1fr 1fr;margin-top:24px;padding:5px;border-radius:99px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
@@ -378,8 +395,8 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
     <div class="stack-label">El stack que vas a dominar</div>
     <div class="marquee">
       <div class="track">
-        <img src="claude.png" alt="Claude"><img src="claude-code.png" alt="Claude Code"><img src="cowork.png" alt="Cowork"><img src="higgsfield.png" alt="Higgsfield"><img src="heygen.png" alt="HeyGen"><img src="elevenlabs.png" alt="ElevenLabs"><img src="manychat.png" alt="ManyChat"><img src="lovable.png" alt="Lovable">
-        <img src="claude.png" alt="" aria-hidden="true"><img src="claude-code.png" alt="" aria-hidden="true"><img src="cowork.png" alt="" aria-hidden="true"><img src="higgsfield.png" alt="" aria-hidden="true"><img src="heygen.png" alt="" aria-hidden="true"><img src="elevenlabs.png" alt="" aria-hidden="true"><img src="manychat.png" alt="" aria-hidden="true"><img src="lovable.png" alt="" aria-hidden="true">
+        <img src="claude.png" alt="Claude"><img src="claude-code.png" alt="Claude Code"><img src="cowork.png" alt="Cowork"><img src="higgsfield.png" alt="Higgsfield"><img src="heygen.png" alt="HeyGen"><img src="elevenlabs.png" alt="ElevenLabs"><img src="manychat.png" alt="ManyChat"><img src="lovable.png" alt="Lovable"><span class="wm">ChatGPT Work</span><span class="wm">dots</span><span class="wm">Muse</span>
+        <img src="claude.png" alt="" aria-hidden="true"><img src="claude-code.png" alt="" aria-hidden="true"><img src="cowork.png" alt="" aria-hidden="true"><img src="higgsfield.png" alt="" aria-hidden="true"><img src="heygen.png" alt="" aria-hidden="true"><img src="elevenlabs.png" alt="" aria-hidden="true"><img src="manychat.png" alt="" aria-hidden="true"><img src="lovable.png" alt="" aria-hidden="true"><span class="wm" aria-hidden="true">ChatGPT Work</span><span class="wm" aria-hidden="true">dots</span><span class="wm" aria-hidden="true">Muse</span>
       </div>
     </div>
   </section>
@@ -451,7 +468,7 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
     <div class="weeks" id="weeks">
       <div class="wk"><div class="wk-top"><span>Semana</span><div class="wk-n">01</div></div><h3>Claude desde cero · <em class="s">tu hub</em></h3><p>Prompting de verdad y Projects. Terminas la semana con tu hub montado.</p></div>
       <div class="wk"><div class="wk-top"><span>Semana</span><div class="wk-n">02</div></div><h3>Tu hub aplicado <em class="s">al negocio</em></h3><p>Le cargas tu negocio a Claude: servicios, precios, tono, clientes. Deja de ser genérico y pasa a ser tuyo.</p></div>
-      <div class="wk"><div class="wk-top"><span>Semana</span><div class="wk-n">03</div></div><h3>El ecosistema · <em class="s">el mapa</em></h3><p>Higgsfield, HeyGen, ElevenLabs y más. Ves el mapa completo y eliges tu stack.</p></div>
+      <div class="wk"><div class="wk-top"><span>Semana</span><div class="wk-n">03</div></div><h3>El ecosistema · <em class="s">el mapa</em></h3><p>Higgsfield, HeyGen, ElevenLabs, ChatGPT Work, Muse de Meta y más. Ves el mapa completo y eliges tu stack.</p></div>
       <div class="wk"><div class="wk-top"><span>Semana</span><div class="wk-n">04</div></div><h3>IA para <em class="s">operar</em></h3><p>Admin, automatizaciones y delegar con criterio. Lo repetitivo deja de ser tu trabajo.</p></div>
       <div class="wk"><div class="wk-top"><span>Semana</span><div class="wk-n">05</div></div><h3>Contenido que <em class="s">vende</em></h3><p>Psicología del contenido y copywriting: hook, estructura y CTA. Diriges a Claude con criterio, no con suerte.</p></div>
       <div class="wk last"><div class="wk-top"><span>Semana</span><div class="wk-n">06</div></div><h3>Convertir + <em class="s">Demo Day</em></h3><p>Presentas lo que construiste, aprendes a cobrarlo como servicio y sales con tu plan de 90 días.</p></div>
@@ -468,11 +485,11 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
       <div class="spin">
         <div class="node" style="--a:-90deg"><div class="node-in"><span>Higgsfield</span></div></div>
         <div class="node" style="--a:-45deg"><div class="node-in"><span>HeyGen</span></div></div>
-        <div class="node" style="--a:0deg"><div class="node-in"><span>Gmail</span></div></div>
+        <div class="node" style="--a:0deg"><div class="node-in"><span>ChatGPT Work</span></div></div>
         <div class="node" style="--a:45deg"><div class="node-in"><span>ElevenLabs</span></div></div>
         <div class="node" style="--a:90deg"><div class="node-in"><span>Cowork</span></div></div>
-        <div class="node" style="--a:135deg"><div class="node-in"><span>Drive</span></div></div>
-        <div class="node" style="--a:180deg"><div class="node-in"><span>Calendar</span></div></div>
+        <div class="node" style="--a:135deg"><div class="node-in"><span>Muse</span></div></div>
+        <div class="node" style="--a:180deg"><div class="node-in"><span>dots</span></div></div>
         <div class="node" style="--a:225deg"><div class="node-in"><span>ManyChat</span></div></div>
       </div>
       <div class="core"><img src="claude.png" alt=""></div>
@@ -484,6 +501,19 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
       <div class="step"><b>Todos arrancan el mismo día</b><span>Una generación, un ritmo. Avanzas con gente que está en lo mismo que tú.</span></div>
       <div class="step"><b>Demo Day y La Sala de por vida</b><span>Te gradúas presentando lo que construiste y pasas a La Sala, el espacio permanente de todos los graduados.</span></div>
     </div>
+  </section>
+
+  <!-- LO NUEVO -->
+  <section class="new-s">
+    <span class="eyebrow">Recién salido</span>
+    <h2 class="h2 rv">La IA cambia cada mes. <em class="s">Tú también.</em></h2>
+    <p class="lead rv">Claude es el centro, pero no el único. Lo que va saliendo lo probamos en vivo y te decimos para qué sirve en tu negocio.</p>
+    <div class="news">
+      <div class="nw"><span class="mk">W</span><div class="nm">ChatGPT Work <small>OpenAI</small><span class="new">NUEVO</span></div><p>El agente de ChatGPT que trabaja por horas: arma documentos, hojas de cálculo y presentaciones.</p></div>
+      <div class="nw"><span class="mk">·</span><div class="nm">dots <small>OpenAI</small><span class="new">NUEVO</span></div><p>Agentes que siguen trabajando en la nube aunque cierres la app.</p></div>
+      <div class="nw"><span class="mk">M</span><div class="nm">Muse <small>Meta</small><span class="new">NUEVO</span></div><p>El agente personal de Meta, ahora también para pequeños negocios.</p></div>
+    </div>
+    <p class="news-foot rv">Y lo que salga mientras estás adentro.</p>
   </section>
 
   <!-- PARA QUIEN -->
@@ -876,13 +906,23 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
 
   // ---- Semanas: cartas apiladas ----
   var wks = $$('.wk');
-  wks.forEach(function(card, i){
-    gsap.from(card, {opacity:0, y:60, duration:.7, ease:'power3.out', scrollTrigger:{trigger:card, start:'top 92%'}});
-    gsap.from($('.wk-n', card), {opacity:0, scale:.5, rotate:-12, duration:.7, ease:'back.out(2)', scrollTrigger:{trigger:card, start:'top 85%'}});
-    if(i < wks.length - 1){
-      gsap.to(card, {scale:.9 + i*.012, opacity:.45, ease:'none', scrollTrigger:{trigger:wks[i+1], start:'top 85%', end:'top 25%', scrub:true}});
+  // Las cartas son sticky: ScrollTrigger calcula mal sus posiciones, asi que el apilado
+  // se calcula en vivo con la posicion real de la carta siguiente (funciona igual al subir).
+  var stackQueued = false;
+  function stackFx(){
+    stackQueued = false;
+    var vh = window.innerHeight, start = vh * .85, end = vh * .3;
+    for(var i = 0; i < wks.length - 1; i++){
+      var t = wks[i+1].getBoundingClientRect().top;
+      var pr = Math.min(1, Math.max(0, (start - t) / (start - end)));
+      wks[i].style.setProperty('--wkdim', (pr * .6).toFixed(3));
+      wks[i].style.transform = 'scale(' + (1 - pr * (.08 - i * .01)).toFixed(4) + ')';
     }
-  });
+  }
+  function queueStack(){ if(!stackQueued){ stackQueued = true; requestAnimationFrame(stackFx); } }
+  window.addEventListener('scroll', queueStack, {passive:true});
+  window.addEventListener('resize', queueStack);
+  stackFx();
 
   // ---- Hub ----
   var orbitTl = gsap.timeline({scrollTrigger:{trigger:'#orbit', start:'top 78%'}});
@@ -894,6 +934,11 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
   $$('.step').forEach(function(st){
     gsap.from(st, {opacity:0, x:20, filter:'blur(6px)', duration:.6, ease:'power3.out', scrollTrigger:{trigger:st, start:'top 82%'}});
   });
+
+  // ---- Lo nuevo ----
+  gsap.from('.nw', {opacity:0, x:-40, filter:'blur(8px)', stagger:.12, duration:.6, ease:'power3.out', scrollTrigger:{trigger:'.news', start:'top 85%'}});
+  gsap.from('.nw .mk', {scale:0, rotate:-25, stagger:.12, duration:.6, ease:'back.out(3)', delay:.15, scrollTrigger:{trigger:'.news', start:'top 85%'}});
+  gsap.from('.nw .new', {scale:0, stagger:.12, duration:.5, ease:'back.out(3)', delay:.35, scrollTrigger:{trigger:'.news', start:'top 85%'}});
 
   // ---- Para quien ----
   gsap.from('#toggle', {opacity:0, scale:.85, duration:.7, ease:'back.out(2)', scrollTrigger:{trigger:'#toggle', start:'top 88%'}});
