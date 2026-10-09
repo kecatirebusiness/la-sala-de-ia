@@ -345,9 +345,8 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
 .jolly{position:fixed;left:0;top:0;z-index:58;width:46px;height:57px;opacity:0;transform:translate3d(-200px,-200px,0);transition:opacity .6s ease;pointer-events:none;will-change:transform}
 .jolly.on{opacity:1;pointer-events:auto;cursor:pointer}
 .jolly .jw{position:absolute;inset:0;transform-origin:50% 100%;will-change:transform}
-.jolly .jflip{position:absolute;inset:0;transform:scaleX(-1);transition:transform .32s cubic-bezier(.45,0,.2,1)}
-.jolly.left .jflip{transform:scaleX(1)}
-.jsprite{position:absolute;inset:0;background:url(gen2/jolly-walk.webp) -276px 0/920px 57px no-repeat;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35))}
+.jolly .jflip{position:absolute;inset:0;transition:transform .3s cubic-bezier(.45,0,.2,1)}
+.jsprite{position:absolute;left:50%;bottom:0;height:57px;width:44px;transform:translateX(-50%);background-repeat:no-repeat;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35))}
 .jhand{position:absolute;top:0;right:-11px;font-size:15px;opacity:0;transform-origin:70% 80%;transition:opacity .3s ease}
 .jolly.waving .jhand{opacity:1;animation:jwave .42s ease-in-out infinite alternate}
 @keyframes jwave{from{transform:rotate(-18deg)}to{transform:rotate(22deg)}}
@@ -355,9 +354,8 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
 .jbub{position:fixed;left:0;top:0;z-index:59;width:max-content;max-width:210px;padding:10px 14px;border-radius:15px;background:#F4F7F5;color:#0B1D17;font-size:13.5px;font-weight:600;line-height:1.3;box-shadow:0 12px 30px rgba(0,0,0,.45);transform-origin:var(--to,50%) 100%;opacity:0;pointer-events:none;will-change:transform,opacity,filter}
 .jbub::after{content:"";position:absolute;bottom:-5px;left:var(--to,50%);width:11px;height:11px;margin-left:-5.5px;background:#F4F7F5;transform:rotate(45deg);border-radius:2px}
 .nw .mk.jolly-mk{background:radial-gradient(circle at 50% 35%,#FFF6EC,#EAD9C6)}
-.nw .mk.jolly-mk img{transform-origin:50% 90%;animation:mkwave 1.6s ease-in-out infinite}
-@keyframes mkwave{0%,100%{transform:scale(1.1) rotate(-7deg)}50%{transform:scale(1.1) translateY(-3%) rotate(7deg)}}
-.nw .mk.jolly-mk .mkhand{position:absolute;right:2px;top:2px;font-size:14px;transform-origin:70% 80%;animation:jwave .45s ease-in-out infinite alternate}
+.nw .mk.jolly-mk .mkwave{position:absolute;left:50%;top:6%;width:58px;height:67px;margin-left:-29px;background:url(gen2/jolly/wave.webp) 0 0/2088px 67px no-repeat;animation:mkwave 3s steps(36) infinite}
+@keyframes mkwave{to{background-position-x:-2088px}}
 
 @media (min-width:700px){
   .page{max-width:500px}
@@ -554,7 +552,7 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
     <div class="news">
       <div class="nw"><span class="mk gpt"><img src="gen2/chatgpt-app.png" alt="ChatGPT"></span><div class="nm">ChatGPT Work <small>OpenAI</small><span class="new">NUEVO</span></div><p>El agente de ChatGPT que trabaja por horas: arma documentos, hojas de cálculo y presentaciones.</p></div>
       <div class="nw"><span class="mk dots" aria-label="dots de OpenAI"><i></i></span><div class="nm">dots <small>OpenAI</small><span class="new">NUEVO</span></div><p>Agentes que siguen trabajando en la nube aunque cierres la app.</p></div>
-      <div class="nw"><span class="mk jolly-mk"><img src="gen2/jolly-face.webp" alt="Jolly, la mascota de Muse de Meta, saludando"><span class="mkhand" aria-hidden="true">👋</span></span><div class="nm">Muse <small>Meta</small><span class="new">NUEVO</span></div><p>El agente personal de Meta, ahora también para pequeños negocios.</p></div>
+      <div class="nw"><span class="mk jolly-mk" role="img" aria-label="Jolly, la mascota de Muse de Meta, saludando"><i class="mkwave"></i></span><div class="nm">Muse <small>Meta</small><span class="new">NUEVO</span></div><p>El agente personal de Meta, ahora también para pequeños negocios.</p></div>
     </div>
     <p class="news-foot rv">Y lo que salga mientras estás adentro.</p>
   </section>
@@ -657,7 +655,7 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
 <div class="jshadow" id="jshadow" aria-hidden="true"></div>
 <div class="jbub" id="jbub" aria-live="polite"></div>
 <div class="jolly" id="jolly" role="button" aria-label="Jolly, la mascota de Muse">
-  <div class="jw"><div class="jflip"><i class="jsprite"></i></div><span class="jhand" aria-hidden="true">👋</span></div>
+  <div class="jw"><div class="jflip"><i class="jsprite"></i></div></div>
 </div>
 
 <div class="dock" id="dock">
@@ -1028,8 +1026,17 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
 (function(){
   'use strict';
   var J = document.getElementById('jolly'); if(!J) return;
-  var W = 46, H = 57, FRAME = 46, FRAMES = 20, IDLE = 6, AIR = 17, STRIDE = 58;
-  var jw = J.querySelector('.jw'), spr = J.querySelector('.jsprite'), shadow = document.getElementById('jshadow');
+  var W = 46, H = 57, STRIDE = 66;
+  // animaciones renderizadas (sprites). cw/ch = tamano de cada cuadro en la hoja
+  var ANIM = {
+    walk:  {src: 'gen2/jolly/walk.webp',  n: 24, cw: 92,  ch: 120, fps: 24, loop: true, face: 'left'},
+    air:   {src: 'gen2/jolly/air.webp',   n: 16, cw: 138, ch: 120, fps: 14, loop: true},
+    wave:  {src: 'gen2/jolly/wave.webp',  n: 36, cw: 104, ch: 120, fps: 12, loop: false},
+    party: {src: 'gen2/jolly/party.webp', n: 36, cw: 90,  ch: 120, fps: 13, loop: false},
+    point: {src: 'gen2/jolly/point.webp', n: 42, cw: 100, ch: 120, fps: 11, loop: false, face: 'right'},
+    idle:  {src: 'gen2/jolly/idle.webp',  n: 48, cw: 88, ch: 120, fps: 10, loop: true}
+  };
+  var jw = J.querySelector('.jw'), jflip = J.querySelector('.jflip'), spr = J.querySelector('.jsprite'), shadow = document.getElementById('jshadow');
   var bub = document.getElementById('jbub'), dock = document.getElementById('dock');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var rnd = function(a, b){ return a + Math.random() * (b - a); };
@@ -1088,21 +1095,32 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
     var t1 = -vy0 / g, t2 = Math.sqrt(2 * Math.max(8, y1 - apex) / g), T = t1 + t2;
     return new Promise(function(res){
       // anticipacion: se agacha antes de saltar
-      P.tx = null; P.crouch = 1; kick(-3.2);
+      P.tx = null; P.crouch = 1; kick(-2.2);
       setTimeout(function(){
         P.crouch = 0;
         var startT = performance.now(), x0 = P.x, y0 = P.y, ref = surf(el);
         face(x1 < x0);
-        kick(4.5);
+        kick(3);
         P.air = {el: el, x0: x0, y0: y0, x1: x1, y1: y1, ref: ref, vy0: vy0, g: g, T: T, start: startT, spin: !!extra.spin, done: function(){
           P.surface = el; P.px = el ? x1 - (surf(el) || {left: 0}).left : 0;
-          kick(-5.5); res(true);
+          kick(-4); res(true);
         }};
       }, 150);
     });
   }
   function face(left){ if(left !== P.faceLeft){ P.faceLeft = left; J.classList.toggle('left', left); } }
 
+  function setSprite(an){
+    an.dw = an.cw * H / an.ch;
+    spr.style.width = an.dw.toFixed(1) + 'px';
+    spr.style.backgroundImage = 'url(' + an.src + ')';
+    spr.style.backgroundSize = (an.dw * an.n).toFixed(1) + 'px ' + H + 'px';
+    P.sprDirty = true;
+  }
+  function play(name){
+    if(!ANIM[name] || !ANIM[name].ok) return Promise.resolve();
+    return new Promise(function(res){ P.act = name; P.anim = null; P.actDone = res; });
+  }
   // ---- loop de render ----
   var last = 0;
   function frame(now){
@@ -1157,9 +1175,23 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
     var rot = clamp(P.lean, -9, 9) + P.lookA + P.spin;
     jw.style.transform = 'rotate(' + rot.toFixed(2) + 'deg) scale(' + sx.toFixed(3) + ',' + sy.toFixed(3) + ')';
 
-    // cuadro del sprite: avanza con la distancia recorrida (sin patinar)
-    var f = !grounded ? AIR : (Math.abs(P.vx) > 6 ? Math.floor((P.phase % 1) * FRAMES) : IDLE);
-    if(f !== P.f){ P.f = f; spr.style.backgroundPosition = (-f * FRAME) + 'px 0'; }
+    // animacion: accion actual (saludar/senalar/celebrar) > aire > caminar > quieto
+    var name, fi;
+    if(!grounded){ name = 'air'; }
+    else if(P.act && Math.abs(P.vx) < 6){ name = P.act; }
+    else if(Math.abs(P.vx) > 6){ name = 'walk'; }
+    else { name = ANIM.idle.ok ? 'idle' : 'wave'; }
+    var an = ANIM[name];
+    if(name !== P.anim){ P.anim = name; P.animT = 0; setSprite(an); }
+    if(an.face){ var flip = an.face === 'left' ? !P.faceLeft : P.faceLeft; if(flip !== P.flip){ P.flip = flip; jflip.style.transform = flip ? 'scaleX(-1)' : 'none'; } }
+    P.animT += dt;
+    if(name === 'walk') fi = Math.floor((P.phase % 1) * an.n);
+    else if(name === 'wave' && !P.act) fi = 0; // pose quieta de respaldo
+    else {
+      fi = Math.floor(P.animT * an.fps);
+      if(fi >= an.n){ if(an.loop) fi = fi % an.n; else { fi = an.n - 1; if(P.act === name){ P.act = null; if(P.actDone) P.actDone(); } } }
+    }
+    if(fi !== P.fi || P.sprDirty){ P.fi = fi; P.sprDirty = false; spr.style.backgroundPosition = (-fi * an.dw).toFixed(1) + 'px 0'; }
 
     J.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)';
     var h = Math.max(0, groundY - y);
@@ -1185,7 +1217,7 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
     bub.textContent = text; B.on = true;
     if(B.o < .05){ B.x = P.x + W / 2; B.y = P.y + 10; B.s = 0; }
     clearTimeout(say.t); say.t = setTimeout(function(){ B.on = false; }, ms || 3300);
-    if(wave){ J.classList.add('waving'); clearTimeout(say.w); say.w = setTimeout(function(){ J.classList.remove('waving'); }, 2300); }
+    if(wave) play('wave');
   }
   window.jollySay = function(t){ say(t, 3600); };
 
@@ -1216,7 +1248,7 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
     await wait(3600);
     var lastLine = '';
     while(true){
-      if(P.air || document.hidden){ await wait(300); continue; }
+      if(P.air || P.act || document.hidden){ await wait(300); continue; }
       var spots = visibleSpots(), r = Math.random();
       if(spots.length && r < .55){
         var sp = spots[Math.floor(Math.random() * spots.length)], t = surf(sp.el);
@@ -1230,8 +1262,10 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
           await wait(500);
           var opts = sp.lines.filter(function(l){ return l !== lastLine; }); if(!opts.length) opts = sp.lines;
           lastLine = opts[Math.floor(Math.random() * opts.length)];
+          var sc = surf(P.surface); if(sc) face(P.x + W / 2 > (sc.minx + sc.maxx + W) / 2);
           say(lastLine, 3400);
-          await wait(rnd(3800, 5200));
+          await play(Math.random() < .75 ? 'point' : 'wave');
+          await wait(rnd(1400, 2600));
           if(P.surface && Math.random() < .5){ var s3 = surf(P.surface); if(s3) await walkTo(rnd(s3.minx, s3.maxx)); await wait(rnd(600, 1400)); }
           if(P.surface && Math.random() < .55){ await jumpTo(null, {px: clamp(P.x + rnd(-80, 80), col().l, col().r), h: 30}); }
         }
@@ -1255,18 +1289,22 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
   });
   var card = document.getElementById('formCard');
   if(card && 'MutationObserver' in window){
-    new MutationObserver(function(){ if(card.classList.contains('done')) setTimeout(function(){ say('¡Bienvenid@ a la Gen 02! 🎉', 3800); if(!P.air) jumpTo(P.surface, {px: P.surface ? P.px : P.x, h: 70, spin: true}); }, 600); })
+    new MutationObserver(function(){ if(card.classList.contains('done')) setTimeout(function(){ say('¡Bienvenid@ a la Gen 02! 🎉', 3800); P.tx = null; P.vx = 0; if(!P.air) play('party'); else setTimeout(function(){ play('party'); }, 900); }, 600); })
       .observe(card, {attributes: true, attributeFilter: ['class']});
   }
 
   J.classList.add('left');
   var seen = false; try{ seen = sessionStorage.getItem('ls_g2_intro') === '1'; }catch(e){}
-  setTimeout(function(){
+  var loaded = Promise.all(Object.keys(ANIM).map(function(k){
+    return new Promise(function(r){ var im = new Image(); im.onload = function(){ ANIM[k].ok = true; r(); }; im.onerror = function(){ r(); }; im.src = ANIM[k].src; });
+  }));
+  setTimeout(function(){ loaded.then(start); }, seen ? 2400 : 4200);
+  function start(){
     metrics(); P.x = col().r; P.y = surf(null).y; B.x = P.x; B.y = P.y;
     started = true; J.classList.add('on');
     requestAnimationFrame(frame);
     if(!reduce) brain(); else say('¡Hola! Soy Jolly, de Muse 👋', 3000, true);
-  }, seen ? 2400 : 4200);
+  }
 })();
 </script>
 </body>
