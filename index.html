@@ -342,37 +342,22 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
 
 
 /* ---------- Jolly (mascota de Muse) ---------- */
-.jolly{position:fixed;left:0;top:0;z-index:58;width:46px;height:57px;opacity:0;transform:translate3d(var(--jx,-100px),var(--jy,-100px),0);transition:opacity .5s ease;pointer-events:none;will-change:transform}
+.jolly{position:fixed;left:0;top:0;z-index:58;width:46px;height:57px;opacity:0;transform:translate3d(-200px,-200px,0);transition:opacity .6s ease;pointer-events:none;will-change:transform}
 .jolly.on{opacity:1;pointer-events:auto;cursor:pointer}
-.jolly .jw{position:absolute;inset:0;transform-origin:50% 100%}
-.jolly.left .jflip{transform:scaleX(1)}.jolly .jflip{position:absolute;inset:0;transform:scaleX(-1)}
-.jolly.left .jflip{transform:none}
-.jsprite{position:absolute;inset:0;background:url(gen2/jolly-walk.webp) -138px 0/920px 57px no-repeat;filter:drop-shadow(0 6px 8px rgba(0,0,0,.45))}
-.jolly.walking .jsprite{animation:jwalk .8s steps(20) infinite}
-.jolly.air .jsprite{background-position-x:-322px}
-.jolly.air .jw{animation:none!important;transform:scale(.92,1.1)}
-.jolly.look .jw{animation:none;transform:rotate(-10deg);transition:transform .3s ease}
-.jolly.look:not(.left) .jw{transform:rotate(10deg)}
-.jolly.land .jw{animation:jland .3s ease-out}
-@keyframes jland{0%{transform:scale(1.15,.82)}100%{transform:none}}
-@keyframes jwalk{from{background-position-x:0}to{background-position-x:-920px}}
-.jolly:not(.walking) .jw{animation:jbreath 2.4s ease-in-out infinite}
-@keyframes jbreath{0%,100%{transform:scale(1,1)}50%{transform:scale(1.03,.97)}}
-.jolly.hop .jw{animation:jhop .55s cubic-bezier(.3,1.6,.5,1)}
-@keyframes jhop{0%{transform:translateY(0) scale(1.1,.88)}40%{transform:translateY(-22px) scale(.95,1.06)}75%{transform:translateY(0) scale(1.08,.92)}100%{transform:none}}
-.jolly.party .jw{animation:jparty 1s cubic-bezier(.3,1.4,.5,1)}
-@keyframes jparty{0%{transform:none}30%{transform:translateY(-34px) rotate(-12deg)}55%{transform:translateY(-34px) rotate(350deg)}80%{transform:translateY(0) rotate(360deg) scale(1.08,.92)}100%{transform:rotate(360deg)}}
-.jhand{position:absolute;top:0;right:-11px;font-size:15px;opacity:0;transform-origin:70% 80%}
-.jolly.waving .jhand{opacity:1;animation:jwave .5s ease-in-out 4 alternate}
+.jolly .jw{position:absolute;inset:0;transform-origin:50% 100%;will-change:transform}
+.jolly .jflip{position:absolute;inset:0;transform:scaleX(-1);transition:transform .32s cubic-bezier(.45,0,.2,1)}
+.jolly.left .jflip{transform:scaleX(1)}
+.jsprite{position:absolute;inset:0;background:url(gen2/jolly-walk.webp) -276px 0/920px 57px no-repeat;filter:drop-shadow(0 4px 6px rgba(0,0,0,.35))}
+.jhand{position:absolute;top:0;right:-11px;font-size:15px;opacity:0;transform-origin:70% 80%;transition:opacity .3s ease}
+.jolly.waving .jhand{opacity:1;animation:jwave .42s ease-in-out infinite alternate}
 @keyframes jwave{from{transform:rotate(-18deg)}to{transform:rotate(22deg)}}
-.jbub{position:absolute;bottom:62px;left:50%;width:max-content;max-width:200px;padding:9px 13px;border-radius:14px;background:#F4F7F5;color:#0B1D17;font-size:13.5px;font-weight:600;line-height:1.3;box-shadow:0 10px 28px rgba(0,0,0,.45);transform:translateX(calc(-50% + var(--bx,0px))) scale(.6);transform-origin:50% 100%;opacity:0;transition:opacity .25s ease,transform .35s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
-.jbub::after{content:"";position:absolute;bottom:-6px;left:calc(50% - var(--bx,0px));width:12px;height:12px;margin-left:-6px;background:#F4F7F5;transform:rotate(45deg);border-radius:2px}
-.jolly.talk .jbub{opacity:1;transform:translateX(calc(-50% + var(--bx,0px))) scale(1)}
+.jshadow{position:fixed;left:0;top:0;z-index:57;width:34px;height:9px;margin:-5px 0 0 -17px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.55),rgba(0,0,0,0));pointer-events:none;opacity:0;will-change:transform,opacity}
+.jbub{position:fixed;left:0;top:0;z-index:59;width:max-content;max-width:210px;padding:10px 14px;border-radius:15px;background:#F4F7F5;color:#0B1D17;font-size:13.5px;font-weight:600;line-height:1.3;box-shadow:0 12px 30px rgba(0,0,0,.45);transform-origin:var(--to,50%) 100%;opacity:0;pointer-events:none;will-change:transform,opacity,filter}
+.jbub::after{content:"";position:absolute;bottom:-5px;left:var(--to,50%);width:11px;height:11px;margin-left:-5.5px;background:#F4F7F5;transform:rotate(45deg);border-radius:2px}
 .nw .mk.jolly-mk{background:radial-gradient(circle at 50% 35%,#FFF6EC,#EAD9C6)}
 .nw .mk.jolly-mk img{transform-origin:50% 90%;animation:mkwave 1.6s ease-in-out infinite}
 @keyframes mkwave{0%,100%{transform:scale(1.1) rotate(-7deg)}50%{transform:scale(1.1) translateY(-3%) rotate(7deg)}}
 .nw .mk.jolly-mk .mkhand{position:absolute;right:2px;top:2px;font-size:14px;transform-origin:70% 80%;animation:jwave .45s ease-in-out infinite alternate}
-@media (prefers-reduced-motion:reduce){.jolly.walking .jsprite{animation:none}}
 
 @media (min-width:700px){
   .page{max-width:500px}
@@ -669,8 +654,9 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
 </main>
 
 
+<div class="jshadow" id="jshadow" aria-hidden="true"></div>
+<div class="jbub" id="jbub" aria-live="polite"></div>
 <div class="jolly" id="jolly" role="button" aria-label="Jolly, la mascota de Muse">
-  <div class="jbub" id="jbub"></div>
   <div class="jw"><div class="jflip"><i class="jsprite"></i></div><span class="jhand" aria-hidden="true">👋</span></div>
 </div>
 
@@ -1038,18 +1024,23 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
 </script>
 
 <script>
-// ---- Jolly: personaje autonomo. Camina, mira, salta sobre lo que hay en pantalla y lo explica ----
+// ---- Jolly: personaje autonomo con fisica (resortes + gravedad). Camina, mira, salta sobre lo que hay en pantalla y lo explica ----
 (function(){
   'use strict';
   var J = document.getElementById('jolly'); if(!J) return;
+  var W = 46, H = 57, FRAME = 46, FRAMES = 20, IDLE = 6, AIR = 17, STRIDE = 58;
+  var jw = J.querySelector('.jw'), spr = J.querySelector('.jsprite'), shadow = document.getElementById('jshadow');
   var bub = document.getElementById('jbub'), dock = document.getElementById('dock');
-  var W = 46, H = 57, reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var S = {mode:'floor', x:null, px:0, perch:null, anim:null, faceLeft:true, talking:false};
-  var cur = {x:-100, y:-100}, vw = 0, vh = 0, recent = new Map();
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var rnd = function(a, b){ return a + Math.random() * (b - a); };
   var wait = function(ms){ return new Promise(function(r){ setTimeout(r, ms); }); };
+  var clamp = function(v, a, b){ return Math.max(a, Math.min(b, v)); };
 
-  // Cosas que Jolly explica cuando se sube encima
+  // estado fisico
+  var P = {x: 0, y: 0, vx: 0, surface: null, px: 0, tx: null, air: null, faceLeft: true, phase: 0, lean: 0, leanV: 0, sq: 0, sqV: 0, spin: 0, look: 0, lookT: 0, t: 0};
+  var B = {x: 0, y: 0, vx: 0, vy: 0, s: 0, sv: 0, o: 0, on: false, text: ''};
+  var vw = 0, vh = 0, recent = new Map(), started = false;
+
   var SPOTS = [
     ['.hero-cta', ['Toca aquí y te apartas un lugar 👆', 'Este botón es el importante 😉']],
     ['.chat', ['Así se ve tu hub trabajando por ti 🤖', 'Esto lo haces tú en la semana 2 💪']],
@@ -1068,167 +1059,213 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
     ['.faq details', ['Aquí respondemos lo que todos preguntan 💬']]
   ];
 
+  function metrics(){ vw = document.documentElement.clientWidth; vh = window.innerHeight; }
   function dockGap(){ return dock.classList.contains('show') ? dock.querySelector('.dock-in').getBoundingClientRect().height + 20 : 12; }
-  function colB(){
-    vw = document.documentElement.clientWidth; vh = window.innerHeight;
-    var c = Math.min(480, vw), l = (vw - c) / 2;
-    return {l: l + 6, r: l + c - 6 - W};
-  }
-  function perchOK(el){
-    if(!el) return null;
-    var r = el.getBoundingClientRect(), c = colB();
+  function col(){ var c = Math.min(480, vw), l = (vw - c) / 2; return {l: l + 6, r: l + c - 6 - W}; }
+  // una "superficie" es el piso o el borde de arriba de un elemento
+  function surf(el){
+    var c = col();
+    if(!el) return {y: vh - dockGap() - H, minx: c.l, maxx: c.r, left: 0};
+    var r = el.getBoundingClientRect();
     var minx = Math.max(r.left + 4, c.l), maxx = Math.min(r.right - W - 4, c.r);
-    if(maxx - minx < 8) return null;
-    if(r.top < 165 || r.top > vh - dockGap() - H - 30) return null;
-    return {r: r, minx: minx, maxx: maxx, y: r.top - H + 6};
+    if(maxx - minx < 8 || r.top < 165 || r.top > vh - dockGap() - H - 30) return null;
+    return {y: r.top - H + 6, minx: minx, maxx: maxx, left: r.left};
   }
-  function basePos(){
-    var c = colB();
-    if(S.mode === 'perch'){
-      var q = perchOK(S.perch);
-      if(!q) return null;
-      S.px = Math.min(q.maxx - q.r.left, Math.max(q.minx - q.r.left, S.px));
-      return {x: q.r.left + S.px, y: q.y, minx: q.minx, maxx: q.maxx};
-    }
-    if(S.x === null) S.x = c.r;
-    S.x = Math.min(c.r, Math.max(c.l, S.x));
-    return {x: S.x, y: vh - dockGap() - H, minx: c.l, maxx: c.r};
-  }
-  function face(left){ if(left !== S.faceLeft){ S.faceLeft = left; J.classList.toggle('left', left); } }
 
-  // salto con arco (bezier) hacia un destino que puede moverse mientras vuela
-  function jump(targetFn, then){
-    var from = {x: cur.x, y: cur.y}, t0 = performance.now();
-    var to0 = targetFn(); if(!to0) return Promise.resolve(false);
-    var dist = Math.hypot(to0.x - from.x, to0.y - from.y), dur = Math.min(900, 420 + dist * .9);
-    face(to0.x < from.x);
-    J.classList.remove('walking'); J.classList.add('air');
+  // ---- resortes ----
+  function spring(v, vel, target, k, d, dt){ var a = -k * (v - target) - d * vel; vel += a * dt; return [v + vel * dt, vel]; }
+  function kick(amount){ P.sqV += amount; }
+
+  // ---- salto con gravedad real ----
+  function jumpTo(el, extra){
+    extra = extra || {};
+    var s0 = surf(P.surface) || surf(null), s1 = surf(el);
+    if(!s1) return Promise.resolve(false);
+    var px = extra.px !== undefined ? extra.px : rnd(s1.minx, s1.maxx) - s1.left;
+    var x1 = clamp(s1.left + px, s1.minx, s1.maxx), y1 = s1.y;
+    var g = 2050, apex = Math.min(P.y, y1) - (extra.h || 46);
+    var vy0 = -Math.sqrt(2 * g * Math.max(8, P.y - apex));
+    var t1 = -vy0 / g, t2 = Math.sqrt(2 * Math.max(8, y1 - apex) / g), T = t1 + t2;
     return new Promise(function(res){
-      S.anim = {step: function(t){
-        var to = targetFn() || to0, k = Math.min(1, (t - t0) / dur), e = k;
-        var peak = Math.min(from.y, to.y) - (40 + Math.min(80, Math.abs(to.y - from.y) * .25));
-        var cx = (from.x + to.x) / 2, cy = 2 * peak - (from.y + to.y) / 2;
-        var x = (1-e)*(1-e)*from.x + 2*(1-e)*e*cx + e*e*to.x, y = (1-e)*(1-e)*from.y + 2*(1-e)*e*cy + e*e*to.y;
-        if(k >= 1){ S.anim = null; J.classList.remove('air'); J.classList.add('land'); setTimeout(function(){ J.classList.remove('land'); }, 320); if(then) then(to); res(true); }
-        return {x: x, y: y};
-      }};
+      // anticipacion: se agacha antes de saltar
+      P.tx = null; P.crouch = 1; kick(-3.2);
+      setTimeout(function(){
+        P.crouch = 0;
+        var startT = performance.now(), x0 = P.x, y0 = P.y, ref = surf(el);
+        face(x1 < x0);
+        kick(4.5);
+        P.air = {el: el, x0: x0, y0: y0, x1: x1, y1: y1, ref: ref, vy0: vy0, g: g, T: T, start: startT, spin: !!extra.spin, done: function(){
+          P.surface = el; P.px = el ? x1 - (surf(el) || {left: 0}).left : 0;
+          kick(-5.5); res(true);
+        }};
+      }, 150);
     });
   }
-  function jumpToPerch(el){
-    var q = perchOK(el); if(!q) return Promise.resolve(false);
-    var px = rnd(q.minx, q.maxx) - q.r.left;
-    return jump(function(){ var z = perchOK(el); return z ? {x: z.r.left + Math.min(z.maxx - z.r.left, Math.max(z.minx - z.r.left, px)), y: z.y} : null; },
-      function(){ S.mode = 'perch'; S.perch = el; S.px = px; });
-  }
-  function jumpDown(){
-    var c = colB(), tx = Math.min(c.r, Math.max(c.l, cur.x + rnd(-90, 90)));
-    return jump(function(){ return {x: tx, y: vh - dockGap() - H}; }, function(){ S.mode = 'floor'; S.perch = null; S.x = tx; });
-  }
-  function walkTo(tx){
-    var mode = S.mode;
-    return new Promise(function(res){
-      var last = performance.now();
-      function step(t){
-        if(S.mode !== mode || S.anim){ J.classList.remove('walking'); return res(); }
-        var dt = Math.min(.05, (t - last) / 1000); last = t;
-        var curv = mode === 'perch' ? S.px : S.x, d = tx - curv;
-        if(Math.abs(d) < 2){ J.classList.remove('walking'); return res(); }
-        face(d < 0); J.classList.add('walking');
-        var v = Math.sign(d) * Math.min(Math.abs(d), 62 * dt);
-        if(mode === 'perch') S.px += v; else S.x += v;
-        requestAnimationFrame(step);
+  function face(left){ if(left !== P.faceLeft){ P.faceLeft = left; J.classList.toggle('left', left); } }
+
+  // ---- loop de render ----
+  var last = 0;
+  function frame(now){
+    var dt = Math.min(.034, (now - (last || now)) / 1000); last = now; P.t += dt;
+    metrics();
+    var x, y, grounded = true, groundY;
+    if(P.air){
+      var A = P.air, t = (now - A.start) / 1000, k = Math.min(1, t / A.T);
+      var sNow = surf(A.el), dx = 0, dy = 0;
+      if(A.el && sNow && A.ref){ dy = (sNow.y - A.ref.y) * k; dx = (sNow.left - A.ref.left) * k; }
+      if(!A.el){ dy = (surf(null).y - A.y1) * k; }
+      x = A.x0 + (A.x1 - A.x0) * k + dx;
+      y = (k < 1 ? A.y0 + A.vy0 * t + .5 * A.g * t * t : A.y1) + dy;
+      groundY = A.y0 + (A.y1 - A.y0) * k + dy;
+      P.lean += ((A.x1 - A.x0) / A.T * .012 - P.lean) * Math.min(1, dt * 10);
+      P.spin = A.spin ? -360 * (1 - Math.pow(1 - k, 2)) : 0;
+      grounded = false;
+      if(k >= 1){ var d = A.done; P.air = null; P.spin = 0; P.x = x; P.y = y; d(); }
+    } else {
+      var s = surf(P.surface);
+      if(!s){ // se fue lo que lo sostenia: cae al piso
+        var fromEl = P.surface; P.surface = null; P.px = 0;
+        if(fromEl){ var fy = P.y; P.air = {el: null, x0: P.x, y0: fy, x1: clamp(P.x, col().l, col().r), y1: surf(null).y, vy0: -200, g: 2050, T: Math.max(.25, (200 + Math.sqrt(40000 + 2 * 2050 * Math.max(0, surf(null).y - fy))) / 2050), start: now, done: function(){ kick(-6); }}; if(Math.random() < .5) say('¡Uy! 😵', 1300); }
+        s = surf(null);
       }
-      requestAnimationFrame(step);
+      if(P.air){ x = P.x; y = P.y; groundY = y; } else {
+      // caminar: aceleracion con llegada suave (arrive)
+      var cur = P.surface ? (s.left + P.px) : P.x;
+      var desired = 0;
+      if(P.tx !== null){
+        var dist = P.tx - cur;
+        if(Math.abs(dist) < 1.5 && Math.abs(P.vx) < 6){ P.tx = null; }
+        else desired = Math.sign(dist) * Math.min(66, Math.abs(dist) * 2.2);
+      }
+      P.vx += (desired - P.vx) * Math.min(1, dt * 5.5);
+      if(Math.abs(P.vx) > 4) face(P.vx < 0);
+      cur = clamp(cur + P.vx * dt, s.minx, s.maxx);
+      if(P.surface) P.px = cur - s.left; else P.x = cur;
+      x = cur; y = s.y; groundY = y;
+      P.phase += Math.abs(P.vx) * dt / STRIDE;
+      P.lean += (P.vx * .07 - P.lean) * Math.min(1, dt * 8);
+      }
+    }
+    if(!P.air){ P.x = x; } P.y = y;
+
+    // squash & stretch (resorte gelatinoso) + respiracion + mirar
+    var tgt = P.crouch ? -0.18 : 0;
+    var r = spring(P.sq, P.sqV, tgt, 260, 13, dt); P.sq = r[0]; P.sqV = r[1];
+    var breath = grounded && Math.abs(P.vx) < 4 ? Math.sin(P.t * 2.6) * .018 : 0;
+    var sy = 1 + P.sq + breath, sx = 1 - P.sq * .55 - breath * .6;
+    P.lookA = (P.lookA || 0) + ((P.look || 0) - (P.lookA || 0)) * Math.min(1, dt * 7);
+    var rot = clamp(P.lean, -9, 9) + P.lookA + P.spin;
+    jw.style.transform = 'rotate(' + rot.toFixed(2) + 'deg) scale(' + sx.toFixed(3) + ',' + sy.toFixed(3) + ')';
+
+    // cuadro del sprite: avanza con la distancia recorrida (sin patinar)
+    var f = !grounded ? AIR : (Math.abs(P.vx) > 6 ? Math.floor((P.phase % 1) * FRAMES) : IDLE);
+    if(f !== P.f){ P.f = f; spr.style.backgroundPosition = (-f * FRAME) + 'px 0'; }
+
+    J.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)';
+    var h = Math.max(0, groundY - y);
+    shadow.style.transform = 'translate3d(' + (x + W / 2).toFixed(1) + 'px,' + (groundY + H - 1).toFixed(1) + 'px,0) scale(' + (1 - Math.min(.55, h / 160)).toFixed(3) + ')';
+    shadow.style.opacity = (started ? (1 - Math.min(.8, h / 140)) * .9 : 0).toFixed(2);
+
+    // globo: sigue a Jolly con resorte, entra/sale con blur
+    var bw = bub.offsetWidth || 150, bh = bub.offsetHeight || 40;
+    var tx = clamp(x + W / 2, bw / 2 + 8, vw - bw / 2 - 8), ty = y - 8;
+    var rx = spring(B.x, B.vx, tx, 170, 20, dt); B.x = rx[0]; B.vx = rx[1];
+    var ry = spring(B.y, B.vy, ty, 170, 20, dt); B.y = ry[0]; B.vy = ry[1];
+    var rs = spring(B.s, B.sv, B.on ? 1 : 0, 220, 16, dt); B.s = rs[0]; B.sv = rs[1];
+    B.o += ((B.on ? 1 : 0) - B.o) * Math.min(1, dt * (B.on ? 12 : 9));
+    var tail = clamp(x + W / 2 - (B.x - bw / 2), 16, bw - 16);
+    bub.style.setProperty('--to', tail.toFixed(0) + 'px');
+    bub.style.transform = 'translate3d(' + (B.x - bw / 2).toFixed(1) + 'px,' + (B.y - bh).toFixed(1) + 'px,0) scale(' + Math.max(.001, .6 + .4 * B.s).toFixed(3) + ')';
+    bub.style.opacity = B.o.toFixed(3);
+    bub.style.filter = B.o < .98 ? 'blur(' + ((1 - B.o) * 6).toFixed(1) + 'px)' : 'none';
+    requestAnimationFrame(frame);
+  }
+
+  function say(text, ms, wave){
+    bub.textContent = text; B.on = true;
+    if(B.o < .05){ B.x = P.x + W / 2; B.y = P.y + 10; B.s = 0; }
+    clearTimeout(say.t); say.t = setTimeout(function(){ B.on = false; }, ms || 3300);
+    if(wave){ J.classList.add('waving'); clearTimeout(say.w); say.w = setTimeout(function(){ J.classList.remove('waving'); }, 2300); }
+  }
+  window.jollySay = function(t){ say(t, 3600); };
+
+  function walkTo(absX){
+    return new Promise(function(res){
+      var s = surf(P.surface); if(!s){ return res(); }
+      P.tx = clamp(absX, s.minx, s.maxx);
+      (function chk(){ if(P.tx === null || P.air) return res(); setTimeout(chk, 80); })();
     });
   }
-  function say(text, mode, ms){
-    bub.textContent = text; S.talking = true;
-    J.classList.add('talk');
-    clearTimeout(say.t); say.t = setTimeout(function(){ J.classList.remove('talk'); S.talking = false; }, ms || 3200);
-    if(mode){ J.classList.remove('hop','party','waving'); void J.offsetWidth; J.classList.add(mode); setTimeout(function(){ J.classList.remove(mode); }, mode === 'waving' ? 2100 : 1100); }
+  async function lookAround(){
+    P.look = P.faceLeft ? -7 : 7; await wait(900);
+    face(!P.faceLeft); P.look = P.faceLeft ? -7 : 7; await wait(900);
+    P.look = 0;
   }
-  window.jollySay = say;
-
-  function render(){
-    var p = S.anim ? S.anim.step(performance.now()) : basePos();
-    if(!p){ // lo que tenia abajo se fue de la pantalla: se cae al piso
-      S.mode = 'floor'; S.x = cur.x; S.perch = null;
-      jump(function(){ return {x: Math.min(colB().r, Math.max(colB().l, S.x)), y: vh - dockGap() - H}; });
-      p = cur;
-      if(Math.random() < .5) say('¡Uy! 😵', null, 1200);
-    }
-    cur = p;
-    J.style.setProperty('--jx', p.x.toFixed(1) + 'px');
-    J.style.setProperty('--jy', p.y.toFixed(1) + 'px');
-    if(S.talking){
-      var bw = bub.offsetWidth, cx = p.x + W / 2, shift = 0;
-      if(cx - bw / 2 < 8) shift = 8 - (cx - bw / 2);
-      if(cx + bw / 2 > vw - 8) shift = (vw - 8) - (cx + bw / 2);
-      J.style.setProperty('--bx', shift.toFixed(0) + 'px');
-    }
-    requestAnimationFrame(render);
-  }
-
   function visibleSpots(){
     var now = Date.now(), out = [];
     SPOTS.forEach(function(sp){
       if(recent.has(sp[0]) && now - recent.get(sp[0]) < 30000) return;
-      document.querySelectorAll(sp[0]).forEach(function(el){
-        if(el === S.perch) return;
-        if(perchOK(el)) out.push({el: el, sel: sp[0], lines: sp[1]});
-      });
+      document.querySelectorAll(sp[0]).forEach(function(el){ if(el !== P.surface && surf(el)) out.push({el: el, sel: sp[0], lines: sp[1]}); });
     });
     return out;
   }
 
   async function brain(){
-    await wait(600);
-    say('¡Hola! Soy Jolly, de Muse 👋', 'waving', 3000);
-    await wait(3200);
+    await wait(500);
+    say('¡Hola! Soy Jolly, de Muse 👋', 3000, true);
+    await wait(3600);
+    var lastLine = '';
     while(true){
-      if(S.anim || document.hidden){ await wait(400); continue; }
+      if(P.air || document.hidden){ await wait(300); continue; }
       var spots = visibleSpots(), r = Math.random();
-      if(spots.length && r < .5){
-        var sp = spots[Math.floor(Math.random() * spots.length)];
+      if(spots.length && r < .55){
+        var sp = spots[Math.floor(Math.random() * spots.length)], t = surf(sp.el);
         recent.set(sp.sel, Date.now());
-        if(await jumpToPerch(sp.el)){
-          await wait(250);
-          J.classList.add('look'); await wait(700); J.classList.remove('look');
-          var opts = sp.lines.filter(function(l){ return l !== brain.last; }); if(!opts.length) opts = sp.lines;
-          brain.last = opts[Math.floor(Math.random() * opts.length)];
-          say(brain.last, null, 3400);
-          await wait(rnd(3400, 4600));
-          if(S.mode === 'perch' && Math.random() < .55){ var q = basePos(); if(q) await walkTo(rnd(q.minx, q.maxx) - (S.mode === 'perch' && S.perch ? S.perch.getBoundingClientRect().left : 0)); }
-          if(S.mode === 'perch' && Math.random() < .5) await jumpDown();
+        // camina hacia abajo del punto, mira hacia arriba, y salta
+        var aim = clamp(rnd(t.minx, t.maxx), (surf(P.surface) || t).minx, (surf(P.surface) || t).maxx);
+        await walkTo(aim + (Math.random() < .5 ? -30 : 30));
+        P.look = P.faceLeft ? 8 : -8; await wait(450); P.look = 0;
+        var s2 = surf(sp.el); if(!s2) continue;
+        if(await jumpTo(sp.el, {px: clamp(P.x, s2.minx, s2.maxx) - s2.left})){
+          await wait(500);
+          var opts = sp.lines.filter(function(l){ return l !== lastLine; }); if(!opts.length) opts = sp.lines;
+          lastLine = opts[Math.floor(Math.random() * opts.length)];
+          say(lastLine, 3400);
+          await wait(rnd(3800, 5200));
+          if(P.surface && Math.random() < .5){ var s3 = surf(P.surface); if(s3) await walkTo(rnd(s3.minx, s3.maxx)); await wait(rnd(600, 1400)); }
+          if(P.surface && Math.random() < .55){ await jumpTo(null, {px: clamp(P.x + rnd(-80, 80), col().l, col().r), h: 30}); }
         }
-      } else if(r < .72){
-        var b = basePos(); if(b){ var tx = rnd(b.minx, b.maxx); await walkTo(S.mode === 'perch' ? tx - S.perch.getBoundingClientRect().left : tx); }
-      } else if(r < .86){
-        face(!S.faceLeft); J.classList.add('look'); await wait(900); face(!S.faceLeft); await wait(700); J.classList.remove('look');
-        if(Math.random() < .3) say(['👀', '¿Qué hay por aquí?', 'Mmm… 🤔'][Math.floor(Math.random() * 3)], null, 1600);
+      } else if(r < .78){
+        var s4 = surf(P.surface); if(s4) await walkTo(rnd(s4.minx, s4.maxx));
+      } else if(r < .92){
+        await lookAround();
+        if(Math.random() < .3) say(['👀', '¿Qué hay por aquí?', 'Mmm… 🤔'][Math.floor(Math.random() * 3)], 1700);
       } else {
-        J.classList.remove('hop'); void J.offsetWidth; J.classList.add('hop'); setTimeout(function(){ J.classList.remove('hop'); }, 600);
-        await wait(600);
+        await jumpTo(P.surface, {px: P.surface ? P.px : P.x, h: 28});
       }
-      await wait(rnd(700, 2200));
+      await wait(rnd(1600, 3400));
     }
   }
 
   // toques y celebracion
   var taps = ['¡Jiji, cosquillas! 😆', 'Apúntate, dale 😄', 'Soy Jolly, de Muse 👋', '¿Ya te apuntaste? 👀'], ti = 0;
-  J.addEventListener('click', function(){ say(taps[ti++ % taps.length], 'hop', 2200); });
+  J.addEventListener('click', function(){
+    say(taps[ti++ % taps.length], 2200);
+    if(!P.air) jumpTo(P.surface, {px: P.surface ? P.px : P.x, h: 34});
+  });
   var card = document.getElementById('formCard');
   if(card && 'MutationObserver' in window){
-    new MutationObserver(function(){ if(card.classList.contains('done')) setTimeout(function(){ say('¡Bienvenid@ a la Gen 02! 🎉', 'party', 3600); }, 600); })
+    new MutationObserver(function(){ if(card.classList.contains('done')) setTimeout(function(){ say('¡Bienvenid@ a la Gen 02! 🎉', 3800); if(!P.air) jumpTo(P.surface, {px: P.surface ? P.px : P.x, h: 70, spin: true}); }, 600); })
       .observe(card, {attributes: true, attributeFilter: ['class']});
   }
 
   J.classList.add('left');
   var seen = false; try{ seen = sessionStorage.getItem('ls_g2_intro') === '1'; }catch(e){}
   setTimeout(function(){
-    colB(); S.x = colB().r; cur = {x: S.x, y: vh - dockGap() - H};
-    J.classList.add('on'); requestAnimationFrame(render);
-    if(!reduce) brain(); else say('¡Hola! Soy Jolly, de Muse 👋', 'waving', 3000);
+    metrics(); P.x = col().r; P.y = surf(null).y; B.x = P.x; B.y = P.y;
+    started = true; J.classList.add('on');
+    requestAnimationFrame(frame);
+    if(!reduce) brain(); else say('¡Hola! Soy Jolly, de Muse 👋', 3000, true);
   }, seen ? 2400 : 4200);
 })();
 </script>
