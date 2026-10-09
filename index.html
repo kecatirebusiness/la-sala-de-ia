@@ -342,14 +342,19 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
 
 
 /* ---------- Jolly (mascota de Muse) ---------- */
-.jolly{position:fixed;left:0;bottom:calc(14px + var(--safe-b));z-index:58;width:46px;height:57px;opacity:0;transform:translate3d(var(--jx,0px),20px,0);transition:opacity .5s ease,bottom .5s cubic-bezier(.34,1.4,.64,1);pointer-events:none}
-.jolly.on{opacity:1;pointer-events:auto;cursor:pointer;transform:translate3d(var(--jx,0px),0,0)}
-.jolly.up{bottom:calc(var(--dockh,84px) + var(--safe-b) - 6px)}
+.jolly{position:fixed;left:0;top:0;z-index:58;width:46px;height:57px;opacity:0;transform:translate3d(var(--jx,-100px),var(--jy,-100px),0);transition:opacity .5s ease;pointer-events:none;will-change:transform}
+.jolly.on{opacity:1;pointer-events:auto;cursor:pointer}
 .jolly .jw{position:absolute;inset:0;transform-origin:50% 100%}
 .jolly.left .jflip{transform:scaleX(1)}.jolly .jflip{position:absolute;inset:0;transform:scaleX(-1)}
 .jolly.left .jflip{transform:none}
 .jsprite{position:absolute;inset:0;background:url(gen2/jolly-walk.webp) -138px 0/920px 57px no-repeat;filter:drop-shadow(0 6px 8px rgba(0,0,0,.45))}
 .jolly.walking .jsprite{animation:jwalk .8s steps(20) infinite}
+.jolly.air .jsprite{background-position-x:-322px}
+.jolly.air .jw{animation:none!important;transform:scale(.92,1.1)}
+.jolly.look .jw{animation:none;transform:rotate(-10deg);transition:transform .3s ease}
+.jolly.look:not(.left) .jw{transform:rotate(10deg)}
+.jolly.land .jw{animation:jland .3s ease-out}
+@keyframes jland{0%{transform:scale(1.15,.82)}100%{transform:none}}
 @keyframes jwalk{from{background-position-x:0}to{background-position-x:-920px}}
 .jolly:not(.walking) .jw{animation:jbreath 2.4s ease-in-out infinite}
 @keyframes jbreath{0%,100%{transform:scale(1,1)}50%{transform:scale(1.03,.97)}}
@@ -360,7 +365,7 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
 .jhand{position:absolute;top:0;right:-11px;font-size:15px;opacity:0;transform-origin:70% 80%}
 .jolly.waving .jhand{opacity:1;animation:jwave .5s ease-in-out 4 alternate}
 @keyframes jwave{from{transform:rotate(-18deg)}to{transform:rotate(22deg)}}
-.jbub{position:absolute;bottom:64px;left:50%;width:max-content;max-width:200px;padding:9px 13px;border-radius:14px;background:#F4F7F5;color:#0B1D17;font-size:13.5px;font-weight:600;line-height:1.3;box-shadow:0 10px 28px rgba(0,0,0,.45);transform:translateX(calc(-50% + var(--bx,0px))) scale(.6);transform-origin:50% 100%;opacity:0;transition:opacity .25s ease,transform .35s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
+.jbub{position:absolute;bottom:62px;left:50%;width:max-content;max-width:200px;padding:9px 13px;border-radius:14px;background:#F4F7F5;color:#0B1D17;font-size:13.5px;font-weight:600;line-height:1.3;box-shadow:0 10px 28px rgba(0,0,0,.45);transform:translateX(calc(-50% + var(--bx,0px))) scale(.6);transform-origin:50% 100%;opacity:0;transition:opacity .25s ease,transform .35s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
 .jbub::after{content:"";position:absolute;bottom:-6px;left:calc(50% - var(--bx,0px));width:12px;height:12px;margin-left:-6px;background:#F4F7F5;transform:rotate(45deg);border-radius:2px}
 .jolly.talk .jbub{opacity:1;transform:translateX(calc(-50% + var(--bx,0px))) scale(1)}
 .nw .mk.jolly-mk{background:radial-gradient(circle at 50% 35%,#FFF6EC,#EAD9C6)}
@@ -1033,91 +1038,198 @@ footer a.ig{display:inline-block;margin-top:10px;color:var(--emerald);font-weigh
 </script>
 
 <script>
-// ---- Jolly: camina por la pagina, habla en cada seccion y celebra el registro ----
+// ---- Jolly: personaje autonomo. Camina, mira, salta sobre lo que hay en pantalla y lo explica ----
 (function(){
   'use strict';
   var J = document.getElementById('jolly'); if(!J) return;
   var bub = document.getElementById('jbub'), dock = document.getElementById('dock');
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var x = null, tx = 0, lastY = window.scrollY, facingLeft = true, walkT = 0, talkT = 0, said = {};
-  function bounds(){
-    var vw = document.documentElement.clientWidth, col = Math.min(480, vw), left = (vw - col) / 2;
-    return {min: left + 10, max: left + col - 56};
+  var W = 46, H = 57, reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var S = {mode:'floor', x:null, px:0, perch:null, anim:null, faceLeft:true, talking:false};
+  var cur = {x:-100, y:-100}, vw = 0, vh = 0, recent = new Map();
+  var rnd = function(a, b){ return a + Math.random() * (b - a); };
+  var wait = function(ms){ return new Promise(function(r){ setTimeout(r, ms); }); };
+
+  // Cosas que Jolly explica cuando se sube encima
+  var SPOTS = [
+    ['.hero-cta', ['Toca aquí y te apartas un lugar 👆', 'Este botón es el importante 😉']],
+    ['.chat', ['Así se ve tu hub trabajando por ti 🤖', 'Esto lo haces tú en la semana 2 💪']],
+    ['.marquee', ['Todas estas las vas a dominar 🤓']],
+    ['#seatCard', ['75 sillas… todas ocupadas 🔥', '¡Ni una libre! 😱']],
+    ['.win', ['Esto lo construyó alguien de la Gen 01 ✨', 'Wins reales, gente real 🙌']],
+    ['.wall', ['Así terminó la graduación 🥹']],
+    ['.wk', ['Cada semana construyes algo real 🛠️', 'Pregrabado + en vivo. Así de fácil']],
+    ['#orbit', ['Claude en el centro, todo alrededor 🧠']],
+    ['.how', ['Llegas preparado y en vivo construyes 🚀']],
+    ['.nw', ['Lo nuevo lo probamos en vivo 🧪', '¡Una de esas soy yo! 👀']],
+    ['#toggle', ['Toca para ver los dos caminos 👉']],
+    ['.aud', ['No necesitas salir en cámara 🙈']],
+    ['.perk', ['Los de la lista se enteran primero 🔔']],
+    ['.form-wrap', ['Solo te toma 20 segundos ✍️', '¡Apúntate aquí! 👇']],
+    ['.faq details', ['Aquí respondemos lo que todos preguntan 💬']]
+  ];
+
+  function dockGap(){ return dock.classList.contains('show') ? dock.querySelector('.dock-in').getBoundingClientRect().height + 20 : 12; }
+  function colB(){
+    vw = document.documentElement.clientWidth; vh = window.innerHeight;
+    var c = Math.min(480, vw), l = (vw - c) / 2;
+    return {l: l + 6, r: l + c - 6 - W};
   }
-  function target(){
-    var b = bounds(), h = document.documentElement.scrollHeight - window.innerHeight;
-    var p = h > 0 ? Math.min(1, Math.max(0, window.scrollY / h)) : 0;
-    return b.max - (b.max - b.min) * p;
+  function perchOK(el){
+    if(!el) return null;
+    var r = el.getBoundingClientRect(), c = colB();
+    var minx = Math.max(r.left + 4, c.l), maxx = Math.min(r.right - W - 4, c.r);
+    if(maxx - minx < 8) return null;
+    if(r.top < 165 || r.top > vh - dockGap() - H - 30) return null;
+    return {r: r, minx: minx, maxx: maxx, y: r.top - H + 6};
+  }
+  function basePos(){
+    var c = colB();
+    if(S.mode === 'perch'){
+      var q = perchOK(S.perch);
+      if(!q) return null;
+      S.px = Math.min(q.maxx - q.r.left, Math.max(q.minx - q.r.left, S.px));
+      return {x: q.r.left + S.px, y: q.y, minx: q.minx, maxx: q.maxx};
+    }
+    if(S.x === null) S.x = c.r;
+    S.x = Math.min(c.r, Math.max(c.l, S.x));
+    return {x: S.x, y: vh - dockGap() - H, minx: c.l, maxx: c.r};
+  }
+  function face(left){ if(left !== S.faceLeft){ S.faceLeft = left; J.classList.toggle('left', left); } }
+
+  // salto con arco (bezier) hacia un destino que puede moverse mientras vuela
+  function jump(targetFn, then){
+    var from = {x: cur.x, y: cur.y}, t0 = performance.now();
+    var to0 = targetFn(); if(!to0) return Promise.resolve(false);
+    var dist = Math.hypot(to0.x - from.x, to0.y - from.y), dur = Math.min(900, 420 + dist * .9);
+    face(to0.x < from.x);
+    J.classList.remove('walking'); J.classList.add('air');
+    return new Promise(function(res){
+      S.anim = {step: function(t){
+        var to = targetFn() || to0, k = Math.min(1, (t - t0) / dur), e = k;
+        var peak = Math.min(from.y, to.y) - (40 + Math.min(80, Math.abs(to.y - from.y) * .25));
+        var cx = (from.x + to.x) / 2, cy = 2 * peak - (from.y + to.y) / 2;
+        var x = (1-e)*(1-e)*from.x + 2*(1-e)*e*cx + e*e*to.x, y = (1-e)*(1-e)*from.y + 2*(1-e)*e*cy + e*e*to.y;
+        if(k >= 1){ S.anim = null; J.classList.remove('air'); J.classList.add('land'); setTimeout(function(){ J.classList.remove('land'); }, 320); if(then) then(to); res(true); }
+        return {x: x, y: y};
+      }};
+    });
+  }
+  function jumpToPerch(el){
+    var q = perchOK(el); if(!q) return Promise.resolve(false);
+    var px = rnd(q.minx, q.maxx) - q.r.left;
+    return jump(function(){ var z = perchOK(el); return z ? {x: z.r.left + Math.min(z.maxx - z.r.left, Math.max(z.minx - z.r.left, px)), y: z.y} : null; },
+      function(){ S.mode = 'perch'; S.perch = el; S.px = px; });
+  }
+  function jumpDown(){
+    var c = colB(), tx = Math.min(c.r, Math.max(c.l, cur.x + rnd(-90, 90)));
+    return jump(function(){ return {x: tx, y: vh - dockGap() - H}; }, function(){ S.mode = 'floor'; S.perch = null; S.x = tx; });
+  }
+  function walkTo(tx){
+    var mode = S.mode;
+    return new Promise(function(res){
+      var last = performance.now();
+      function step(t){
+        if(S.mode !== mode || S.anim){ J.classList.remove('walking'); return res(); }
+        var dt = Math.min(.05, (t - last) / 1000); last = t;
+        var curv = mode === 'perch' ? S.px : S.x, d = tx - curv;
+        if(Math.abs(d) < 2){ J.classList.remove('walking'); return res(); }
+        face(d < 0); J.classList.add('walking');
+        var v = Math.sign(d) * Math.min(Math.abs(d), 62 * dt);
+        if(mode === 'perch') S.px += v; else S.x += v;
+        requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
   }
   function say(text, mode, ms){
-    bub.textContent = text;
-    var b = bounds(), half = Math.min(200, bub.offsetWidth || 160) / 2, cx = (x || tx) + 23, shift = 0;
-    if(cx - half < b.min - 4) shift = (b.min - 4) - (cx - half);
-    if(cx + half > b.max + 52) shift = (b.max + 52) - (cx + half);
-    J.style.setProperty('--bx', shift + 'px');
+    bub.textContent = text; S.talking = true;
     J.classList.add('talk');
-    clearTimeout(talkT); talkT = setTimeout(function(){ J.classList.remove('talk'); }, ms || 2800);
+    clearTimeout(say.t); say.t = setTimeout(function(){ J.classList.remove('talk'); S.talking = false; }, ms || 3200);
     if(mode){ J.classList.remove('hop','party','waving'); void J.offsetWidth; J.classList.add(mode); setTimeout(function(){ J.classList.remove(mode); }, mode === 'waving' ? 2100 : 1100); }
   }
   window.jollySay = say;
-  function frame(){
-    tx = target();
-    if(x === null) x = tx;
-    var d = tx - x;
-    if(Math.abs(d) > .4){
-      x += d * (reduce ? 1 : .08);
-      var goLeft = d < 0;
-      if(goLeft !== facingLeft){ facingLeft = goLeft; J.classList.toggle('left', facingLeft); }
-      if(!reduce) J.classList.add('walking');
-      clearTimeout(walkT); walkT = setTimeout(function(){ J.classList.remove('walking'); }, 180);
+
+  function render(){
+    var p = S.anim ? S.anim.step(performance.now()) : basePos();
+    if(!p){ // lo que tenia abajo se fue de la pantalla: se cae al piso
+      S.mode = 'floor'; S.x = cur.x; S.perch = null;
+      jump(function(){ return {x: Math.min(colB().r, Math.max(colB().l, S.x)), y: vh - dockGap() - H}; });
+      p = cur;
+      if(Math.random() < .5) say('¡Uy! 😵', null, 1200);
     }
-    J.style.setProperty('--jx', x.toFixed(1) + 'px');
-    J.classList.toggle('up', dock.classList.contains('show'));
-    requestAnimationFrame(frame);
+    cur = p;
+    J.style.setProperty('--jx', p.x.toFixed(1) + 'px');
+    J.style.setProperty('--jy', p.y.toFixed(1) + 'px');
+    if(S.talking){
+      var bw = bub.offsetWidth, cx = p.x + W / 2, shift = 0;
+      if(cx - bw / 2 < 8) shift = 8 - (cx - bw / 2);
+      if(cx + bw / 2 > vw - 8) shift = (vw - 8) - (cx + bw / 2);
+      J.style.setProperty('--bx', shift.toFixed(0) + 'px');
+    }
+    requestAnimationFrame(render);
   }
-  J.style.setProperty('--dockh', (dock.querySelector('.dock-in').offsetHeight + 22) + 'px');
-  J.classList.add('left');
-  requestAnimationFrame(frame);
 
-  // aparece despues de la intro
-  var seen = false; try{ seen = sessionStorage.getItem('ls_g2_intro') === '1'; }catch(e){}
-  setTimeout(function(){
-    J.classList.add('on');
-    setTimeout(function(){ say('¡Hola! Soy Jolly, de Muse', 'waving', 3200); }, 700);
-  }, seen ? 2200 : 4200);
-
-  var lines = [
-    ['.stack', 'Todo esto lo vas a dominar 🤓'],
-    ['.loss', 'Uff… esto duele 😬'],
-    ['.proof', '¡75 de 75! Se llenó 🔥', 'hop'],
-    ['.testi', 'Gente real, wins reales ✨'],
-    ['.program', '6 semanas. Tú puedes 💪'],
-    ['.hub', 'Todo pasa por Claude 🧠'],
-    ['.new-s', '¡Esa de ahí soy yo! 👀', 'hop'],
-    ['.who-s', '¿Dueño o proveedor? 🤔'],
-    ['.why', 'No te quedes fuera 🙏'],
-    ['#lista', '¡Apúntate aquí! 👇', 'waving'],
-    ['.faq-s', '¿Dudas? Aquí están 💬']
-  ];
-  if('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(es){
-      es.forEach(function(e){
-        if(!e.isIntersecting || !J.classList.contains('on')) return;
-        var l = e.target._jl; if(said[l[0]]) return; said[l[0]] = 1;
-        say(l[1], l[2]);
+  function visibleSpots(){
+    var now = Date.now(), out = [];
+    SPOTS.forEach(function(sp){
+      if(recent.has(sp[0]) && now - recent.get(sp[0]) < 30000) return;
+      document.querySelectorAll(sp[0]).forEach(function(el){
+        if(el === S.perch) return;
+        if(perchOK(el)) out.push({el: el, sel: sp[0], lines: sp[1]});
       });
-    }, {threshold: .35});
-    lines.forEach(function(l){ var el = document.querySelector(l[0]); if(el){ el._jl = l; io.observe(el); } });
+    });
+    return out;
   }
+
+  async function brain(){
+    await wait(600);
+    say('¡Hola! Soy Jolly, de Muse 👋', 'waving', 3000);
+    await wait(3200);
+    while(true){
+      if(S.anim || document.hidden){ await wait(400); continue; }
+      var spots = visibleSpots(), r = Math.random();
+      if(spots.length && r < .5){
+        var sp = spots[Math.floor(Math.random() * spots.length)];
+        recent.set(sp.sel, Date.now());
+        if(await jumpToPerch(sp.el)){
+          await wait(250);
+          J.classList.add('look'); await wait(700); J.classList.remove('look');
+          var opts = sp.lines.filter(function(l){ return l !== brain.last; }); if(!opts.length) opts = sp.lines;
+          brain.last = opts[Math.floor(Math.random() * opts.length)];
+          say(brain.last, null, 3400);
+          await wait(rnd(3400, 4600));
+          if(S.mode === 'perch' && Math.random() < .55){ var q = basePos(); if(q) await walkTo(rnd(q.minx, q.maxx) - (S.mode === 'perch' && S.perch ? S.perch.getBoundingClientRect().left : 0)); }
+          if(S.mode === 'perch' && Math.random() < .5) await jumpDown();
+        }
+      } else if(r < .72){
+        var b = basePos(); if(b){ var tx = rnd(b.minx, b.maxx); await walkTo(S.mode === 'perch' ? tx - S.perch.getBoundingClientRect().left : tx); }
+      } else if(r < .86){
+        face(!S.faceLeft); J.classList.add('look'); await wait(900); face(!S.faceLeft); await wait(700); J.classList.remove('look');
+        if(Math.random() < .3) say(['👀', '¿Qué hay por aquí?', 'Mmm… 🤔'][Math.floor(Math.random() * 3)], null, 1600);
+      } else {
+        J.classList.remove('hop'); void J.offsetWidth; J.classList.add('hop'); setTimeout(function(){ J.classList.remove('hop'); }, 600);
+        await wait(600);
+      }
+      await wait(rnd(700, 2200));
+    }
+  }
+
+  // toques y celebracion
   var taps = ['¡Jiji, cosquillas! 😆', 'Apúntate, dale 😄', 'Soy Jolly, de Muse 👋', '¿Ya te apuntaste? 👀'], ti = 0;
   J.addEventListener('click', function(){ say(taps[ti++ % taps.length], 'hop', 2200); });
-
-  // celebra cuando se apuntan
   var card = document.getElementById('formCard');
   if(card && 'MutationObserver' in window){
     new MutationObserver(function(){ if(card.classList.contains('done')) setTimeout(function(){ say('¡Bienvenid@ a la Gen 02! 🎉', 'party', 3600); }, 600); })
       .observe(card, {attributes: true, attributeFilter: ['class']});
   }
+
+  J.classList.add('left');
+  var seen = false; try{ seen = sessionStorage.getItem('ls_g2_intro') === '1'; }catch(e){}
+  setTimeout(function(){
+    colB(); S.x = colB().r; cur = {x: S.x, y: vh - dockGap() - H};
+    J.classList.add('on'); requestAnimationFrame(render);
+    if(!reduce) brain(); else say('¡Hola! Soy Jolly, de Muse 👋', 'waving', 3000);
+  }, seen ? 2400 : 4200);
 })();
 </script>
 </body>
