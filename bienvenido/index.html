@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>La Sala de IA — Bienvenido</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Ccircle cx='60' cy='60' r='54' fill='%2300D26A'/%3E%3Ccircle cx='46' cy='52' r='4.5' fill='%230B1D17'/%3E%3Ccircle cx='74' cy='52' r='4.5' fill='%230B1D17'/%3E%3Crect x='48' y='70' width='24' height='4.5' rx='2.25' fill='%230B1D17'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --emerald: #00D26A;
+    --deep-forest: #0B1D17;
+    --forest: #1A3A2A;
+    --sage: #7FB896;
+    --mint: #C8E6D4;
+    --cloud: #EFF7F2;
+    --snow: #F8FBF9;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    font-family: 'Instrument Sans', system-ui, -apple-system, sans-serif;
+    background: var(--deep-forest);
+    color: var(--snow);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .serif { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; color: var(--emerald); font-weight: 400; }
+
+  /* =========================================
+     INTRO ANIMATION
+     ========================================= */
+  .intro {
+    position: fixed;
+    inset: 0;
+    background: var(--deep-forest);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: introFade 0.6s ease 2.6s forwards;
+  }
+  .intro.done { pointer-events: none; }
+
+  .intro-logo {
+    width: 140px;
+    height: 140px;
+    animation: logoPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  .intro-logo .face {
+    fill: var(--emerald);
+    transform-origin: center;
+    animation: tilt 1.2s ease-in-out 0.9s;
+  }
+  .intro-logo .eye {
+    fill: var(--deep-forest);
+    opacity: 0;
+    transform-origin: center;
+    animation: eyePop 0.25s ease forwards;
+  }
+  .intro-logo .eye-l { animation-delay: 0.55s; }
+  .intro-logo .eye-r { animation-delay: 0.7s; }
+
+  .intro-logo .mouth {
+    fill: var(--deep-forest);
+    transform-origin: 60px 72px;
+    transform: scaleX(0);
+    animation: drawMouth 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.9s forwards;
+  }
+
+  .intro-tag {
+    position: absolute;
+    bottom: 20%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--sage);
+    opacity: 0;
+    animation: tagIn 0.5s ease 1.5s forwards;
+    letter-spacing: 0.02em;
+  }
+
+  @keyframes logoPop {
+    0%   { opacity: 0; transform: scale(0.3) rotate(-12deg); }
+    60%  { opacity: 1; transform: scale(1.08) rotate(3deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0); }
+  }
+  @keyframes eyePop {
+    0%   { opacity: 0; transform: scale(0); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes drawMouth {
+    0%   { transform: scaleX(0); }
+    100% { transform: scaleX(1); }
+  }
+  @keyframes tilt {
+    0%, 100% { transform: rotate(0); }
+    40%      { transform: rotate(-3deg); }
+    70%      { transform: rotate(3deg); }
+  }
+  @keyframes tagIn {
+    0%   { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes introFade {
+    to { opacity: 0; visibility: hidden; }
+  }
+
+  /* Page content fade-in after intro */
+  .page {
+    opacity: 0;
+    animation: pageIn 0.8s ease 2.8s forwards;
+  }
+  @keyframes pageIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* =========================================
+     NAV
+     ========================================= */
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.01em;
+  }
+  .logo svg { width: 36px; height: 36px; }
+
+  .nav-right {
+    font-size: 14px;
+    color: var(--sage);
+  }
+  .nav-right strong { color: var(--emerald); font-weight: 500; }
+
+  /* =========================================
+     HERO / VSL
+     ========================================= */
+  .hero {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 20px 24px 60px;
+    text-align: center;
+  }
+  .kicker-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 210, 106, 0.12);
+    color: var(--emerald);
+    border: 1px solid rgba(0, 210, 106, 0.3);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .kicker.live {
+    background: rgba(220, 38, 38, 0.12);
+    color: #FF6B6B;
+    border-color: rgba(220, 38, 38, 0.35);
+  }
+  .kicker .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--emerald);
+    box-shadow: 0 0 0 0 rgba(0, 210, 106, 0.6);
+    animation: pulse 1.8s ease-out infinite;
+  }
+  .kicker .live-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: #FF4545;
+    box-shadow: 0 0 0 0 rgba(255, 69, 69, 0.7);
+    animation: livePulse 1.2s ease-out infinite;
+  }
+  .viewer-count {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+  #viewerNum {
+    font-variant-numeric: tabular-nums;
+    display: inline-block;
+    min-width: 22px;
+    text-align: right;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  #viewerNum.flip {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(0, 210, 106, 0.7); }
+    100% { box-shadow: 0 0 0 10px rgba(0, 210, 106, 0); }
+  }
+  @keyframes livePulse {
+    0%   { box-shadow: 0 0 0 0 rgba(255, 69, 69, 0.7); }
+    100% { box-shadow: 0 0 0 8px rgba(255, 69, 69, 0); }
+  }
+
+  h1 {
+    font-size: clamp(40px, 6.5vw, 72px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 18px;
+  }
+  .hero p.lead {
+    font-size: clamp(17px, 1.8vw, 20px);
+    color: var(--mint);
+    max-width: 680px;
+    margin: 0 auto 36px;
+  }
+
+  /* VIDEO */
+  .video-wrap {
+    position: relative;
+    max-width: 920px;
+    margin: 0 auto 28px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--forest);
+    box-shadow: 0 30px 80px rgba(0, 210, 106, 0.15), 0 0 0 1px rgba(0, 210, 106, 0.2);
+    aspect-ratio: 16 / 9;
+  }
+  .video-wrap video,
+  .video-wrap iframe,
+  .video-wrap #vslVideo {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 0;
+  }
+  .video-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: var(--sage);
+    background:
+      radial-gradient(circle at 30% 20%, rgba(0, 210, 106, 0.15), transparent 50%),
+      radial-gradient(circle at 70% 80%, rgba(127, 184, 150, 0.1), transparent 50%),
+      linear-gradient(135deg, var(--forest), var(--deep-forest));
+  }
+  .play-icon {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    background: var(--emerald);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 40px rgba(0, 210, 106, 0.45);
+    animation: floatY 3s ease-in-out infinite;
+  }
+  .play-icon svg { width: 30px; height: 30px; fill: var(--deep-forest); margin-left: 4px; }
+  @keyframes floatY {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+  }
+
+  .unmute-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: var(--emerald);
+    color: var(--deep-forest);
+    border: 0;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+    z-index: 5;
+    box-shadow: 0 8px 24px rgba(0, 210, 106, 0.4);
+    animation: unmutePulse 1.6s ease-in-out infinite;
+  }
+  .unmute-btn:hover { transform: translateY(-2px) scale(1.03); }
+  .unmute-btn.hidden { display: none; }
+  @keyframes unmutePulse {
+    0%, 100% { box-shadow: 0 8px 24px rgba(0, 210, 106, 0.4), 0 0 0 0 rgba(0, 210, 106, 0.5); }
+    50%      { box-shadow: 0 8px 24px rgba(0, 210, 106, 0.4), 0 0 0 12px rgba(0, 210, 106, 0); }
+  }
+
+  .video-caption {
+    font-size: 14px;
+    color: var(--sage);
+    margin-bottom: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .video-caption::before { content: "▶"; color: var(--emerald); font-size: 10px; }
+
+  /* CTA */
+  .cta-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 40px;
+    background: var(--emerald);
+    color: var(--deep-forest);
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 600;
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    letter-spacing: -0.01em;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 10px 30px rgba(0, 210, 106, 0.35);
+    text-decoration: none;
+  }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(0, 210, 106, 0.5); }
+  .cta-btn:active { transform: translateY(0); }
+
+  .cta-shake {
+    animation: ctaShake 3s ease-in-out infinite;
+    transform-origin: center;
+  }
+  .cta-shake:hover { animation-play-state: paused; }
+  @keyframes ctaShake {
+    0%, 82%, 100% { transform: translate3d(0, 0, 0) rotate(0); }
+    84%  { transform: translate3d(-4px, 0, 0) rotate(-1.5deg); }
+    86%  { transform: translate3d(4px, 0, 0) rotate(1.5deg); }
+    88%  { transform: translate3d(-3px, 0, 0) rotate(-1deg); }
+    90%  { transform: translate3d(3px, 0, 0) rotate(1deg); }
+    92%  { transform: translate3d(-2px, 0, 0) rotate(-0.5deg); }
+    94%  { transform: translate3d(2px, 0, 0) rotate(0.5deg); }
+    96%  { transform: translate3d(-1px, 0, 0) rotate(0); }
+  }
+  .cta-note { font-size: 13px; color: var(--sage); }
+  .cta-note strong { color: var(--mint); font-weight: 500; }
+
+  /* TRUST STRIP */
+  .trust {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    text-align: center;
+  }
+  .trust-item .num {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 36px;
+    color: var(--emerald);
+    line-height: 1;
+  }
+  .trust-item .label {
+    font-size: 13px;
+    color: var(--sage);
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+  }
+
+  /* =========================================
+     INLINE FORM CARD
+     ========================================= */
+  .inline-note {
+    font-size: 14px;
+    color: var(--sage);
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .inline-note strong { color: var(--emerald); font-weight: 600; }
+
+  .inline-form-card {
+    background: var(--snow);
+    color: var(--deep-forest);
+    border-radius: 24px;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 36px 36px 32px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 210, 106, 0.15);
+    text-align: left;
+  }
+  .form-title {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  .form-sub {
+    color: var(--forest);
+    opacity: 0.7;
+    margin-bottom: 22px;
+    font-size: 14px;
+    text-align: center;
+  }
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--forest);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1.5px solid var(--mint);
+    background: var(--snow);
+    color: var(--deep-forest);
+    font-family: inherit;
+    font-size: 15px;
+    transition: border-color 0.15s ease;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--emerald);
+  }
+  .inline-form-card .cta-btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  .success-state { display: none; text-align: center; }
+  .success-state.show { display: block; }
+  .success-state .check {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--emerald);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: var(--deep-forest);
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  /* SKIP INTRO (dev) */
+  .skip-intro {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: transparent;
+    border: 1px solid rgba(127, 184, 150, 0.3);
+    color: var(--sage);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-family: inherit;
+    cursor: pointer;
+    z-index: 10000;
+    opacity: 0.5;
+  }
+  .skip-intro:hover { opacity: 1; }
+
+  @media (max-width: 768px) {
+    nav { padding: 14px 18px; }
+    .nav-right { display: none; }
+    .logo { font-size: 15px; gap: 10px; }
+    .logo svg { width: 32px; height: 32px; }
+
+    .hero { padding: 4px 18px 40px; }
+    .kicker-row { gap: 8px; margin-bottom: 20px; }
+    .kicker { font-size: 11.5px; padding: 7px 12px; gap: 6px; }
+    h1 { font-size: clamp(30px, 9vw, 44px); margin-bottom: 14px; }
+    .hero p.lead { font-size: 15px; margin-bottom: 24px; padding: 0 4px; }
+
+    .video-wrap { border-radius: 14px; margin-bottom: 20px; }
+    .video-caption { font-size: 12px; margin-bottom: 22px; }
+
+    .unmute-btn { top: 10px; right: 10px; padding: 8px 14px; font-size: 12px; gap: 6px; }
+    .unmute-btn svg { width: 14px; height: 14px; }
+
+    .cta-btn { padding: 16px 28px; font-size: 16px; width: 100%; max-width: 360px; justify-content: center; }
+    .cta-note { font-size: 12px; padding: 0 10px; }
+
+    .trust {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 24px 18px 50px;
+    }
+    .trust-item .num { font-size: 26px; }
+    .trust-item .label { font-size: 11px; }
+
+    .inline-form-card { padding: 28px 22px; border-radius: 20px; }
+    .form-title { font-size: 22px; }
+    .form-sub { font-size: 13px; margin-bottom: 18px; }
+
+    .intro-logo { width: 110px; height: 110px; }
+    .intro-tag { font-size: 18px; bottom: 22%; }
+
+    .skip-intro { bottom: 14px; right: 14px; font-size: 11px; padding: 5px 12px; }
+  }
+
+  @media (max-width: 380px) {
+    h1 { font-size: 26px; }
+    .kicker { font-size: 11px; padding: 6px 10px; }
+    .kicker-row { flex-direction: column; align-items: center; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== INTRO ANIMATION ========== -->
+<div class="intro" id="intro">
+  <svg class="intro-logo" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <circle class="face" cx="60" cy="60" r="54"/>
+    <circle class="eye eye-l" cx="46" cy="52" r="4.5"/>
+    <circle class="eye eye-r" cx="74" cy="52" r="4.5"/>
+    <rect class="mouth" x="48" y="70" width="24" height="4.5" rx="2.25"/>
+  </svg>
+  <div class="intro-tag">Aprende. Crea. Monetiza.</div>
+</div>
+
+<button class="skip-intro" onclick="skipIntro()">Saltar intro</button>
+
+<!-- ========== PAGE ========== -->
+<div class="page">
+
+  <nav>
+    <div class="logo">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-label="Logo La Sala de IA">
+        <circle cx="60" cy="60" r="54" fill="#00D26A"/>
+        <circle cx="46" cy="52" r="4.5" fill="#0B1D17"/>
+        <circle cx="74" cy="52" r="4.5" fill="#0B1D17"/>
+        <rect x="48" y="70" width="24" height="4.5" rx="2.25" fill="#0B1D17"/>
+      </svg>
+      La Sala de IA
+    </div>
+    <div class="nav-right">
+      Comunidad privada · <strong>+500 miembros activos</strong>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="kicker-row">
+      <div class="kicker"><span class="dot"></span> Cupos limitados esta semana</div>
+      <div class="kicker live">
+        <span class="live-dot"></span>
+        <span class="viewer-count"><span id="viewerNum">47</span> personas viendo ahora</span>
+      </div>
+    </div>
+    <h1>Tu cerebro + <span class="serif">IA</span><br/>= un negocio que escala.</h1>
+    <p class="lead">Mira el video completo — te muestro exactamente cómo monetizar con AI desde cero, sin depender de tendencias y sin gastar en software caro.</p>
+
+    <div class="video-wrap">
+      <!--
+        VIDEO: reemplaza el placeholder por uno de estos cuando tengas el archivo:
+
+        Local:
+        <video controls playsinline preload="metadata" poster="poster.jpg">
+          <source src="../vsl-video.mp4" type="video/mp4">
+        </video>
+
+        YouTube:
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID?rel=0" title="VSL" allowfullscreen></iframe>
+
+        Vimeo:
+        <iframe src="https://player.vimeo.com/video/VIDEO_ID" title="VSL" allowfullscreen></iframe>
+      -->
+      <iframe
+        id="vslVideo"
+        src="https://player.vimeo.com/video/1189448862?controls=1&title=0&byline=0&portrait=0&dnt=1&playsinline=1"
+        title="La Sala de IA — VSL"
+        frameborder="0"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="video-caption">Mira el video antes de continuar — dura ~8 minutos</div>
+
+    <div class="cta-note inline-note">Llena el formulario de <strong>30 segundos</strong> y te contactamos hoy.</div>
+
+    <div class="inline-form-card" id="formCard">
+      <h2 class="form-title">Únete a <span class="serif">La Sala</span></h2>
+      <p class="form-sub">Déjanos tus datos y te contactamos con los siguientes pasos.</p>
+
+      <!-- HighLevel form embed → los leads van directo a tu pipeline -->
+      <iframe
+        src="https://link.ricocloud.net/widget/form/euKnkY1wBejFKjEl1Wma"
+        id="inline-euKnkY1wBejFKjEl1Wma"
+        title="Únete a La Sala"
+        style="width:100%;min-height:560px;border:none;border-radius:12px;display:block;background:transparent;overflow:hidden;"
+        data-layout="{'id':'INLINE'}"
+        data-trigger-type="alwaysShow"
+        data-activation-type="alwaysActivated"
+        data-deactivation-type="neverDeactivate"
+        data-form-name="Únete a La Sala"
+        data-height="560"
+        data-layout-iframe-id="inline-euKnkY1wBejFKjEl1Wma"
+        data-form-id="euKnkY1wBejFKjEl1Wma"
+        scrolling="no">
+      </iframe>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="trust-item">
+      <div class="num">+500</div>
+      <div class="label">Miembros activos</div>
+    </div>
+    <div class="trust-item">
+      <div class="num">24/7</div>
+      <div class="label">Comunidad en vivo</div>
+    </div>
+    <div class="trust-item">
+      <div class="num">+25</div>
+      <div class="label">Herramientas de IA incluidas</div>
+    </div>
+  </section>
+
+</div>
+
+
+<script>
+  // Live viewer counter — cambia cada 5s
+  (function() {
+    const el = document.getElementById('viewerNum');
+    if (!el) return;
+    let current = parseInt(el.textContent, 10) || 47;
+    setInterval(() => {
+      // Random walk: ±3 to ±8, mantiene entre 38-68
+      const delta = Math.floor(Math.random() * 11) - 5;
+      let next = current + delta;
+      if (next < 38) next = 38 + Math.floor(Math.random() * 5);
+      if (next > 68) next = 68 - Math.floor(Math.random() * 5);
+      if (next === current) next += (Math.random() < 0.5 ? -1 : 1);
+      el.classList.add('flip');
+      setTimeout(() => {
+        el.textContent = next;
+        el.classList.remove('flip');
+        current = next;
+      }, 300);
+    }, 5000);
+  })();
+
+  // Intro
+  function skipIntro() {
+    const intro = document.getElementById('intro');
+    intro.style.animation = 'none';
+    intro.style.opacity = '0';
+    intro.style.visibility = 'hidden';
+    document.querySelector('.page').style.animation = 'none';
+    document.querySelector('.page').style.opacity = '1';
+    document.querySelector('.skip-intro').style.display = 'none';
+  }
+  // auto-hide skip button after intro ends
+  setTimeout(() => {
+    const btn = document.querySelector('.skip-intro');
+    if (btn) btn.style.display = 'none';
+  }, 3400);
+
+  // Inline form submit
+</script>
+
+<!-- HighLevel: auto-ajusta la altura del iframe del form al contenido -->
+<script src="https://link.ricocloud.net/js/form_embed.js"></script>
+
+</body>
+</html>
