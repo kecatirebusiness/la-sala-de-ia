@@ -170,6 +170,13 @@ h1 .l3{display:block;font-family:var(--serif);font-style:italic;font-weight:600;
 @keyframes eqb{from{height:15%}to{height:95%}}
 
 /* como funciona */
+.calma{margin-top:22px;padding:20px 18px;border-radius:20px;background:linear-gradient(160deg,rgba(0,210,106,.12),rgba(0,210,106,.03));border:1px solid rgba(0,210,106,.35)}
+.calma .ct{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:-.02em}
+.calma .ct i{font-style:normal;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--emerald);color:#03130b;font-size:16px;flex-shrink:0}
+.calma p{margin-top:8px;font-size:14.5px;color:var(--muted);line-height:1.5}
+.calma ul{list-style:none;margin-top:12px;display:grid;gap:7px}
+.calma li{font-size:14px;display:flex;gap:9px;align-items:flex-start}
+.calma li::before{content:"✓";color:var(--emerald);font-weight:700}
 .how{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:0;position:relative}
 .how::before{content:"";position:absolute;left:19px;top:20px;bottom:20px;width:2px;background:linear-gradient(var(--emerald),rgba(0,210,106,.1))}
 .how li{position:relative;display:flex;gap:16px;padding:12px 0}
@@ -306,7 +313,7 @@ footer a{color:var(--muted)}
     <p class="lead">El <b>Editor de La Sala</b> es un skill para Claude Code que agarra tu video crudo y te lo devuelve listo para Reels en <b>el diseño que elijas entre más de 50</b>: <b>sin silencios, con captions palabra por palabra, motion graphics, tu cara saliendo del recuadro, música y color</b>. Tú solo grabas.</p>
     <button class="cta buy" type="button">Quiero el editor <span class="px">$75</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-    <div class="mini"><span><i>✓</i> Pago único</span><span><i>✓</i> Te llega al correo al instante</span><span><i>✓</i> Mac y Windows</span></div>
+    <div class="mini"><span><i>✓</i> Pago único</span><span><i>✓</i> Te llega al correo al instante</span><span><i>✓</i> Mac y Windows</span><span><i>✓</i> Guía de instalación paso a paso</span></div>
 
     <div class="ab" id="ab" style="--cut:50%">
       <video class="before" src="https://lasala-editor.vercel.app/img/antes.mp4?v=5" poster="https://lasala-editor.vercel.app/img/antes.jpg?v=5" muted playsinline loop autoplay preload="auto"></video>
@@ -399,6 +406,15 @@ footer a{color:var(--muted)}
       <li data-reveal><span class="k">2</span><div><b>Lo instalas con Claude Code</b><span>Abres Claude Code, le pasas el archivo y pegas tu código. La guía te lleva paso a paso y Claude instala todo lo demás.</span></div></li>
       <li data-reveal><span class="k">3</span><div><b>Le das tu video</b><span>Le dices <code>edítame este video estilo cine</code> (o cualquiera de los +50 diseños) y te devuelve el MP4 editado, listo para subir.</span></div></li>
     </ol>
+    <div class="calma" data-reveal>
+      <div class="ct"><i>✓</i>¿Nunca has usado Claude? Tranquilo.</div>
+      <p>Cuando compras, te llega una <b>guía de instalación paso a paso</b>, escrita para alguien que nunca ha abierto Claude Code. No necesitas saber programar: solo copias, pegas y le das Enter.</p>
+      <ul>
+        <li>Cómo instalar Claude Code desde cero (Mac y Windows)</li>
+        <li>Qué copiar y dónde pegarlo, en orden</li>
+        <li>Qué hacer si algo sale distinto a lo esperado</li>
+      </ul>
+    </div>
   </section>
 
   <section id="precio">
@@ -413,7 +429,7 @@ footer a{color:var(--muted)}
           <li><b>Más de 50 diseños de edición</b>: kecatire, editorial de lujo, piso 3D, cine, vintage, impacto, marcos de celular y polaroid, pantalla dividida y más</li>
           <li>Plantilla de animación con todos los motion graphics</li>
           <li>Pack de efectos de sonido de interfaz</li>
-          <li>Guía de instalación paso a paso (Mac y Windows)</li>
+          <li><b>Guía de instalación paso a paso</b> (Mac y Windows), pensada para quien nunca ha usado Claude</li>
           <li>Licencia personal para 2 computadoras</li>
           <li>Actualizaciones del skill sin costo</li>
         </ul>
@@ -428,6 +444,7 @@ footer a{color:var(--muted)}
     <span class="eyebrow">Preguntas</span>
     <h2 class="h2">Lo que <em class="s">te estás preguntando.</em></h2>
     <div class="faq">
+      <details><summary>Nunca he usado Claude, ¿lo voy a poder instalar?</summary><p>Sí. Con la compra te llega una guía paso a paso que empieza desde cero: cómo abrir la Terminal, cómo instalar Claude Code y qué copiar y pegar en cada paso. Después de eso, Claude instala el editor por ti. Y si te trabas, le preguntas a Claude en español normal y te guía.</p></details>
       <details><summary>¿Tengo que saber editar o programar?</summary><p>No. Claude Code hace el trabajo técnico. Tú le das el video y le dices qué quieres en español normal.</p></details>
       <details><summary>¿Qué necesito para que funcione?</summary><p>Una Mac o una PC con Windows, Claude Code instalado con un plan de Claude (Pro o superior) y espacio en el disco. La guía incluida te dice cómo instalar Claude Code si todavía no lo tienes.</p></details>
       <details><summary>¿Cuánto tarda en editar un video?</summary><p>Depende de tu computadora y del largo del video. Un video de un minuto suele estar listo en unos minutos, mientras tú haces otra cosa.</p></details>
