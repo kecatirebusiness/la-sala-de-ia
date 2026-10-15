@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Portal de creadores · Editor de La Sala</title>
+<meta name="theme-color" content="#050B08">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Fraunces:ital,wght@1,600;1,700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050B08;--panel:#0C1C16;--line:#1d3b2e;--fg:#F3F7F4;--soft:#B5EBCF;--mute:#8FA39A;--dim:#5D7268;--em:#00D26A;--em2:#3DFF9A;--amber:#E8A317;--red:#FF6B5E}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{font-family:'Instrument Sans',system-ui,sans-serif;background:var(--bg);color:var(--mute);min-height:100vh;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;width:420px;height:420px;top:-180px;right:-160px;border-radius:50%;background:radial-gradient(circle,rgba(0,210,106,.35),transparent 70%);filter:blur(60px);pointer-events:none}
+.wrap{position:relative;max-width:560px;margin:0 auto;padding:22px 16px 60px}
+em.s{font-family:'Fraunces',serif;font-style:italic;font-weight:600;color:var(--em)}
+.brand{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.brand svg{width:34px;height:34px}
+.brand b{color:var(--fg);font-size:16px}
+.brand span{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#04120b;background:var(--em);padding:5px 10px;border-radius:99px}
+/* login */
+#login{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:8vh}
+#login h1{color:var(--fg);font-size:32px;letter-spacing:-.03em;line-height:1.08;margin:18px 0 10px}
+#login p{font-size:15px;max-width:340px}
+#login form{width:100%;max-width:340px;margin-top:26px}
+#login input{width:100%;font:inherit;font-family:'JetBrains Mono',monospace;font-size:18px;text-transform:uppercase;letter-spacing:.12em;text-align:center;background:var(--panel);border:1px solid var(--line);color:var(--fg);border-radius:14px;padding:15px;outline:none}
+#login input:focus{border-color:var(--em)}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;font:inherit;font-weight:700;font-size:16px;border:0;border-radius:14px;padding:15px;cursor:pointer;background:var(--em);color:#04120b;margin-top:12px;box-shadow:0 16px 40px -16px rgba(0,210,106,.7)}
+.btn.ghost{background:var(--panel);color:var(--fg);border:1px solid var(--line);box-shadow:none}
+.err{color:var(--red);font-size:13px;min-height:18px;margin-top:10px}
+/* dashboard */
+.hi{color:var(--fg);font-size:26px;letter-spacing:-.03em;line-height:1.1}
+.sub{font-size:14px;margin-top:6px}
+.money{margin-top:20px;border-radius:22px;padding:22px;background:linear-gradient(150deg,#0F3A26,#08160F 70%);border:1px solid rgba(0,210,106,.35);position:relative;overflow:hidden}
+.money::after{content:"";position:absolute;right:-60px;bottom:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(61,255,154,.25),transparent 70%)}
+.money small{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+.money .big{font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:56px;line-height:1;color:var(--fg);letter-spacing:-.04em;margin:8px 0 6px;text-shadow:0 0 40px rgba(0,210,106,.4)}
+.money .line{display:flex;gap:16px;flex-wrap:wrap;font-size:13px}
+.money .line b{color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.k{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+.k small{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.k b{display:block;color:var(--fg);font-size:26px;letter-spacing:-.03em;margin-top:2px}
+.k span{font-size:12px;color:var(--em)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin-top:12px}
+.card h3{color:var(--fg);font-size:15px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.card h3 small{font-weight:500;font-size:12px;color:var(--dim)}
+.link{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px dashed var(--em);border-radius:12px;padding:12px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--fg);word-break:break-all;cursor:pointer}
+.share{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.share .btn{margin:0;padding:12px;font-size:14px}
+.chart{display:flex;align-items:flex-end;gap:8px;height:120px;padding-top:6px}
+.chart div{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.chart i{display:block;width:100%;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,var(--em2),var(--em));min-height:3px}
+.chart i.z{background:var(--line)}
+.chart span{font-size:10.5px;color:var(--dim);font-family:'JetBrains Mono',monospace}
+.chart em{font-style:normal;font-size:11px;color:var(--fg);font-weight:600}
+.list div{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.list div:last-child{border:0}
+.list b{color:var(--fg)}
+.list .g{color:var(--em);font-weight:700}
+.list .r{color:var(--red);font-size:12px}
+.empty{color:var(--dim);font-size:13px;padding:8px 0}
+.how{font-size:13px;line-height:1.6}
+.how b{color:var(--fg)}
+.out{display:block;margin:24px auto 0;background:none;border:0;color:var(--dim);font:inherit;font-size:13px;cursor:pointer;text-decoration:underline}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--em);color:#04120b;font-weight:700;padding:11px 18px;border-radius:12px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="15.4" cy="17" r="1.9" fill="#04120b"/><circle cx="24.6" cy="17" r="1.9" fill="#04120b"/><line x1="16.4" y1="23.4" x2="23.6" y2="23.4" stroke="#04120b" stroke-width="2.1" stroke-linecap="round"/></svg><b>Editor <em class="s">de La Sala</em></b><span>Creadores</span></div>
+
+  <section id="login">
+    <svg width="64" height="64" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="15.4" cy="17" r="1.9" fill="#04120b"/><circle cx="24.6" cy="17" r="1.9" fill="#04120b"/><line x1="16.4" y1="23.4" x2="23.6" y2="23.4" stroke="#04120b" stroke-width="2.1" stroke-linecap="round"/></svg>
+    <h1>Tu portal de <em class="s">creador</em></h1>
+    <p>Mira cuánto has vendido con tu link y cuánto vas a cobrar este mes.</p>
+    <form id="lf"><input id="code" placeholder="TU CÓDIGO" autocomplete="off" autocapitalize="characters" spellcheck="false"><button class="btn" type="submit">Entrar →</button><div class="err" id="le"></div></form>
+  </section>
+
+  <section id="dash" hidden>
+    <div class="hi" id="hi"></div>
+    <div class="sub" id="sub"></div>
+
+    <div class="money">
+      <small>Por cobrar</small>
+      <div class="big" id="pend">$0</div>
+      <div class="line"><span>Este mes: <b id="cm">$0</b></span><span>Ganado en total: <b id="ct">$0</b></span><span>Ya cobrado: <b id="pg">$0</b></span></div>
+    </div>
+
+    <div class="grid">
+      <div class="k"><small>Personas por tu link</small><b id="vis">0</b><span id="visM"></span></div>
+      <div class="k"><small>Ventas</small><b id="ven">0</b><span id="venM"></span></div>
+      <div class="k"><small>Vendido</small><b id="vend">$0</b><span id="vendM"></span></div>
+      <div class="k"><small>Tu comisión</small><b id="pct">0%</b><span>de cada venta</span></div>
+    </div>
+
+    <div class="card">
+      <h3>Tu link de ventas <small>compártelo</small></h3>
+      <div class="link" id="lk" title="Copiar"></div>
+      <div class="share"><button class="btn" id="cp">Copiar link</button><button class="btn ghost" id="sh">Compartir</button></div>
+    </div>
+
+    <div class="card"><h3>Tus ventas por mes <small>últimos 6 meses</small></h3><div class="chart" id="chart"></div></div>
+
+    <div class="card"><h3>Tus ventas <small id="nv"></small></h3><div class="list" id="lv"></div></div>
+
+    <div class="card"><h3>Tus pagos <small>transferencias recibidas</small></h3><div class="list" id="lp"></div></div>
+
+    <div class="card how"><h3>¿Cómo funciona?</h3>
+      <p>Cada vez que alguien compra el Editor de La Sala desde <b>tu link</b>, la venta aparece aquí sola y ganas tu comisión. Si la persona entra por tu link y compra días después, igual cuenta para ti (hasta 30 días).</p>
+      <p style="margin-top:8px">A fin de mes te hacemos una <b>transferencia bancaria</b> con lo que tienes por cobrar. Si una venta se reembolsa, su comisión se descuenta.</p>
+    </div>
+    <button class="out" id="out">Salir</button>
+  </section>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money = (c) => '$' + ((c || 0) / 100).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+const fd = (s) => new Date(s).toLocaleDateString('es', {day: 'numeric', month: 'short', year: 'numeric'});
+function toast(m){ const t = $('#toast'); t.textContent = m; t.classList.add('on'); setTimeout(() => t.classList.remove('on'), 1800); }
+let CODE = ''; try { CODE = localStorage.getItem('edl_creador') || ''; } catch (e) {}
+async function entrar(){
+  $('#le').textContent = '';
+  try {
+    const r = await fetch('https://lasala-editor.vercel.app/api/creador', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({codigo: CODE})});
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.error || 'Error');
+    try { localStorage.setItem('edl_creador', CODE); } catch (e) {}
+    pintar(j.creador);
+  } catch (e) { $('#login').hidden = false; $('#dash').hidden = true; $('#le').textContent = e.message; try { localStorage.removeItem('edl_creador'); } catch (x) {} }
+}
+function pintar(c){
+  $('#login').hidden = true; $('#dash').hidden = false;
+  $('#hi').innerHTML = `Hola, <em class="s">${esc(c.nombre.split(' ')[0])}</em> 👋`;
+  $('#sub').textContent = c.activo ? 'Tu link está activo.' : 'Tu link está en pausa. Escríbenos si tienes dudas.';
+  $('#pend').textContent = money(c.pendiente); $('#cm').textContent = money(c.comisionMes); $('#ct').textContent = money(c.comision); $('#pg').textContent = money(c.pagado);
+  $('#vis').textContent = c.visitas; $('#visM').textContent = `${c.visitasMes} este mes`;
+  $('#ven').textContent = c.ventas; $('#venM').textContent = `${c.ventasMes} este mes`;
+  $('#vend').textContent = money(c.vendido); $('#vendM').textContent = `${money(c.vendidoMes)} este mes`;
+  $('#pct').textContent = c.pct + '%';
+  $('#lk').textContent = c.link.replace('https://', '');
+  const copy = () => { navigator.clipboard.writeText(c.link); toast('Link copiado'); };
+  $('#lk').onclick = copy; $('#cp').onclick = copy;
+  $('#sh').onclick = () => navigator.share ? navigator.share({title: 'Editor de La Sala', text: 'Graba y Claude Code te edita el video. Mira:', url: c.link}).catch(() => {}) : copy();
+  // gráfica: comisión ganada por mes (últimos 6)
+  const meses = []; const d = new Date(); d.setDate(1);
+  for (let i = 5; i >= 0; i--) { const x = new Date(d.getFullYear(), d.getMonth() - i, 1); meses.push({k: x.toISOString().slice(0, 7), n: x.toLocaleDateString('es', {month: 'short'}), v: 0}); }
+  (c.listaVentas || []).filter((v) => v.estado !== 'reembolsada').forEach((v) => { const m = meses.find((x) => x.k === (v.fecha || '').slice(0, 7)); if (m) m.v += v.comision; });
+  const max = Math.max(1, ...meses.map((m) => m.v));
+  $('#chart').innerHTML = meses.map((m) => `<div>${m.v ? `<em>${money(m.v).replace('.00', '')}</em>` : ''}<i class="${m.v ? '' : 'z'}" style="height:${Math.max(3, Math.round(m.v / max * 88))}%"></i><span>${esc(m.n)}</span></div>`).join('');
+  const lv = c.listaVentas || [];
+  $('#nv').textContent = lv.length ? `${lv.length} en total` : '';
+  $('#lv').innerHTML = lv.map((v) => `<div><span><b>${esc(v.comprador || 'Comprador')}</b><br><small style="color:var(--dim)">${fd(v.fecha)} · venta de ${money(v.monto)}</small></span>${v.estado === 'reembolsada' ? '<span class="r">Reembolsada</span>' : `<span class="g">+${money(v.comision)}</span>`}</div>`).join('') || '<div class="empty">Todavía no hay ventas. ¡Comparte tu link! 🚀</div>';
+  const lp = c.listaPagos || [];
+  $('#lp').innerHTML = lp.map((p) => `<div><span><b>${fd(p.fecha)}</b><br><small style="color:var(--dim)">${esc(p.nota || 'Transferencia')}</small></span><span class="g">${money(p.monto)}</span></div>`).join('') || '<div class="empty">Aún no hay pagos. A fin de mes te transferimos lo que tengas por cobrar.</div>';
+}
+$('#lf').addEventListener('submit', (e) => { e.preventDefault(); CODE = $('#code').value.trim().toUpperCase(); if (CODE) entrar(); });
+$('#out').onclick = () => { try { localStorage.removeItem('edl_creador'); } catch (e) {} CODE = ''; $('#dash').hidden = true; $('#login').hidden = false; $('#code').value = ''; };
+if (CODE) entrar();
+</script>
+</body>
+</html>
