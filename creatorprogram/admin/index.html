@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin · Creator Program · La Sala de IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Fraunces:ital,wght@1,600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050B08;--panel:#0C1C16;--line:#1d3b2e;--fg:#F3F7F4;--soft:#B5EBCF;--mute:#8FA39A;--dim:#5D7268;--em:#00D26A;--red:#FF6B5E;--amber:#E8A317}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{font-family:'Instrument Sans',system-ui,sans-serif;background:var(--bg);color:var(--mute);font-size:14px;min-height:100vh}
+.wrap{max-width:1200px;margin:0 auto;padding:24px 16px 60px}
+header{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand svg{width:40px;height:40px}
+.brand b{display:block;color:var(--fg);font-size:18px;letter-spacing:-.02em}
+.brand b em{font-family:'Fraunces',serif;font-style:italic;color:var(--em);font-weight:600}
+.brand span{font-size:12px;color:var(--dim)}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+button,.btn{font:inherit;font-size:13px;font-weight:600;border-radius:10px;padding:9px 13px;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--fg)}
+button:hover{border-color:var(--em)}
+button.pri{background:var(--em);color:#04120b;border-color:var(--em)}
+button.danger{color:var(--red)}
+button:disabled{opacity:.5}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.kpi small{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.kpi b{display:block;font-size:30px;color:var(--fg);line-height:1.15;letter-spacing:-.03em}
+.kpi b.g{color:var(--em)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tools input,.tools select{font:inherit;background:var(--panel);border:1px solid var(--line);color:var(--fg);border-radius:10px;padding:10px 12px;outline:none}
+.tools input{flex:1;min-width:200px}
+.tools input:focus{border-color:var(--em)}
+.tbl{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:auto}
+table{width:100%;border-collapse:collapse;min-width:900px}
+th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);padding:12px;border-bottom:1px solid var(--line);font-weight:500}
+td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border:0}
+td b{color:var(--fg);font-weight:600}
+.code{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--soft);cursor:pointer}
+.code:hover{color:var(--em)}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px}
+.pill.ok{background:rgba(0,210,106,.14);color:var(--em)}
+.pill.no{background:rgba(255,107,94,.14);color:var(--red)}
+.act{font-size:12px;line-height:1.5}
+.act span{display:block;color:var(--dim)}
+.ops{display:flex;gap:6px;flex-wrap:wrap}
+.ops button{padding:6px 9px;font-size:12px}
+.empty{padding:40px;text-align:center;color:var(--dim)}
+#lock{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--bg);padding:16px;z-index:10}
+#lock form{width:100%;max-width:340px;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:28px 22px;text-align:center}
+#lock h1{color:var(--fg);font-size:20px;margin:12px 0 16px}
+#lock input{width:100%;font:inherit;font-size:18px;text-align:center;letter-spacing:.3em;background:var(--bg);border:1px solid var(--line);color:var(--fg);border-radius:12px;padding:12px;outline:none}
+#lock input:focus{border-color:var(--em)}
+#lock button{width:100%;margin-top:12px;padding:12px}
+#lock .e{color:var(--red);font-size:13px;min-height:18px;margin-top:10px}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--em);color:#04120b;font-weight:700;padding:10px 16px;border-radius:12px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+
+.tabs{display:flex;gap:6px;margin-bottom:18px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:5px;width:max-content;max-width:100%}
+.tabs button{border:0;background:transparent;color:var(--mute);padding:9px 16px}
+.tabs button.on{background:var(--em);color:#04120b}
+.kpi b.a{color:var(--amber)}
+.kpi .ks{font-size:12px;color:var(--dim)}
+.kpis.pag .kpi{background:linear-gradient(150deg,#0F3A26,#0C1C16 70%);border-color:rgba(0,210,106,.35)}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+.cc{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
+.cc.off{opacity:.55}
+.cc .top{display:flex;align-items:center;gap:12px}
+.av{width:46px;height:46px;border-radius:50%;flex:none;display:grid;place-items:center;font-weight:700;font-size:19px;color:#04120b;background:linear-gradient(135deg,var(--em),#3DFF9A)}
+.cc h3{color:var(--fg);font-size:17px;letter-spacing:-.02em}
+.cc .lk{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--soft);cursor:pointer;word-break:break-all}
+.cc .lk:hover{color:var(--em)}
+.pct{margin-left:auto;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#04120b;background:var(--em);border-radius:99px;padding:5px 10px}
+.st{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.st div{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:9px 10px}
+.st small{display:block;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.st b{display:block;color:var(--fg);font-size:17px;margin-top:2px}
+.owe{display:flex;align-items:center;justify-content:space-between;gap:10px;background:rgba(232,163,23,.08);border:1px solid rgba(232,163,23,.3);border-radius:14px;padding:12px 14px}
+.owe small{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+.owe b{display:block;color:var(--fg);font-size:26px;letter-spacing:-.03em}
+.owe span{font-size:12px;color:var(--dim)}
+.cops{display:flex;gap:6px;flex-wrap:wrap}
+.cops button{padding:7px 10px;font-size:12px}
+.bar{height:6px;border-radius:3px;background:var(--bg);overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--em),#3DFF9A)}
+dialog{margin:auto;border:1px solid var(--line);border-radius:18px;background:var(--panel);color:var(--mute);padding:0;width:min(560px,94vw);max-height:90vh}
+dialog::backdrop{background:rgba(0,0,0,.65)}
+.dl{padding:22px}
+.dl h2{color:var(--fg);font-size:19px;margin-bottom:4px}
+.dl p.s{font-size:13px;color:var(--dim);margin-bottom:16px}
+.dl label{display:block;font-size:12px;font-weight:600;color:var(--soft);margin:12px 0 6px}
+.dl input,.dl textarea{width:100%;font:inherit;background:var(--bg);border:1px solid var(--line);color:var(--fg);border-radius:10px;padding:11px 12px;outline:none}
+.dl input:focus{border-color:var(--em)}
+.dl .row{display:flex;gap:10px}.dl .row>div{flex:1}
+.dl .fx{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
+.dl .hint{font-size:12px;color:var(--dim);margin-top:6px}
+.dl .preview{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--em);margin-top:6px}
+.dl .big{font-family:'JetBrains Mono',monospace;font-size:20px;color:var(--fg);background:var(--bg);border:2px dashed var(--em);border-radius:12px;padding:12px;text-align:center;letter-spacing:.06em;margin:10px 0;cursor:pointer}
+.ls{max-height:260px;overflow:auto;border:1px solid var(--line);border-radius:12px;margin-top:8px}
+.ls div{display:flex;justify-content:space-between;gap:10px;padding:9px 12px;border-bottom:1px solid var(--line);font-size:13px}
+.ls div:last-child{border:0}
+.ls b{color:var(--fg)}
+.tag{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:99px;background:rgba(181,235,207,.12);color:var(--soft);margin-top:4px}
+@media(max-width:760px){.st{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div id="lock"><form id="lf">
+  <svg width="52" height="52" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="15.4" cy="17" r="1.9" fill="#04120b"/><circle cx="24.6" cy="17" r="1.9" fill="#04120b"/><line x1="16.4" y1="23.4" x2="23.6" y2="23.4" stroke="#04120b" stroke-width="2.1" stroke-linecap="round"/></svg>
+  <h1>CRM · Editor de La Sala</h1>
+  <input id="pin" type="password" inputmode="numeric" autocomplete="current-password" placeholder="PIN">
+  <button class="pri" type="submit">Entrar</button>
+  <div class="e" id="le"></div>
+</form></div>
+
+<div class="wrap" id="app" hidden>
+  <header>
+    <div class="brand"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="15.4" cy="17" r="1.9" fill="#04120b"/><circle cx="24.6" cy="17" r="1.9" fill="#04120b"/><line x1="16.4" y1="23.4" x2="23.6" y2="23.4" stroke="#04120b" stroke-width="2.1" stroke-linecap="round"/></svg>
+      <div><b>Editor <em>de La Sala</em> · CRM</b><span>Compradores, códigos de licencia y activaciones</span></div></div>
+    <div class="actions" id="actC"><button class="pri" id="manual">＋ Licencia manual</button><button id="reload">↻ Actualizar</button><button id="csv">⬇ CSV</button><button id="copy">Copiar correos</button><button id="out">Salir</button></div>
+  </header>
+  <div class="tabs"><button class="on" data-tab="C">Compradores</button><button data-tab="R">Creadores</button></div>
+  <section id="tabC">
+  <div class="kpis">
+    <div class="kpi"><small>Compradores</small><b id="k1">0</b></div>
+    <div class="kpi"><small>Ingresos</small><b class="g" id="k2">$0</b></div>
+    <div class="kpi"><small>Ya instalaron</small><b id="k3">0</b></div>
+    <div class="kpi"><small>Revocados</small><b id="k4">0</b></div>
+  </div>
+  <div class="tools">
+    <input id="q" placeholder="Buscar por nombre, correo o código…">
+    <select id="f"><option value="">Todos</option><option value="active">Activos</option><option value="revoked">Revocados</option><option value="inst">Instalados</option><option value="noinst">Sin instalar</option></select>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Comprador</th><th>Código</th><th>Fecha</th><th>Monto</th><th>Estado</th><th>Computadoras</th><th>Acciones</th></tr></thead>
+    <tbody id="tb"></tbody>
+  </table></div>
+  </section>
+
+  <section id="tabR" hidden>
+    <div class="kpis pag">
+      <div class="kpi"><small>Ventas totales de la página</small><b id="p1">0</b></div>
+      <div class="kpi"><small>Ingresos totales</small><b class="g" id="p2">$0</b></div>
+      <div class="kpi"><small>Este mes</small><b id="p3">$0</b><span class="ks" id="p3b"></span></div>
+      <div class="kpi"><small>Vendidas por creadores</small><b id="p4">0</b><span class="ks" id="p4b"></span></div>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><small>Creadores</small><b id="r1">0</b></div>
+      <div class="kpi"><small>Vendido por creadores · este mes</small><b class="g" id="r2">$0</b></div>
+      <div class="kpi"><small>Comisión por pagar</small><b class="a" id="r3">$0</b></div>
+      <div class="kpi"><small>Ya pagado</small><b id="r4">$0</b></div>
+    </div>
+    <div class="tools"><button class="pri" id="newC">＋ Nuevo creador</button><button id="reloadR">↻ Actualizar</button><input id="qr" placeholder="Buscar creador…"></div>
+    <div class="cgrid" id="cg"></div>
+  </section>
+</div>
+
+<dialog id="dNew"><form class="dl" method="dialog" id="fNew">
+  <h2>Nuevo creador</h2><p class="s">Se crea su link y su código para entrar a su portal.</p>
+  <label>Nombre</label><input id="nNom" required placeholder="Ej. Kiki Montilla" autocomplete="off">
+  <div class="row"><div><label>Link (lasaladeia.com/editor/…)</label><input id="nSlug" placeholder="kiki" autocomplete="off"></div><div><label>Comisión %</label><input id="nPct" type="number" min="1" max="100" step="0.5" value="30" required></div></div>
+  <div class="preview" id="nPrev"></div>
+  <label>Correo (opcional)</label><input id="nMail" type="email" placeholder="para tu referencia">
+  <div class="hint" id="nEj">Con 30 % gana $22.50 por cada venta de $75.</div>
+  <div class="fx"><button type="button" data-close>Cancelar</button><button class="pri" id="nGo">Crear creador</button></div>
+</form></dialog>
+
+<dialog id="dOk"><div class="dl">
+  <h2>¡Creador listo! 🎉</h2><p class="s">Mándale estos dos datos. El código es su contraseña del portal.</p>
+  <label>Su link de ventas</label><div class="big" id="okLink" data-copy></div>
+  <label>Su código de acceso</label><div class="big" id="okCode" data-copy></div>
+  <label>Portal del creador</label><div class="big" id="okPortal" data-copy>https://lasaladeia.com/creatorprogram</div>
+  <div class="fx"><button id="okMsg">Copiar mensaje para enviarle</button><button class="pri" data-close>Listo</button></div>
+</div></dialog>
+
+<dialog id="dPay"><form class="dl" method="dialog" id="fPay">
+  <h2>Registrar pago</h2><p class="s" id="pWho"></p>
+  <label>Monto transferido (USD)</label><input id="pAmt" type="number" min="0.01" step="0.01" required>
+  <label>Nota (opcional)</label><input id="pNota" placeholder="Ej. Transferencia octubre · Zelle">
+  <div class="fx"><button type="button" data-close>Cancelar</button><button class="pri">Guardar pago</button></div>
+</form></dialog>
+
+<dialog id="dDet"><div class="dl" id="detBody"></div></dialog>
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+let PIN = '', DATA = [];
+try { PIN = sessionStorage.getItem('edl_pin') || ''; } catch (e) {}
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fd = (s) => s ? new Date(s).toLocaleString('es', {day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'}) : '—';
+function toast(m){ const t = $('#toast'); t.textContent = m; t.classList.add('on'); setTimeout(() => t.classList.remove('on'), 1800); }
+async function api(method, data){
+  const r = await fetch('https://lasala-editor.vercel.app/api/crm', {method, headers:{'x-crm-pin': PIN, 'Content-Type':'application/json'}, body: data ? JSON.stringify(data) : undefined});
+  const j = await r.json().catch(() => ({}));
+  if (r.status === 401) { lock('PIN incorrecto'); throw new Error('auth'); }
+  if (!r.ok) throw new Error(j.error || r.status);
+  return j;
+}
+function lock(msg){ $('#lock').hidden = false; $('#app').hidden = true; $('#le').textContent = msg || ''; try { sessionStorage.removeItem('edl_pin'); } catch (e) {} }
+$('#lf').addEventListener('submit', async (e) => { e.preventDefault(); PIN = $('#pin').value.trim(); load(); });
+$('#out').onclick = () => { PIN = ''; lock(); };
+async function load(){
+  try {
+    const j = await api('GET');
+    try { sessionStorage.setItem('edl_pin', PIN); } catch (e) {}
+    $('#lock').hidden = true; $('#app').hidden = false;
+    DATA = j.buyers;
+    $('#k1').textContent = j.stats.compradores; $('#k2').textContent = '$' + j.stats.ingresos.toLocaleString('en-US');
+    $('#k3').textContent = j.stats.activados; $('#k4').textContent = j.stats.revocados;
+    render();
+  } catch (e) { if (e.message !== 'auth') toast('Error: ' + e.message); }
+}
+function rows(){
+  const q = $('#q').value.trim().toLowerCase(), f = $('#f').value;
+  return DATA.filter((b) => (!q || [b.nombre, b.email, b.code].join(' ').toLowerCase().includes(q)) &&
+    (!f || (f === 'inst' ? (b.activations || []).length : f === 'noinst' ? !(b.activations || []).length : b.status === f)));
+}
+function render(){
+  const list = rows();
+  $('#tb').innerHTML = list.map((b) => {
+    const acts = (b.activations || []).map((a, i) => `<div>💻 ${i + 1}: <span title="${esc(a.machine)}">${esc(a.machine.slice(0, 10))}… · ${fd(a.last)}</span></div>`).join('') || '<span>Sin instalar</span>';
+    return `<tr>
+      <td><b>${esc(b.nombre || '—')}</b><div>${esc(b.email)}</div><div style="color:var(--dim);font-size:11px">${esc(b.pi)}</div>${b.creador ? `<span class="tag">vía ${esc(b.creador)}</span>` : ''}</td>
+      <td><span class="code" data-copy="${esc(b.code)}" title="Copiar">${esc(b.code)}</span></td>
+      <td>${fd(b.fecha)}</td>
+      <td><b>$${((b.amount || 0) / 100).toFixed(2)}</b></td>
+      <td><span class="pill ${b.status === 'active' ? 'ok' : 'no'}">${b.status === 'active' ? 'Activo' : 'Revocado'}</span><div style="font-size:11px;margin-top:4px">${b.emails || 0} correo(s)</div></td>
+      <td class="act">${acts}<span>${(b.activations || []).length}/2</span></td>
+      <td><div class="ops">
+        <button data-op="resend" data-c="${esc(b.code)}">✉ Reenviar</button>
+        <button data-op="reset" data-c="${esc(b.code)}">↺ Liberar PCs</button>
+        ${b.status === 'active' ? `<button class="danger" data-op="revoke" data-c="${esc(b.code)}">Revocar</button>` : `<button data-op="activate" data-c="${esc(b.code)}">Reactivar</button>`}
+      </div></td></tr>`;
+  }).join('') || `<tr><td colspan="7" class="empty">${DATA.length ? 'Nada coincide con la búsqueda.' : 'Todavía no hay compradores.'}</td></tr>`;
+}
+$('#q').oninput = render; $('#f').onchange = render; $('#reload').onclick = load;
+$('#tb').addEventListener('click', async (e) => {
+  const cp = e.target.closest('[data-copy]');
+  if (cp) { navigator.clipboard.writeText(cp.dataset.copy); return toast('Código copiado'); }
+  const b = e.target.closest('[data-op]'); if (!b) return;
+  const op = b.dataset.op, code = b.dataset.c;
+  if ((op === 'revoke' || op === 'reset') && !b.dataset.armed) { b.dataset.armed = 1; const t = b.textContent; b.textContent = '¿Seguro?'; setTimeout(() => { b.textContent = t; delete b.dataset.armed; }, 2500); return; }
+  b.disabled = true;
+  try {
+    if (op === 'resend') await api('POST', {op:'resend', code});
+    if (op === 'reset') await api('POST', {op:'reset', code});
+    if (op === 'revoke') await api('POST', {op:'status', code, status:'revoked'});
+    if (op === 'activate') await api('POST', {op:'status', code, status:'active'});
+    toast({resend:'Correo reenviado', reset:'Computadoras liberadas', revoke:'Licencia revocada', activate:'Licencia reactivada'}[op]);
+    load();
+  } catch (err) { if (err.message !== 'auth') toast('Error: ' + err.message); b.disabled = false; }
+});
+$('#csv').onclick = () => {
+  const head = ['nombre','email','codigo','fecha','monto','estado','computadoras','payment_intent'];
+  const lines = [head.join(',')].concat(rows().map((b) => [b.nombre, b.email, b.code, b.fecha, (b.amount || 0) / 100, b.status, (b.activations || []).length, b.pi].map((v) => `"${String(v ?? '').replace(/"/g, '""')}"`).join(',')));
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([lines.join('\n')], {type:'text/csv'})); a.download = 'compradores-editor-la-sala.csv'; a.click();
+};
+$('#manual').onclick = async () => {
+  const nombre = prompt('Nombre del comprador'); if (nombre === null) return;
+  const email = prompt('Correo'); if (!email) return;
+  const enviar = confirm('¿Enviarle ya el correo con el editor y el código?');
+  try { const j = await api('POST', {op:'create', nombre, email, enviar}); toast('Licencia creada: ' + j.buyer.code); load(); } catch (e) { if (e.message !== 'auth') toast('Error: ' + e.message); }
+};
+$('#copy').onclick = () => { navigator.clipboard.writeText(rows().map((b) => b.email).join(', ')); toast('Correos copiados'); };
+
+// ═════════ CREADORES ═════════
+const money = (c) => '$' + ((c || 0) / 100).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+let CR = [];
+async function apiR(method, data){
+  const r = await fetch('https://lasala-editor.vercel.app/api/creadores', {method, headers:{'x-crm-pin': PIN, 'Content-Type':'application/json'}, body: data ? JSON.stringify(data) : undefined});
+  const j = await r.json().catch(() => ({}));
+  if (r.status === 401) { lock('PIN incorrecto'); throw new Error('auth'); }
+  if (!r.ok) throw new Error(j.error || r.status);
+  return j;
+}
+document.querySelectorAll('.tabs button').forEach((b) => b.onclick = () => {
+  document.querySelectorAll('.tabs button').forEach((x) => x.classList.toggle('on', x === b));
+  $('#tabC').hidden = b.dataset.tab !== 'C'; $('#tabR').hidden = b.dataset.tab !== 'R'; $('#actC').hidden = b.dataset.tab !== 'C';
+  if (b.dataset.tab === 'R') loadR();
+});
+async function loadR(){
+  try {
+    const j = await apiR('GET'); CR = j.creadores;
+    const P = j.pagina || {};
+    $('#p1').textContent = P.ventas || 0; $('#p2').textContent = money(P.ingresos);
+    $('#p3').textContent = money(P.ingresosMes); $('#p3b').textContent = `${P.ventasMes || 0} venta(s)`;
+    $('#p4').textContent = P.porCreadores || 0; $('#p4b').textContent = P.ventas ? `${Math.round((P.porCreadores || 0) / P.ventas * 100)} % del total` : '';
+    $('#r1').textContent = j.totales.creadores; $('#r2').textContent = money(j.totales.vendidoMes);
+    $('#r3').textContent = money(j.totales.pendiente); $('#r4').textContent = money(j.totales.pagado);
+    renderR();
+  } catch (e) { if (e.message !== 'auth') toast('Error: ' + e.message); }
+}
+function renderR(){
+  const q = ($('#qr').value || '').toLowerCase();
+  const list = CR.filter((c) => !q || (c.nombre + ' ' + c.slug).toLowerCase().includes(q));
+  const maxV = Math.max(1, ...CR.map((c) => c.vendido));
+  $('#cg').innerHTML = list.map((c) => `
+    <div class="cc ${c.activo ? '' : 'off'}">
+      <div class="top"><div class="av">${esc((c.nombre || '?').slice(0, 1).toUpperCase())}</div>
+        <div><h3>${esc(c.nombre)}${c.activo ? '' : ' · <span style="color:var(--amber)">en pausa</span>'}</h3><div class="lk" data-copy="${esc(c.link)}" title="Copiar link">${esc(c.link.replace('https://', ''))}</div></div>
+        <span class="pct">${c.pct}%</span></div>
+      <div class="st">
+        <div><small>Visitas</small><b>${c.visitas}</b></div>
+        <div><small>Ventas</small><b>${c.ventas}</b></div>
+        <div><small>Vendido</small><b>${money(c.vendido)}</b></div>
+        <div><small>Comisión</small><b>${money(c.comision)}</b></div>
+      </div>
+      <div class="bar" title="Vendido comparado con el mejor creador"><i style="width:${Math.round(c.vendido / maxV * 100)}%"></i></div>
+      <div class="owe"><div><small>Le debes</small><b>${money(c.pendiente)}</b><span>Este mes: ${money(c.comisionMes)} · Pagado: ${money(c.pagado)}</span></div>
+        <button class="pri" data-r="pay" data-s="${esc(c.slug)}" ${c.pendiente ? '' : 'disabled'}>Registrar pago</button></div>
+      <div class="cops">
+        <button data-r="det" data-s="${esc(c.slug)}">📊 Detalle</button>
+        <button data-r="pct" data-s="${esc(c.slug)}">% Comisión</button>
+        <button data-r="code" data-s="${esc(c.slug)}" title="${esc(c.codigo)}">🔑 ${esc(c.codigo)}</button>
+        <button data-r="tog" data-s="${esc(c.slug)}">${c.activo ? '⏸ Pausar' : '▶ Activar'}</button>
+      </div>
+    </div>`).join('') || `<div class="empty" style="grid-column:1/-1">${CR.length ? 'Nada coincide.' : 'Todavía no hay creadores. Crea el primero con “＋ Nuevo creador”.'}</div>`;
+}
+$('#qr').oninput = renderR; $('#reloadR').onclick = loadR;
+document.addEventListener('click', (e) => {
+  const cl = e.target.closest('[data-close]'); if (cl) { cl.closest('dialog').close(); return; }
+  const cp = e.target.closest('dialog [data-copy], .cc [data-copy]');
+  if (cp) { navigator.clipboard.writeText(cp.dataset.copy || cp.textContent.trim()); toast('Copiado'); }
+});
+const slugify = (s) => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '').slice(0, 30);
+function prevNew(){
+  const sl = slugify($('#nSlug').value || $('#nNom').value), p = Number($('#nPct').value) || 0;
+  $('#nPrev').textContent = sl ? 'lasaladeia.com/editor/' + sl : '';
+  $('#nEj').textContent = `Con ${p} % gana ${money(Math.round(7500 * p / 100))} por cada venta de $75.`;
+}
+['#nNom', '#nSlug', '#nPct'].forEach((s) => $(s).addEventListener('input', prevNew));
+$('#newC').onclick = () => { $('#fNew').reset(); $('#nPct').value = 30; prevNew(); $('#dNew').showModal(); setTimeout(() => $('#nNom').focus(), 50); };
+$('#fNew').addEventListener('submit', async (e) => {
+  e.preventDefault(); const b = $('#nGo'); b.disabled = true;
+  try {
+    const j = await apiR('POST', {op:'crear', nombre: $('#nNom').value, slug: $('#nSlug').value, pct: $('#nPct').value, email: $('#nMail').value});
+    $('#dNew').close();
+    $('#okLink').textContent = j.creador.link; $('#okCode').textContent = j.creador.codigo;
+    $('#okMsg').onclick = () => { navigator.clipboard.writeText(`¡Hola ${j.creador.nombre}! Ya eres creador del Editor de La Sala 🎬\n\nTu link de ventas: ${j.creador.link}\nGanas el ${j.creador.pct}% de cada venta.\n\nTu portal (ahí ves tus ventas y tu comisión): https://lasaladeia.com/creatorprogram\nTu código de acceso: ${j.creador.codigo}`); toast('Mensaje copiado'); };
+    $('#dOk').showModal(); loadR();
+  } catch (err) { if (err.message !== 'auth') toast('Error: ' + err.message); }
+  b.disabled = false;
+});
+let PAY = null;
+$('#fPay').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  try { await apiR('POST', {op:'pago', slug: PAY, monto: $('#pAmt').value, nota: $('#pNota').value}); $('#dPay').close(); toast('Pago registrado'); loadR(); }
+  catch (err) { if (err.message !== 'auth') toast('Error: ' + err.message); }
+});
+$('#cg').addEventListener('click', async (e) => {
+  const b = e.target.closest('[data-r]'); if (!b) return;
+  const c = CR.find((x) => x.slug === b.dataset.s); if (!c) return;
+  try {
+    if (b.dataset.r === 'pay') { PAY = c.slug; $('#pWho').textContent = `${c.nombre} · le debes ${money(c.pendiente)}`; $('#pAmt').value = (c.pendiente / 100).toFixed(2); $('#pNota').value = 'Transferencia ' + new Date().toLocaleString('es', {month:'long', year:'numeric'}); $('#dPay').showModal(); }
+    if (b.dataset.r === 'pct') { const p = prompt(`Nueva comisión para ${c.nombre} (%)\nAplica a las ventas nuevas; las anteriores conservan su %.`, c.pct); if (p === null) return; await apiR('POST', {op:'editar', slug: c.slug, pct: p}); toast('Comisión actualizada'); loadR(); }
+    if (b.dataset.r === 'tog') { await apiR('POST', {op:'editar', slug: c.slug, activo: !c.activo}); toast(c.activo ? 'Creador en pausa' : 'Creador activo'); loadR(); }
+    if (b.dataset.r === 'code') {
+      if (!confirm(`Código actual de ${c.nombre}: ${c.codigo}\n\n¿Generar uno NUEVO? (el actual dejará de funcionar)\nCancelar = solo copiar el actual.`)) { navigator.clipboard.writeText(c.codigo); return toast('Código copiado'); }
+      const j = await apiR('POST', {op:'codigo', slug: c.slug}); navigator.clipboard.writeText(j.codigo); toast('Código nuevo copiado: ' + j.codigo); loadR();
+    }
+    if (b.dataset.r === 'det') {
+      const j = await apiR('POST', {op:'detalle', slug: c.slug}), d = j.creador;
+      $('#detBody').innerHTML = `<h2>${esc(d.nombre)}</h2><p class="s">${esc(d.link)} · ${d.pct}% · creado ${fd(d.creado)}</p>
+        <div class="st"><div><small>Visitas mes</small><b>${d.visitasMes}</b></div><div><small>Ventas mes</small><b>${d.ventasMes}</b></div><div><small>Vendido mes</small><b>${money(d.vendidoMes)}</b></div><div><small>Comisión mes</small><b>${money(d.comisionMes)}</b></div></div>
+        <label>Ventas (${d.listaVentas.length})</label><div class="ls">${d.listaVentas.map((v) => `<div><span>${fd(v.fecha)} · ${esc(v.comprador || '—')}${v.estado === 'reembolsada' ? ' · <b style="color:var(--red)">reembolsada</b>' : ''}</span><b>${money(v.monto)} → ${money(v.estado === 'reembolsada' ? 0 : v.comision)}</b></div>`).join('') || '<div><span>Sin ventas todavía</span></div>'}</div>
+        <label>Pagos registrados (${d.listaPagos.length})</label><div class="ls">${d.listaPagos.map((p, i) => `<div><span>${fd(p.fecha)} · ${esc(p.nota || '')}</span><span><b>${money(p.monto)}</b> <button data-bp="${i}" style="padding:3px 7px;font-size:11px">✕</button></span></div>`).join('') || '<div><span>Sin pagos todavía</span></div>'}</div>
+        <div class="fx"><button class="danger" id="delC" ${d.listaVentas.length ? 'hidden' : ''}>Eliminar creador</button><button class="pri" data-close>Cerrar</button></div>`;
+      $('#detBody').querySelectorAll('[data-bp]').forEach((x) => x.onclick = async () => { if (!confirm('¿Borrar este pago registrado?')) return; await apiR('POST', {op:'borrar-pago', slug: c.slug, i: Number(x.dataset.bp)}); $('#dDet').close(); toast('Pago borrado'); loadR(); });
+      const del = $('#delC'); if (del) del.onclick = async () => { if (!confirm('¿Eliminar a ' + c.nombre + '? Su link dejará de funcionar.')) return; await apiR('POST', {op:'eliminar', slug: c.slug}); $('#dDet').close(); toast('Creador eliminado'); loadR(); };
+      $('#dDet').showModal();
+    }
+  } catch (err) { if (err.message !== 'auth') toast('Error: ' + err.message); }
+});
+if (PIN) load();
+</script>
+</body>
+</html>
