@@ -657,7 +657,7 @@ footer a{color:var(--muted)}
   var FM = [["hormozi", "Impacto Amarillo"], ["top-neon", "Top Neón"], ["dividido-oro", "Dividido Oro"], ["polaroid", "Polaroid"], ["camcorder", "Camcorder"], ["kecatire", "Kecatire"], ["cine", "Cine"], ["pastel", "Pastel"], ["tv-retro", "TV Retro"], ["revista", "Revista"], ["oro-negro", "Oro y Negro"], ["telefono", "Teléfono"], ["burbuja-neon", "Burbuja Neón"], ["editorial-lujo", "Editorial Lujo"], ["cyber-neon", "Cyber Neón"]];
   var tr = document.getElementById('fmTrack');
   if(tr){
-    var h=''; FM.concat(FM).forEach(function(f,i){ h += '<figure class="fm-card"'+(i>=FM.length?' aria-hidden="true"':'')+'><div class="im"><img src="https://lasala-editor.vercel.app/img/formatos/'+f[0]+'.jpg?v=4" alt="Diseño '+f[1]+'" decoding="async" width="360" height="640"></div><figcaption>'+f[1]+'</figcaption></figure>'; }); tr.innerHTML=h;
+    var h=''; FM.concat(FM).forEach(function(f,i){ h += '<figure class="fm-card"'+(i>=FM.length?' aria-hidden="true"':'')+'><div class="im"><img src="https://lasala-editor.vercel.app/img/formatos/'+f[0]+'.jpg?v=5" alt="Diseño '+f[1]+'" decoding="async" width="360" height="640"></div><figcaption>'+f[1]+'</figcaption></figure>'; }); tr.innerHTML=h;
     // se mueve con JS (funciona aunque el teléfono tenga "reducir movimiento"); se puede arrastrar con el dedo
     var x=0, last=0, vel=115, visible=true, drag=false, sx=0, sx0=0, idle=0;
     function half(){ return tr.scrollWidth/2; }
