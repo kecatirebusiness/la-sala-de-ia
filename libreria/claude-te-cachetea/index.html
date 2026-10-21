@@ -125,6 +125,25 @@ video.vid{width:100%;max-width:300px;aspect-ratio:9/16;border-radius:16px;backgr
 .dl p{margin:4px 0 0;color:#bcd3c6;font-size:14px}.dl a{flex-shrink:0;background:var(--ac);color:#03130B;font:800 13.5px Manrope;border-radius:999px;padding:10px 18px;text-decoration:none}
 .back{display:inline-block;margin-top:26px;color:var(--mut);font-size:14px;text-decoration:none}.back:hover{color:var(--ac)}
 @media(max-width:640px){.dl{flex-direction:column;align-items:flex-start}video.vid{max-width:260px}.meta{grid-template-columns:1fr 1fr}}
+/* pop-up de email: sale una sola vez por navegador (localStorage ls_lib) y manda el lead al CRM de La Sala */
+.pop{position:fixed;inset:0;z-index:99;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .3s}
+.pop.on{opacity:1;pointer-events:auto}
+.pop .bx{position:relative;width:100%;max-width:420px;background:linear-gradient(160deg,#0c1c16,#050b08);border:1px solid #1d3b2e;border-radius:20px;padding:30px 26px 24px;text-align:center;transform:translateY(16px) scale(.97);transition:transform .35s cubic-bezier(.2,1.4,.4,1)}
+.pop.on .bx{transform:none}
+.pop .x{position:absolute;top:10px;right:12px;background:none;border:0;color:var(--mut);font-size:26px;line-height:1;cursor:pointer;padding:6px}
+.pop .lg{width:52px;height:52px;margin:0 auto 14px}.pop .lg svg{width:100%;height:100%}
+.pop .eb{display:inline-block;border:1px solid var(--ac);color:var(--ac);border-radius:999px;font:800 11px Montserrat;letter-spacing:.12em;padding:5px 12px}
+.pop h3{margin:14px 0 8px;font:800 25px/1.15 Montserrat;color:#fff}.pop h3 span{color:var(--ac)}
+.pop p{margin:0 0 18px;color:#bcd3c6;font-size:15px;line-height:1.5}
+.pop input{width:100%;box-sizing:border-box;background:#000;border:1px solid #2a3a33;border-radius:12px;color:#fff;font:500 16px Manrope;padding:14px 16px;outline:none}
+.pop input:focus{border-color:var(--ac)}.pop input.bad{border-color:#ff5a5a}
+.pop .go{width:100%;margin-top:10px;background:var(--ac);color:#03130B;border:0;border-radius:12px;font:800 16px Manrope;padding:14px;cursor:pointer}
+.pop .go:disabled{opacity:.6}
+.pop .no{margin-top:12px;background:none;border:0;color:var(--mut);font-size:13px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.pop .er{min-height:18px;margin-top:8px;color:#ff7a7a;font-size:13px}
+.pop .ok{display:none}.pop.done .fm{display:none}.pop.done .ok{display:block}
+.pop .ok .ck{width:56px;height:56px;margin:4px auto 12px;border-radius:50%;background:var(--ac);color:#03130B;font:800 30px/56px Montserrat}
+@media(max-width:640px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:4px 0 24px}.card{border-radius:10px}.card:hover{transform:none}.card .ci{padding:7px 7px 9px}.card .num{font-size:9.5px;letter-spacing:.06em}.nuevo{font-size:8px;padding:1px 5px;margin-left:4px}.card h3{font-size:12.5px;line-height:1.2;margin:3px 0 0}.card p,.card .tags{display:none}}
 </style></head><body>
 <header class="top"><div class="who"><span class="lg"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="#00D26A"/><circle cx="14" cy="16" r="2.6" fill="#000"/><circle cx="26" cy="16" r="2.6" fill="#000"/><rect x="13" y="25" width="14" height="2.6" rx="1.3" fill="#000"/></svg></span><div><b>La Sala de IA <svg viewBox="0 0 24 24"><path fill="#A3A3A3" d="M12 2l2.4 2.2 3.2-.4.9 3.1 2.9 1.5-1.1 3 1.1 3-2.9 1.5-.9 3.1-3.2-.4L12 22l-2.4-2.2-3.2.4-.9-3.1-2.9-1.5 1.1-3-1.1-3 2.9-1.5.9-3.1 3.2.4z"/><path fill="#000" d="M10.6 15.4l-3-3 1.4-1.4 1.6 1.6 4.4-4.4 1.4 1.4z"/></svg></b><small>Librería de videos</small></div>
 <a class="sub" href="https://instagram.com/lasaladeia" target="_blank" rel="noopener">Seguir</a></div>
@@ -179,11 +198,33 @@ Vuelve a transcribir con faster-whisper para sacar los tiempos nuevos y resincro
 Corrige: [lo que no te gustó]. Que los globos no tapen caras, que las palabras tengan espacios y que el ¡ZAS! coincida justo con la cachetada.
 Vuelve a renderizar y normaliza a -14 LUFS.</pre></div>
 <a class="back" href="../">← Volver a la librería</a></main><aside><nav class="toc"><h5>CONTENIDO</h5><a href="#herramientas">Herramientas</a><a href="#repos">Repos para descargar</a><a href="#paso-1"><span class="n">01</span>Cuéntale tu idea a Claude</a><a href="#paso-2"><span class="n">02</span>Escribe el diálogo para dos voces</a><a href="#paso-3"><span class="n">03</span>Crea tu muñequito y sus poses</a><a href="#paso-4"><span class="n">04</span>Crea la mascota de Claude</a><a href="#paso-5"><span class="n">05</span>Versión con la boca abierta de cada pose</a><a href="#paso-6"><span class="n">06</span>Las dos voces</a><a href="#paso-7"><span class="n">07</span>Pídele a Claude que arme el cómic</a><a href="#paso-8"><span class="n">08</span>Voz aislada y cortes rápidos</a><a href="#paso-9"><span class="n">09</span>Revisa y publica</a></nav></aside></div><footer><span>© 2026 La Sala de IA</span><span><a href="https://lasaladeia.com/?utm_source=libreria" target="_blank" rel="noopener">La Sala de IA</a><a href="https://instagram.com/lasaladeia" target="_blank" rel="noopener">Instagram</a></span></footer>
-<div class="toast" id="toast">¡Copiado!</div><script>
+<div class="toast" id="toast">¡Copiado!</div><div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="pop-t"><div class="bx"><button class="x" aria-label="Cerrar">×</button>
+<div class="fm"><div class="lg"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="#00D26A"/><circle cx="14" cy="16" r="2.6" fill="#000"/><circle cx="26" cy="16" r="2.6" fill="#000"/><rect x="13" y="25" width="14" height="2.6" rx="1.3" fill="#000"/></svg></div><span class="eb">LIBRERÍA GRATIS</span>
+<h3 id="pop-t">Te mandamos cada <span>receta nueva</span></h3>
+<p>Cada video que hacemos con IA, desarmado: los prompts exactos y los repos. Déjanos tu email y te llega apenas lo subimos.</p>
+<form novalidate><input type="email" name="email" placeholder="tu@email.com" autocomplete="email" inputmode="email" required>
+<button class="go" type="submit">Quiero las recetas</button><div class="er"></div></form>
+<button class="no" type="button">Ahora no, solo quiero mirar</button></div>
+<div class="ok"><div class="ck">✓</div><h3>¡Listo, ya estás <span>dentro</span>!</h3><p>Disfruta la librería. La próxima receta te llega al correo.</p></div>
+</div></div><script>
 document.querySelectorAll('.pr').forEach(function(b){var pre=b.querySelector('pre'),c=b.querySelector('.cp'),m=b.querySelector('.more');
  c&&c.addEventListener('click',function(){var t=pre.innerText,l=c.textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).catch(function(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();});
   c.textContent='¡Copiado!';c.classList.add('ok');var o=document.getElementById('toast');o.classList.add('on');setTimeout(function(){c.textContent=l;c.classList.remove('ok');o.classList.remove('on');},1500);});
  m&&m.addEventListener('click',function(){b.classList.remove('cut');});});
 var L=[].slice.call(document.querySelectorAll('.toc a')),S=L.map(function(a){return document.querySelector(a.getAttribute('href'));});
+(function(){var K='ls_lib',st;try{st=localStorage.getItem(K);}catch(e){}if(st)return;
+ var P=document.getElementById('pop'),F=P.querySelector('form'),I=F.querySelector('input'),B=F.querySelector('.go'),R=P.querySelector('.er');
+ function marca(v){try{localStorage.setItem(K,v);}catch(e){}}
+ function cierra(){P.classList.remove('on');document.body.style.overflow='';}
+ setTimeout(function(){P.classList.add('on');document.body.style.overflow='hidden';},1500);
+ P.querySelector('.x').onclick=P.querySelector('.no').onclick=function(){marca('cerrado');cierra();};
+ P.addEventListener('click',function(ev){if(ev.target===P){marca('cerrado');cierra();}});
+ F.addEventListener('submit',function(ev){ev.preventDefault();var m=I.value.trim().toLowerCase();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(m)){I.classList.add('bad');R.textContent='Revisa tu email.';return;}
+  I.classList.remove('bad');R.textContent='';B.disabled=true;B.textContent='Enviando…';
+  var q=new URLSearchParams(location.search),src=q.get('utm_source')||q.get('src')||'',pg=location.pathname.replace(/^\/libreria\/?/,'').replace(/\/$/,'')||'portada';
+  fetch('https://script.google.com/macros/s/AKfycbx4lMpMjSD4aGnMNOdu3DwnnV8XITHB6t2smF7vh5KYa-OdztslQIxufsgmWrbaI32J/exec',{method:'POST',mode:'no-cors',body:JSON.stringify({nombre:'',email:m,phone:'',goal:'Librería · '+pg+(src?' · src:'+src:'')})}).catch(function(){});
+  marca('email');setTimeout(function(){P.classList.add('done');setTimeout(cierra,2200);},600);});
+})();
 addEventListener('scroll',function(){var y=scrollY+130,k=0;S.forEach(function(s,i){if(s&&s.getBoundingClientRect().top+scrollY<=y)k=i;});L.forEach(function(a,i){a.classList.toggle('on',i===k);});},{passive:true});
 </script></body></html>
