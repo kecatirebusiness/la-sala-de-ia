@@ -387,6 +387,30 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
 .dock-in p b{display:block;color:var(--text);font-size:14px}
 .dock-in a{flex-shrink:0;padding:13px 18px;border-radius:14px;background:var(--em);color:#03130b;font-weight:700;font-size:14.5px;text-decoration:none}
 
+/* ---------- Pop-up de verificación antes del pago ---------- */
+.ver{position:fixed;inset:0;z-index:120;display:none;align-items:flex-end;justify-content:center;background:rgba(3,8,6,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:0}
+.ver.on{display:flex}
+.ver-in{position:relative;width:100%;max-width:460px;max-height:92dvh;overflow:auto;border-radius:26px 26px 0 0;padding:22px 20px calc(22px + var(--safe-b));background:linear-gradient(180deg,#0F2A1F,#08140F);border:1px solid rgba(0,210,106,.4);border-bottom:0;box-shadow:0 -30px 80px -20px rgba(0,210,106,.35);animation:verIn .45s cubic-bezier(.2,1.2,.3,1)}
+@keyframes verIn{from{transform:translateY(100%)}}
+@media (min-width:600px){.ver{align-items:center}.ver-in{border-radius:26px;border-bottom:1px solid rgba(0,210,106,.4);animation:verIn2 .4s cubic-bezier(.2,1.2,.3,1)}@keyframes verIn2{from{transform:translateY(30px) scale(.96);opacity:0}}}
+.ver-x{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.07);color:var(--soft);font-size:18px;display:grid;place-items:center}
+.ver-top{display:flex;align-items:center;gap:10px}
+.ver-top .tag{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.18em;color:var(--em);text-transform:uppercase}
+.ver h3{font-size:24px;font-weight:700;letter-spacing:-.035em;line-height:1.1;margin-top:12px}
+.ver p.s{font-size:14px;color:var(--muted);margin-top:6px;line-height:1.45}
+.ver label.l{display:block;font-size:12.5px;font-weight:600;color:var(--soft);margin:14px 0 6px}
+.ver input[type=text],.ver input[type=email],.ver select{width:100%;background:rgba(0,0,0,.35);border:1px solid var(--line2);border-radius:13px;padding:14px;font-size:16px;color:var(--text);font-family:inherit;-webkit-appearance:none;appearance:none}
+.ver select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238FA39A' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;background-size:16px;padding-right:30px}
+.ver select option{background:#0C1C16;color:#F3F7F4}
+.ver input:focus,.ver select:focus{outline:none;border-color:var(--em);box-shadow:0 0 0 3px rgba(0,210,106,.15)}
+.fecha{display:grid;grid-template-columns:1fr 1.5fr 1.2fr;gap:8px}
+.chk{display:flex;gap:11px;align-items:flex-start;margin-top:16px;padding:13px;border-radius:14px;background:rgba(0,210,106,.07);border:1px solid rgba(0,210,106,.25);cursor:pointer;font-size:14px;line-height:1.4}
+.chk input{width:22px;height:22px;flex-shrink:0;accent-color:#00D26A;margin-top:1px}
+.chk b{color:var(--text)}
+.ver .err{display:none;margin-top:10px;font-size:13px;color:#ff8475;font-weight:600}
+.ver .cta{margin-top:16px}
+.ver .safe{margin-top:10px}
+
 .rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
 .rv.in{opacity:1;transform:none}
 @media (min-width:900px){
@@ -681,6 +705,31 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
   La IA no te va a reemplazar. Te va a multiplicar.<br><a href="https://instagram.com/lasaladeia" target="_blank" rel="noopener">@lasaladeia</a>
 </footer>
 
+
+<!-- Pop-up de verificación (mayor de 18) antes del pago -->
+<div class="ver" id="ver" role="dialog" aria-modal="true" aria-labelledby="verT">
+  <form class="ver-in" id="verForm" novalidate>
+    <button type="button" class="ver-x" id="verX" aria-label="Cerrar">✕</button>
+    <div class="ver-top"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="15.4" cy="17" r="1.9" fill="#04120b"/><circle cx="24.6" cy="17" r="1.9" fill="#04120b"/><line x1="16.4" y1="23.4" x2="23.6" y2="23.4" stroke="#04120b" stroke-width="2.1" stroke-linecap="round"/></svg><span class="tag">Antes de pagar · Gen 02</span></div>
+    <h3 id="verT">Un paso más y la silla es <em class="s">tuya.</em></h3>
+    <p class="s">La Gen 02 es solo para mayores de 18 años. Confírmanos tus datos y te llevamos al pago seguro.</p>
+    <label class="l" for="vNombre">Nombre y apellido</label>
+    <input type="text" id="vNombre" autocomplete="name" placeholder="Tu nombre completo" required>
+    <label class="l" for="vEmail">Email (el mismo con el que vas a pagar)</label>
+    <input type="email" id="vEmail" autocomplete="email" inputmode="email" placeholder="tu@correo.com" required>
+    <label class="l">Fecha de nacimiento</label>
+    <div class="fecha">
+      <select id="vDia" aria-label="Día" autocomplete="bday-day"><option value="">Día</option></select>
+      <select id="vMes" aria-label="Mes" autocomplete="bday-month"><option value="">Mes</option></select>
+      <select id="vAno" aria-label="Año" autocomplete="bday-year"><option value="">Año</option></select>
+    </div>
+    <label class="chk"><input type="checkbox" id="vMayor"><span>Confirmo que <b>tengo 18 años o más</b> y que los datos que doy son reales.</span></label>
+    <p class="err" id="vErr"></p>
+    <button type="submit" class="cta" id="vBtn"><span>Continuar al pago · $375</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <p class="safe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>Tus datos solo los usa La Sala de IA</p>
+  </form>
+</div>
+
 <div class="dock" id="dock"><div class="dock-in"><p><b>Gen 02 · $375</b><span id="dockSub">150 sillas · abre el 16 nov</span></p><a href="#inscribirme" class="js-dock">Quiero mi silla</a></div></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -882,6 +931,50 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
     dock.classList.toggle('show', scrollY > innerHeight * .8 && !enVista($('#inscribirme')) && !(!av.hidden && enVista(av)) && !enTel);
   }
   addEventListener('scroll', dockUpd, {passive:true});
+
+
+  // ---- Pop-up de verificación (mayor de 18) antes de ir al checkout ----
+  var ver = $('#ver'), destPago = '';
+  (function(){
+    var d = $('#vDia'), m = $('#vMes'), a = $('#vAno'), y = new Date().getFullYear();
+    for(var i = 1; i <= 31; i++) d.insertAdjacentHTML('beforeend', '<option value="' + i + '">' + i + '</option>');
+    ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'].forEach(function(n, i){ m.insertAdjacentHTML('beforeend', '<option value="' + (i + 1) + '">' + n.charAt(0).toUpperCase() + n.slice(1) + '</option>'); });
+    for(var k = y - 13; k >= y - 100; k--) a.insertAdjacentHTML('beforeend', '<option value="' + k + '">' + k + '</option>');
+  })();
+  function verAbrir(url){ destPago = url; ver.classList.add('on'); document.body.style.overflow = 'hidden'; setTimeout(function(){ $('#vNombre').focus(); }, 350); }
+  function verCerrar(){ ver.classList.remove('on'); document.body.style.overflow = ''; }
+  $('#verX').addEventListener('click', verCerrar);
+  ver.addEventListener('click', function(ev){ if(ev.target === ver) verCerrar(); });
+  document.addEventListener('keydown', function(ev){ if(ev.key === 'Escape') verCerrar(); });
+  $$('.js-buy').forEach(function(b){
+    b.addEventListener('click', function(ev){
+      var h = b.getAttribute('href') || '';
+      if(h.indexOf('http') !== 0) return; // solo intercepta los que van al pago
+      ev.preventDefault(); verAbrir(h);
+    });
+  });
+  $('#verForm').addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var err = $('#vErr'), nm = $('#vNombre').value.trim(), em = $('#vEmail').value.trim();
+    var dd = +$('#vDia').value, mm = +$('#vMes').value, aa = +$('#vAno').value;
+    function mal(t){ err.textContent = t; err.style.display = 'block'; }
+    if(!nm) return mal('Escribe tu nombre y apellido.');
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) return mal('Revisa tu email.');
+    if(!dd || !mm || !aa) return mal('Elige tu fecha de nacimiento completa.');
+    var nac = new Date(aa, mm - 1, dd);
+    if(nac.getMonth() !== mm - 1) return mal('Esa fecha no existe. Revísala.');
+    var hoy = new Date(), edad = hoy.getFullYear() - aa - ((hoy.getMonth() < mm - 1 || (hoy.getMonth() === mm - 1 && hoy.getDate() < dd)) ? 1 : 0);
+    if(edad < 18) return mal('La Gen 02 es solo para mayores de 18 años.');
+    if(!$('#vMayor').checked) return mal('Marca la casilla para confirmar que tienes 18 años o más.');
+    err.style.display = 'none';
+    var btn = $('#vBtn'); btn.disabled = true; btn.querySelector('span').textContent = 'Llevándote al pago…';
+    var fecha = aa + '-' + ('0' + mm).slice(-2) + '-' + ('0' + dd).slice(-2);
+    var src = qp.get('utm_source') || qp.get('src') || '';
+    try {
+      fetch(CRM_URL, {method:'POST', mode:'no-cors', keepalive:true, body:JSON.stringify({nombre:nm, email:em, phone:'', goal:'Gen 02 · fue al pago · nacimiento ' + fecha + ' · ' + edad + ' años · +18 confirmado · ' + new Date().toISOString() + (src ? ' · src:' + src : '')})}).catch(function(){});
+    } catch(x){}
+    setTimeout(function(){ location.href = destPago; }, 700);
+  });
 
   // ---- Avísame → CRM de La Sala ----
   $('#avForm').addEventListener('submit', function(ev){
