@@ -779,7 +779,8 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
       .to('.hero h1 .ln>span', {y:0, duration:1, stagger:.12, ease:'power4.out'}, .25)
       .to('.hero h1 .tach i', {width:'104%', duration:.5, ease:'power2.inOut'}, 1)
       .from('.hero .lead, .hero .cta, .hero-meta', {opacity:0, y:22, duration:.7, stagger:.1, ease:'power3.out'}, .7);
-    gsap.to('.orbita', {y:-50, scale:.88, opacity:.4, ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}});
+    // valores de inicio explícitos: si no, el scrub toma los de la entrada (opacidad 0) y al volver a subir la órbita desaparece
+    gsap.fromTo('.orbita', {y:0, scale:1, opacity:1}, {y:-50, scale:.88, opacity:.4, ease:'none', immediateRender:false, scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}});
   }
 
   // ---- Barra de progreso + nav ----
