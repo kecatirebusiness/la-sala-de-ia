@@ -719,12 +719,24 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
     $('#navChip').innerHTML = '<span class="pulse"></span>Abierta · ' + quedan + ' sillas';
     $('#dockSub').textContent = 'Inscripción abierta · quedan ' + quedan;
   }
+  // los botones de arriba, del cierre y de la barra bajan a la inscripción; solo el de la tarjeta lleva al pago
   $$('.js-buy').forEach(function(b){
     var enOferta = !!b.closest('#inscribirme');
-    b.setAttribute('href', enOferta ? dest : (abierto && !lleno ? dest : '#inscribirme'));
+    b.setAttribute('href', enOferta ? dest : '#inscribirme');
     var l = $('.js-buy-l', b); if(l && enOferta) l.textContent = txt;
   });
-  var dk = $('.js-dock'); dk.setAttribute('href', abierto && !lleno ? dest : '#inscribirme'); dk.textContent = abierto && !lleno ? dockTxt : 'Quiero mi silla';
+  var dk = $('.js-dock'); dk.setAttribute('href', '#inscribirme'); dk.textContent = 'Quiero mi silla';
+  // scroll suave hasta la tarjeta del pase (o al formulario), dejando espacio para la barra de arriba
+  $$('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(ev){
+      var id = a.getAttribute('href'); if(id.length < 2) return;
+      var t = $(id); if(!t) return;
+      ev.preventDefault();
+      var foco = id === '#inscribirme' ? ($('.pase-esc') || t) : t;
+      var y = foco.getBoundingClientRect().top + scrollY - 76;
+      window.scrollTo({top: y, behavior: reduce ? 'auto' : 'smooth'});
+    });
+  });
 
   // ---- Cuenta regresiva ----
   function pad(n){ return (n < 10 ? '0' : '') + n; }
