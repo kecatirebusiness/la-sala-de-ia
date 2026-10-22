@@ -655,7 +655,7 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
     <span class="eyebrow">Preguntas</span>
     <h2 class="h2 rv">Lo que <em class="s">todos</em> preguntan.</h2>
     <div class="faq">
-      <details><summary>¿Cuándo abre y cuánto cuesta?<i></i></summary><div class="ans">La inscripción abre el <b>lunes 16 de noviembre</b>. Son <b>150 sillas</b> a <b>$375, pago único</b>, y se cierra cuando se llenan.</div></details>
+      <details><summary>¿Cuánto cuesta y cuántas sillas hay?<i></i></summary><div class="ans">Son <b>150 sillas</b> a <b>$375, pago único</b>. La inscripción se cierra cuando se llenan.</div></details>
       <details><summary>¿Cómo recibo el acceso?<i></i></summary><div class="ans">Apenas pagas, te llega a tu correo la invitación a la academia en <b>Circle</b>. Creas tu contraseña y entras desde el navegador o la app.</div></details>
       <details><summary>¿Necesito saber de IA o de programación?<i></i></summary><div class="ans">No. Si ya abriste ChatGPT o Claude alguna vez, estás listo. Claude Code y Codex programan por ti; tú les dices qué quieres.</div></details>
       <details><summary>¿Qué herramientas tengo que pagar?<i></i></summary><div class="ans">Te enseñamos a sacarle el máximo a lo que ya pagas y a usar las versiones gratis cuando alcanzan. La idea es terminar pagando <b>menos</b> herramientas, no más.</div></details>
@@ -691,13 +691,14 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
   // ===== Configuración de la inscripción =====
   var CFG = {
     ABRE: new Date('2026-11-16T00:00:00-05:00').getTime(), // 16 nov, 12:00 a.m. hora de Miami
+    VENTA_ABIERTA: true,   // true = la página vende ya (botones al checkout); false = espera la fecha con "Avísame"
     TOTAL: 150,
     VENDIDAS: 0,   // sillas vendidas: actualizar aquí
     CHECKOUT: 'https://la-sala-de-ia-3829bf.circle.so/checkout/gen-02'   // checkout de Circle de la Gen 02 (cobra al Stripe conectado a Circle)
   };
   var CRM_URL = 'https://script.google.com/macros/s/AKfycbx4lMpMjSD4aGnMNOdu3DwnnV8XITHB6t2smF7vh5KYa-OdztslQIxufsgmWrbaI32J/exec';
   var qp = new URLSearchParams(location.search);
-  var abierto = Date.now() >= CFG.ABRE || qp.get('open') === '1';
+  var abierto = CFG.VENTA_ABIERTA || Date.now() >= CFG.ABRE || qp.get('open') === '1';
   var quedan = Math.max(0, CFG.TOTAL - CFG.VENDIDAS), lleno = quedan <= 0;
   var $ = function(s, r){ return (r || document).querySelector(s); }, $$ = function(s, r){ return [].slice.call((r || document).querySelectorAll(s)); };
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
