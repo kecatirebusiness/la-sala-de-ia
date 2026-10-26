@@ -53,7 +53,7 @@ section{position:relative}
 /* iconos de los reyes */
 .ico{display:grid;place-items:center;border-radius:28%;overflow:hidden;flex-shrink:0}
 .ico img{width:100%;height:100%;object-fit:cover}
-.ico.cl{background:var(--claude)}.ico.cl svg{width:60%;height:60%}
+.ico.cl{background:var(--claude)}.ico.cl img{width:66%;height:66%;object-fit:contain}
 .ico.gp{background:#fff}
 
 /* ---------- Intro ---------- */
@@ -61,7 +61,8 @@ section{position:relative}
 #intro.out{clip-path:inset(0 0 100% 0)}
 .in-gen{font-weight:700;font-size:clamp(64px,22vw,130px);letter-spacing:-.06em;line-height:.9;display:flex;overflow:hidden}
 .in-gen span{display:inline-block;transform:translateY(110%);animation:sube .7s cubic-bezier(.2,1,.3,1) forwards}
-.in-gen span.n{font-family:var(--serif);font-style:italic;color:var(--em)}
+.in-gen span.n{font-family:var(--serif);font-style:italic;color:var(--em);padding-right:.14em}
+.in-gen{padding:0 .06em}
 @keyframes sube{to{transform:none}}
 .in-cnt{font-family:var(--mono);font-size:12px;letter-spacing:.24em;color:var(--muted);text-transform:uppercase}
 .in-cnt b{color:var(--em);font-size:14px}
@@ -99,7 +100,7 @@ section{position:relative}
 .sat .ico{width:58px;height:58px;box-shadow:0 12px 30px -10px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.14)}
 .sat .cr{position:absolute;left:50%;top:-20px;margin-left:-10px;font-size:19px;line-height:1}
 .nucleo{position:absolute;left:50%;top:50%;width:104px;height:104px;margin:-52px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#3DFF9A,#00D26A 55%,#00A856);box-shadow:0 0 60px rgba(0,210,106,.6),inset 0 -8px 20px rgba(0,0,0,.25)}
-.nucleo svg{width:64%;height:64%;position:relative}
+.nucleo svg{width:100%;height:100%;position:relative}
 .nucleo::before,.nucleo::after{content:"";position:absolute;inset:-12px;border-radius:50%;border:2px solid rgba(0,210,106,.5);animation:onda 2.4s ease-out infinite}
 .nucleo::after{animation-delay:1.2s}
 @keyframes onda{from{transform:scale(.8);opacity:1}to{transform:scale(1.8);opacity:0}}
@@ -290,7 +291,7 @@ section{position:relative}
 .carta q{display:block;font-size:16.5px;line-height:1.45;margin-top:12px;quotes:none;font-weight:500;letter-spacing:-.01em}
 .carta .by{position:absolute;left:20px;right:20px;bottom:18px;display:flex;align-items:center;gap:10px}
 .carta .av{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;color:#03130b;background:var(--em)}
-.carta .by b{display:block;font-size:14px}.carta .by span{display:block;font-size:12px;color:var(--muted)}
+.carta .by b{display:block;font-size:14px}.carta .by span{display:block;font-size:12px;color:var(--muted)}.carta .by span.av{display:grid;place-items:center;font-size:12px;color:#03130b;line-height:1}
 .mazo-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:10px}
 .mazo-nav button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;color:var(--em);font-size:17px}
 .mazo-nav span{font-family:var(--mono);font-size:12px;color:var(--muted);min-width:44px;text-align:center}
@@ -413,6 +414,87 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
 .ver .cta{margin-top:16px}
 .ver .safe{margin-top:10px}
 
+.wall{margin:22px calc(var(--pad)*-1) 0;display:flex;flex-direction:column;gap:10px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.wall-row{display:flex;align-items:flex-start;gap:10px;width:max-content;animation:wallmq 40s linear infinite}
+.wall-row.rev{animation-direction:reverse;animation-duration:46s}
+@keyframes wallmq{to{transform:translateX(-50%)}}
+.bub{display:flex;gap:10px;align-items:flex-start;width:290px;padding:12px 14px;border-radius:16px;background:#14211C;border:1px solid var(--line)}
+.bub .av{flex-shrink:0;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;color:#03130b}
+.bub b{display:block;font-size:12.5px;color:#7DB8F0;font-weight:600}
+.bub span{display:block;font-size:14px;line-height:1.4;color:var(--text);margin-top:2px}.bub span.av{display:grid;place-items:center;font-size:12px;line-height:1;margin-top:0}
+.wall-cap{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:13px;color:var(--muted)}
+.wall-cap .pulse{flex-shrink:0}
+.tools{padding:80px 0 0}
+.marcas{margin-top:24px;display:flex;flex-wrap:wrap;gap:8px}
+.marca{display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 15px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.025);font-size:15px;font-weight:600;letter-spacing:-.01em}
+.marca>img{height:21px;width:auto;display:block}.marca>img.alta{height:28px}
+.marca .ico{width:24px;height:24px;border-radius:7px}
+.marca small{font-size:12px;color:var(--muted);font-weight:500;margin-left:-2px}
+.conecta{margin-top:18px;border-radius:22px;padding:16px;border:1px solid var(--line);background:linear-gradient(160deg,rgba(0,210,106,.06),rgba(255,255,255,.015))}
+.conecta-k{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--em)}
+.tiles{margin-top:12px;display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.tile{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:7px;padding:11px 4px 9px;border-radius:12px;border:1px solid var(--line);background:rgba(5,11,8,.55);min-width:0;text-align:center}
+.tile .cn-i{width:24px;height:24px;flex-shrink:0;display:grid;place-items:center}.tile .cn-i svg{width:22px;height:22px;display:block}
+.tile .cn-l{display:block;width:100%;text-align:center;font-size:10.5px;line-height:1.2;color:var(--text);text-wrap:balance}
+.conecta-n{margin-top:12px;font-size:12.5px;line-height:1.45;color:var(--muted)}
+@media (min-width:600px){.tiles{grid-template-columns:repeat(6,1fr)}}
+.diag-s{padding:80px 0 0}
+.diag{margin-top:24px;display:flex;flex-direction:column;gap:10px}
+.dg{position:relative;display:block;padding:16px 16px 16px 52px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.02);cursor:pointer;transition:border-color .3s,background .3s;-webkit-user-select:none;user-select:none}
+.dg input{position:absolute;opacity:0;width:0;height:0}
+.dg .dg-chk{position:absolute;left:16px;top:18px;width:22px;height:22px;border-radius:7px;border:1.5px solid var(--line2);transition:background .25s,border-color .25s}
+.dg .dg-chk::after{content:"";position:absolute;left:7px;top:3px;width:5px;height:10px;border:solid #03130b;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) scale(0);transition:transform .25s cubic-bezier(.3,1.4,.5,1)}
+.dg .dg-n{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--dim)}
+.dg h3{font-size:17px;letter-spacing:-.02em;line-height:1.2;margin-top:4px;text-wrap:balance}
+.dg p{font-size:13.5px;line-height:1.45;color:var(--muted);margin-top:6px;text-wrap:pretty}
+.dg:has(input:checked){border-color:rgba(0,210,106,.5);background:linear-gradient(160deg,rgba(0,210,106,.1),rgba(255,255,255,.02))}
+.dg:has(input:checked) .dg-chk{background:var(--em);border-color:var(--em)}
+.dg:has(input:checked) .dg-chk::after{transform:rotate(45deg) scale(1)}
+.dg:has(input:checked) .dg-n{color:var(--em)}
+.diag-r{margin-top:14px;padding:14px 16px;border-radius:16px;border:1px dashed var(--line2);font-size:14.5px;line-height:1.45;color:var(--muted);text-align:center;transition:border-color .3s,color .3s}
+.diag-r.on{border-style:solid;border-color:rgba(0,210,106,.5);color:var(--text)}
+.diag-r b{color:var(--em)}
+.ba-s{padding:80px 0 0}
+.ba{margin-top:24px;display:grid;gap:10px}
+.ba-box{border-radius:20px;padding:18px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.ba-box.despues{border-color:rgba(0,210,106,.45);background:linear-gradient(160deg,rgba(0,210,106,.1),rgba(255,255,255,.015))}
+.ba-k{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.ba-box.despues .ba-k{color:var(--em)}
+.ba-box ul{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:9px}
+.ba-box li{position:relative;padding-left:22px;font-size:14.5px;line-height:1.4;color:var(--muted)}
+.ba-box li::before{content:"";position:absolute;left:0;top:9px;width:10px;height:2px;background:var(--dim);border-radius:2px}
+.ba-box.despues li{color:var(--text)}
+.ba-box.despues li::before{top:4px;width:12px;height:12px;background:none;border-radius:0;border:solid var(--em);border-width:0 2px 2px 0;transform:rotate(45deg) scale(.7)}
+@media (min-width:600px){.ba{grid-template-columns:1fr 1fr}}
+.real-s{padding:80px 0 0}
+.real-vid{position:relative;margin-top:24px;border-radius:22px;overflow:hidden;border:1px solid var(--line2);background:#000;aspect-ratio:1662/1080;box-shadow:0 24px 50px -24px rgba(0,0,0,.9)}
+.real-vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.grad{padding:80px 0 0}
+.grad-top{margin-top:26px;display:grid;grid-template-columns:140px 1fr;gap:18px;align-items:stretch}
+.grad-vid{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--line2);background:#000;aspect-ratio:9/16;box-shadow:0 24px 50px -24px rgba(0,0,0,.9)}
+.grad-vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.grad-cap{position:absolute;left:10px;right:10px;bottom:10px;display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(5,11,8,.62);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:6px 8px;border-radius:9px;white-space:nowrap;overflow:hidden}
+.grad-cap i{width:6px;height:6px;border-radius:50%;background:var(--em);box-shadow:0 0 8px var(--em);flex-shrink:0}
+.podio{display:flex;flex-direction:column;gap:8px;min-width:0}
+.podio-h{border-radius:18px;padding:14px;border:1px solid rgba(242,196,107,.38);background:linear-gradient(160deg,rgba(242,196,107,.14),rgba(255,255,255,.015))}
+.podio-h b{display:block;font-size:38px;font-weight:700;letter-spacing:-.05em;line-height:1;color:var(--gold)}
+.podio-h span{display:block;font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.3}
+.pr{flex:1;display:flex;align-items:center;gap:7px;border-radius:16px;padding:8px 9px;border:1px solid var(--line);background:rgba(255,255,255,.02);min-width:0}
+.pr .pr-k{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--em);min-width:18px}
+.pr>div{flex:1;min-width:0}
+.pr>div b{display:block;font-size:18px;letter-spacing:-.03em;line-height:1}
+.pr>div span{display:block;font-size:11.5px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pr img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,210,106,.5);flex-shrink:0}
+.pr.p1{border-color:rgba(242,196,107,.45)}.pr.p1>div b{color:var(--gold)}
+.fotos{margin-top:12px;display:grid;grid-auto-flow:column;grid-auto-columns:74%;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 var(--pad) 6px;margin-left:calc(var(--pad)*-1);margin-right:calc(var(--pad)*-1);scrollbar-width:none}
+.fotos::-webkit-scrollbar{display:none}
+.fotos figure{scroll-snap-align:start;position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);aspect-ratio:3/2;background:var(--card)}
+.fotos img{width:100%;height:100%;object-fit:cover;display:block}
+.fotos figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 12px 10px;font-size:12.5px;color:#fff;background:linear-gradient(180deg,transparent,rgba(5,11,8,.88))}
+.fotos figcaption b{color:var(--gold);margin-right:6px}
+.grad-note{margin-top:16px;font-size:15px;line-height:1.5;color:var(--muted);padding:14px 16px;border-radius:16px;border:1px solid rgba(0,210,106,.3);background:rgba(0,210,106,.06);text-wrap:pretty}
+.grad-note b{color:var(--text)}
+@media (min-width:600px){.fotos{grid-auto-columns:47%}}
 .rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
 .rv.in{opacity:1;transform:none}
 @media (min-width:900px){
@@ -450,7 +532,7 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
 </div>
 
 <nav class="nav" id="nav">
-  <a class="lock" href="#top"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="15.4" cy="17" r="1.9" fill="#04120b"/><circle cx="24.6" cy="17" r="1.9" fill="#04120b"/><line x1="16.4" y1="23.4" x2="23.6" y2="23.4" stroke="#04120b" stroke-width="2.1" stroke-linecap="round"/></svg><span>La Sala <em>de IA</em></span></a>
+  <a class="lock" href="#top"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="14.9" cy="17.5" r="1.85" fill="#04120b"/><circle cx="25.1" cy="17.5" r="1.85" fill="#04120b"/><rect x="15.3" y="22.9" width="9.4" height="1.7" fill="#04120b"/></svg><span>La Sala <em>de IA</em></span></a>
   <span class="chip" id="navChip"><span class="pulse"></span>Gen 02 · abre el 16 nov</span>
 </nav>
 
@@ -464,12 +546,12 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
       <div class="anillo a3"></div><div class="anillo"></div><div class="anillo a2"></div>
       <div class="rayos"><span class="rayo" style="--a:-90deg;--d:0s"></span><span class="rayo" style="--a:30deg;--d:1s"></span><span class="rayo" style="--a:150deg;--d:2s"></span></div>
       <div class="rueda">
-        <div class="sat" style="--a:0deg"><span><span class="cr">👑</span><span class="ico cl"><svg viewBox="0 0 24 24"><path fill="#fff" d="M12 1.5l1.7 6.1 5.4-3.4-3.4 5.4 6.1 1.7-6.1 1.7 3.4 5.4-5.4-3.4L12 21.1l-1.7-6.1-5.4 3.4 3.4-5.4-6.1-1.7 6.1-1.7-3.4-5.4 5.4 3.4z"/></svg></span></span></div>
-        <div class="sat" style="--a:120deg"><span><span class="cr">👑</span><span class="ico gp"><img src="https://lasaladeia.com/gen2/chatgpt-app.png" alt=""></span></span></div>
-        <div class="sat" style="--a:240deg"><span><span class="cr">👑</span><span class="ico"><img src="https://lasaladeia.com/gen2/muse-app.png" alt=""></span></span></div>
+        <div class="sat" style="--a:0deg"><span><span class="ico cl"><img src="https://lasaladeia.com/gen2/claude-icon.png" alt=""></span></span></div>
+        <div class="sat" style="--a:120deg"><span><span class="ico gp"><img src="https://lasaladeia.com/gen2/chatgpt-app.png" alt=""></span></span></div>
+        <div class="sat" style="--a:240deg"><span><span class="ico"><img src="https://lasaladeia.com/gen2/muse-app.png" alt=""></span></span></div>
       </div>
-      <div class="nucleo"><svg viewBox="0 0 40 40"><g class="ojos"><circle cx="15.4" cy="17" r="2.2" fill="#04120b"/><circle cx="24.6" cy="17" r="2.2" fill="#04120b"/></g><line x1="16" y1="24" x2="24" y2="24" stroke="#04120b" stroke-width="2.4" stroke-linecap="round"/></svg></div>
-      <div class="noti n1"><span class="ico cl"><svg viewBox="0 0 24 24"><path fill="#fff" d="M12 1.5l1.7 6.1 5.4-3.4-3.4 5.4 6.1 1.7-6.1 1.7 3.4 5.4-5.4-3.4L12 21.1l-1.7-6.1-5.4 3.4 3.4-5.4-6.1-1.7 6.1-1.7-3.4-5.4 5.4 3.4z"/></svg></span><span>Tu web está publicada<small>Claude · ahora</small></span></div>
+      <div class="nucleo"><svg viewBox="0 0 40 40"><g class="ojos"><circle cx="14.3" cy="17.2" r="2.05" fill="#04120b"/><circle cx="25.7" cy="17.2" r="2.05" fill="#04120b"/></g><rect x="14.8" y="23.2" width="10.4" height="1.9" fill="#04120b"/></svg></div>
+      <div class="noti n1"><span class="ico cl"><img src="https://lasaladeia.com/gen2/claude-icon.png" alt=""></span><span>Tu web está publicada<small>Claude · ahora</small></span></div>
       <div class="noti n2"><span class="ico gp"><img src="https://lasaladeia.com/gen2/chatgpt-app.png" alt=""></span><span>4 fotos listas<small>ChatGPT · 38 s</small></span></div>
       <div class="noti n3"><span class="ico"><img src="https://lasaladeia.com/gen2/muse-app.png" alt=""></span><span>Pagué la luz ⚡<small>Muse · 7:00 am</small></span></div>
     </div>
@@ -489,12 +571,65 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
 <!-- MARQUEE -->
 <div class="mq" aria-hidden="true">
   <div class="mq-row"><span>Claude</span><span class="st">✦</span><span>ChatGPT</span><span class="st">✦</span><span><em class="s">Muse</em></span><span class="st">✦</span><span>Claude Code</span><span class="st">✦</span><span>Codex</span><span class="st">✦</span><span>Claude</span><span class="st">✦</span><span>ChatGPT</span><span class="st">✦</span><span><em class="s">Muse</em></span><span class="st">✦</span><span>Claude Code</span><span class="st">✦</span><span>Codex</span><span class="st">✦</span></div>
-  <div class="mq-row rev"><span>Tu negocio</span><span class="st">👑</span><span>trabajando solo</span><span class="st">👑</span><span>Tu negocio</span><span class="st">👑</span><span>trabajando solo</span><span class="st">👑</span><span>Tu negocio</span><span class="st">👑</span><span>trabajando solo</span><span class="st">👑</span><span>Tu negocio</span><span class="st">👑</span><span>trabajando solo</span><span class="st">👑</span></div>
+  <div class="mq-row rev"><span>Tu negocio</span><span class="st">✦</span><span>trabajando solo</span><span class="st">✦</span><span>Tu negocio</span><span class="st">✦</span><span>trabajando solo</span><span class="st">✦</span><span>Tu negocio</span><span class="st">✦</span><span>trabajando solo</span><span class="st">✦</span><span>Tu negocio</span><span class="st">✦</span><span>trabajando solo</span><span class="st">✦</span></div>
 </div>
 
 <!-- MANIFIESTO -->
 <section class="mani">
   <div class="wrap"><p id="mani">Cada semana que lo dejas para después, alguien en tu industria contesta más rápido, publica más y cobra antes que tú. No porque sepa más. Porque ya tiene a la IA trabajando para su negocio.</p></div>
+</section>
+
+<!-- DIAGNOSTICO -->
+<section class="diag-s" id="diagnostico">
+  <div class="wrap">
+    <span class="eyebrow">El diagnóstico</span>
+    <h2 class="h2 rv">Ya usas IA. Y aun así <em class="s">cargas con todo.</em></h2>
+    <p class="lead rv"><b>Marca con las que te identificas.</b></p>
+    <div class="diag" id="diag">
+      <label class="dg rv"><input type="checkbox"><span class="dg-chk"></span><span class="dg-n">01</span><h3>Cuarenta chats, cero memoria</h3><p>Cada conversación arranca de cero. Le vuelves a explicar tu negocio, tus precios, tu cliente. Lo que resolviste el martes, el jueves ya no existe.</p></label>
+      <label class="dg rv"><input type="checkbox"><span class="dg-chk"></span><span class="dg-n">02</span><h3>Tu negocio vive en tu cabeza</h3><p>Los procesos, los acuerdos, por qué cobras lo que cobras. Nada está escrito donde una IA pueda leerlo. Si tú paras, todo para.</p></label>
+      <label class="dg rv"><input type="checkbox"><span class="dg-chk"></span><span class="dg-n">03</span><h3>Herramientas que no se hablan</h3><p>ChatGPT sabe una cosa, Notion otra, el correo otra. Cada una tiene un pedazo. Nadie tiene la foto completa, y la foto completa es la que decide.</p></label>
+      <label class="dg rv"><input type="checkbox"><span class="dg-chk"></span><span class="dg-n">04</span><h3>Te aplaude en vez de corregirte</h3><p>Le presentas una idea floja y te felicita. Cotizas de menos y te dice «¡excelente!». Un socio que nunca te contradice es un espejo, no un socio.</p></label>
+      <label class="dg rv"><input type="checkbox"><span class="dg-chk"></span><span class="dg-n">05</span><h3>Lo que se enfría no aparece en ningún reporte</h3><p>La propuesta que ibas a mandar. El seguimiento que se quedó. El cobro que nadie persiguió. No se ve en el día, se siente a fin de mes.</p></label>
+      <label class="dg rv"><input type="checkbox"><span class="dg-chk"></span><span class="dg-n">06</span><h3>Cada mañana empiezas desde cero</h3><p>Nadie te barre las bandejas, nadie te dice qué vence hoy ni quién lleva tres días esperando por ti. Lo descubres cuando ya explotó.</p></label>
+    </div>
+    <div class="diag-r rv" id="diagR">Con una basta.</div>
+  </div>
+</section>
+
+<!-- ANTES / DESPUES -->
+<section class="ba-s">
+  <div class="wrap">
+    <span class="eyebrow">El cambio</span>
+    <h2 class="h2 rv">De explicarle todo cada vez <em class="s">a que ya lo sepa.</em></h2>
+    <div class="ba rv">
+      <div class="ba-box antes"><div class="ba-k">Hoy, con chats sueltos</div><ul>
+        <li>Le cuentas tu negocio otra vez en cada conversación</li>
+        <li>Te dice que sí a todo lo que le propones</li>
+        <li>Tus precios, tu voz y tus clientes viven en tu cabeza</li>
+        <li>Cada mañana arrancas sin saber qué vence</li>
+        <li>Lo que se enfría se entera a fin de mes</li></ul></div>
+      <div class="ba-box despues"><div class="ba-k">Con tu segundo cerebro</div><ul>
+        <li>Abre el archivo exacto: tus precios, tu cliente, tu voz</li>
+        <li>Te contradice cuando cotizas de menos</li>
+        <li>Recuerda cada decisión y por qué la tomaron</li>
+        <li>Amanece con el brief del día hecho</li>
+        <li>Te avisa lo que se te queda antes de que explote</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- SEGUNDO CEREBRO REAL -->
+<section class="real-s">
+  <div class="wrap">
+    <span class="eyebrow">Un segundo cerebro real</span>
+    <h2 class="h2 rv">Así se ve <em class="s">el de Elsa.</em></h2>
+    <p class="lead rv">Este es el cerebro de Maia, el agente cofundador de Elsa: cada nota es un cliente, un proyecto o una decisión, y lo escribe ella sola mientras trabaja. <b>En la Gen 02 construyes el tuyo.</b></p>
+    <div class="real-vid rv">
+      <video id="realVid" muted loop playsinline preload="none" poster="https://lasaladeia.com/gen2/obsidian/poster.jpg"><source src="https://lasaladeia.com/gen2/obsidian/obsidian-second-brain.mp4" type="video/mp4"></video>
+      <span class="grad-cap"><i></i>El cerebro de Maia · Obsidian</span>
+    </div>
+  </div>
 </section>
 
 <!-- LOS TRES REYES MAGOS: el celular -->
@@ -523,7 +658,7 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
         </div>
         <div class="esc e1">
           <div class="sb"><span>10:00</span><span>●●● 5G</span></div>
-          <div class="app-h"><span class="ico cl"><svg viewBox="0 0 24 24"><path fill="#fff" d="M12 1.5l1.7 6.1 5.4-3.4-3.4 5.4 6.1 1.7-6.1 1.7 3.4 5.4-5.4-3.4L12 21.1l-1.7-6.1-5.4 3.4 3.4-5.4-6.1-1.7 6.1-1.7-3.4-5.4 5.4 3.4z"/></svg></span>Claude</div>
+          <div class="app-h"><span class="ico cl"><img src="https://lasaladeia.com/gen2/claude-icon.png" alt=""></span>Claude</div>
           <div class="burbuja">Hazme mi página web con formulario y un CRM</div>
           <div class="navegador"><div class="nav-b"><i></i><i></i><i></i></div>
             <div class="web"><div class="blq b-nav"></div><div class="blq b-hero"><i></i><i></i></div><div class="blq b-btn"></div><div class="blq b-cards"><span></span><span></span><span></span></div><div class="blq b-crm"><div><i></i>Lead nuevo · Ana R.</div><div><i></i>Lead nuevo · Luis P.</div></div></div>
@@ -544,14 +679,14 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
         </div>
         <div class="esc e3">
           <div class="sb"><span>18:00</span><span>●●● 5G</span></div>
-          <div class="tres"><span class="ico"><img src="https://lasaladeia.com/gen2/muse-app.png" alt=""></span><span class="ico cl"><svg viewBox="0 0 24 24"><path fill="#fff" d="M12 1.5l1.7 6.1 5.4-3.4-3.4 5.4 6.1 1.7-6.1 1.7 3.4 5.4-5.4-3.4L12 21.1l-1.7-6.1-5.4 3.4 3.4-5.4-6.1-1.7 6.1-1.7-3.4-5.4 5.4 3.4z"/></svg></span><span class="ico gp"><img src="https://lasaladeia.com/gen2/chatgpt-app.png" alt=""></span></div>
+          <div class="tres"><span class="ico"><img src="https://lasaladeia.com/gen2/muse-app.png" alt=""></span><span class="ico cl"><img src="https://lasaladeia.com/gen2/claude-icon.png" alt=""></span><span class="ico gp"><img src="https://lasaladeia.com/gen2/chatgpt-app.png" alt=""></span></div>
           <b>Tu equipo</b><span>trabajó todo el día por ti</span>
         </div>
       </div>
     </div>
     <div class="cap">
       <div class="cap-in on"><span class="cap-k"><span class="ico"><img src="https://lasaladeia.com/gen2/muse-app.png" alt=""></span>7:00 AM · Muse</span><h3>El asistente personal</h3><p>Te recuerda todo, paga tus facturas, te hace el mercado e investiga por ti.</p></div>
-      <div class="cap-in"><span class="cap-k"><span class="ico cl"><svg viewBox="0 0 24 24"><path fill="#fff" d="M12 1.5l1.7 6.1 5.4-3.4-3.4 5.4 6.1 1.7-6.1 1.7 3.4 5.4-5.4-3.4L12 21.1l-1.7-6.1-5.4 3.4 3.4-5.4-6.1-1.7 6.1-1.7-3.4-5.4 5.4 3.4z"/></svg></span>10:00 AM · Claude</span><h3>El constructor</h3><p>Tu web en HTML, tu CRM sin pagar otra herramienta, automatizaciones y videos. Con Claude Code.</p></div>
+      <div class="cap-in"><span class="cap-k"><span class="ico cl"><img src="https://lasaladeia.com/gen2/claude-icon.png" alt=""></span>10:00 AM · Claude</span><h3>El constructor</h3><p>Tu web en HTML, tu CRM sin pagar otra herramienta, automatizaciones y videos. Con Claude Code.</p></div>
       <div class="cap-in"><span class="cap-k"><span class="ico gp"><img src="https://lasaladeia.com/gen2/chatgpt-app.png" alt=""></span>3:00 PM · ChatGPT</span><h3>El creativo</h3><p>Imágenes en segundos sin comprar créditos, y un cerebro para pensar contigo. Con Codex.</p></div>
       <div class="cap-in"><span class="cap-k">6:00 PM · los tres</span><h3>Solos son buenos. <em class="s">Juntos, tu equipo.</em></h3><p>Esto es lo que montas en la Gen 02, paso a paso y en vivo.</p></div>
     </div>
@@ -620,6 +755,44 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
   </div>
 </section>
 
+<!-- HERRAMIENTAS -->
+<section class="tools">
+  <div class="wrap">
+    <span class="eyebrow">Las herramientas</span>
+    <h2 class="h2 rv">Todo lo que tocas <em class="s">en 6 semanas.</em></h2>
+    <p class="lead rv">Los tres reyes magos en el centro y, alrededor, las plataformas que los extienden. Las pruebas en vivo y te quedas con las que <b>usa tu negocio</b>.</p>
+    <div class="marcas rv">
+      <span class="marca"><img src="https://lasaladeia.com/gen2/claude.png" alt="Claude"></span>
+      <span class="marca"><img class="alta" src="https://lasaladeia.com/gen2/claude-code.png" alt="Claude Code"></span>
+      <span class="marca"><img class="alta" src="https://lasaladeia.com/gen2/cowork.png" alt="Claude Cowork"></span>
+      <span class="marca"><span class="ico gp"><img src="https://lasaladeia.com/gen2/chatgpt-app.png" alt=""></span>ChatGPT<small>+ Codex</small></span>
+      <span class="marca"><span class="ico"><img src="https://lasaladeia.com/gen2/muse-app.png" alt=""></span>Muse</span>
+      <span class="marca"><img src="https://lasaladeia.com/gen2/higgsfield.png" alt="Higgsfield"></span>
+      <span class="marca"><img src="https://lasaladeia.com/gen2/heygen.png" alt="HeyGen"></span>
+      <span class="marca"><img class="alta" src="https://lasaladeia.com/gen2/elevenlabs.png" alt="ElevenLabs"></span>
+      <span class="marca"><img src="https://lasaladeia.com/gen2/manychat.png" alt="ManyChat"></span>
+    </div>
+    <div class="conecta rv">
+      <div class="conecta-k">Lo que tu agente conecta</div>
+      <div class="tiles">
+        <div class="tile"><span class="cn-i"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg></span><span class="cn-l">Gmail</span></div>
+        <div class="tile"><span class="cn-i"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="3" fill="#0078D4"/><path d="M6 9l6 4.5L18 9" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><rect x="4.5" y="6.5" width="8" height="11" rx="2" fill="#fff" opacity=".18"/></svg></span><span class="cn-l">Outlook</span></div>
+        <div class="tile"><span class="cn-i"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M18.316 5.684H24v12.632h-5.684V5.684zM5.684 24h12.632v-5.684H5.684V24zM18.316 5.684V0H1.895A1.894 1.894 0 0 0 0 1.895v16.421h5.684V5.684h12.632zm-7.207 6.25v-.065c.272-.144.5-.349.687-.617s.279-.595.279-.982c0-.379-.099-.72-.3-1.025a2.05 2.05 0 0 0-.832-.714 2.703 2.703 0 0 0-1.197-.257c-.6 0-1.094.156-1.481.467-.386.311-.65.671-.793 1.078l1.085.452c.086-.249.224-.461.413-.633.189-.172.445-.257.767-.257.33 0 .602.088.816.264a.86.86 0 0 1 .322.703c0 .33-.12.589-.36.778-.24.19-.535.284-.886.284h-.567v1.085h.633c.407 0 .748.109 1.02.327.272.218.407.499.407.843 0 .336-.129.614-.387.832s-.565.327-.924.327c-.351 0-.651-.103-.897-.311-.248-.208-.422-.502-.521-.881l-1.096.452c.178.616.505 1.082.977 1.401.472.319.984.478 1.538.477a2.84 2.84 0 0 0 1.293-.291c.382-.193.684-.458.902-.794.218-.336.327-.72.327-1.149 0-.429-.115-.797-.344-1.105a2.067 2.067 0 0 0-.881-.689zm2.093-1.931l.602.913L15 10.045v5.744h1.187V8.446h-.827l-2.158 1.557zM22.105 0h-3.289v5.184H24V1.895A1.894 1.894 0 0 0 22.105 0zm-3.289 23.5l4.684-4.684h-4.684V23.5zM0 22.105C0 23.152.848 24 1.895 24h3.289v-5.184H0v3.289z"/></svg></span><span class="cn-l">Google Calendar</span></div>
+        <div class="tile"><span class="cn-i"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FBBC04" d="M12.01 1.485c-2.082 0-3.754.02-3.743.047.01.02 1.708 3.001 3.774 6.62l3.76 6.574h3.76c2.081 0 3.753-.02 3.742-.047-.005-.02-1.708-3.001-3.775-6.62l-3.76-6.574zm-4.76 1.73a789.828 789.861 0 0 0-3.63 6.319L0 15.868l1.89 3.298 1.885 3.297 3.62-6.335 3.618-6.33-1.88-3.287C8.1 4.704 7.255 3.22 7.25 3.214zm2.259 12.653-.203.348c-.114.198-.96 1.672-1.88 3.287a423.93 423.948 0 0 1-1.698 2.97c-.01.026 3.24.042 7.222.042h7.244l1.796-3.157c.992-1.734 1.85-3.23 1.906-3.323l.104-.167h-7.249z"/></svg></span><span class="cn-l">Google Drive</span></div>
+        <div class="tile"><span class="cn-i"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#F06A6A" d="M18.78 12.653c-2.882 0-5.22 2.336-5.22 5.22s2.338 5.22 5.22 5.22 5.22-2.34 5.22-5.22-2.336-5.22-5.22-5.22zm-13.56 0c-2.88 0-5.22 2.337-5.22 5.22s2.338 5.22 5.22 5.22 5.22-2.338 5.22-5.22-2.336-5.22-5.22-5.22zm12-6.525c0 2.883-2.337 5.22-5.22 5.22-2.882 0-5.22-2.337-5.22-5.22 0-2.88 2.338-5.22 5.22-5.22 2.883 0 5.22 2.34 5.22 5.22z"/></svg></span><span class="cn-l">Asana</span></div>
+        <div class="tile"><span class="cn-i"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#F8FBF9" d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.139c-.093-.514.28-.887.747-.933zM1.936 1.035l13.31-.98c1.634-.14 2.055-.047 3.082.7l4.249 2.986c.7.513.934.653.934 1.213v16.378c0 1.026-.373 1.634-1.68 1.726l-15.458.934c-.98.047-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.96V2.667c0-.839.374-1.54 1.447-1.632z"/></svg></span><span class="cn-l">Notion</span></div>
+        <div class="tile"><span class="cn-i"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M11.318 12.545H7.91v-1.909h3.41v1.91zM14.728 0v6h6l-6-6zm1.363 10.636h-3.41v1.91h3.41v-1.91zm0 3.273h-3.41v1.91h3.41v-1.91zM20.727 6.5v15.864c0 .904-.732 1.636-1.636 1.636H4.909a1.636 1.636 0 0 1-1.636-1.636V1.636C3.273.732 4.005 0 4.909 0h9.318v6.5h6.5zm-3.273 2.773H6.545v7.909h10.91v-7.91zm-6.136 4.636H7.91v1.91h3.41v-1.91z"/></svg></span><span class="cn-l">Google Sheets</span></div>
+        <div class="tile"><span class="cn-i"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#E01E5A" d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/></svg></span><span class="cn-l">Slack</span></div>
+        <div class="tile"><span class="cn-i"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#00C4CC" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zM6.962 7.68c.754 0 1.337.549 1.405 1.2.069.583-.171 1.097-.822 1.406-.343.171-.48.172-.549.069-.034-.069 0-.137.069-.206.617-.514.617-.926.548-1.508-.034-.378-.308-.618-.583-.618-1.2 0-2.914 2.674-2.674 4.629.103.754.549 1.646 1.509 1.646.308 0 .65-.103.96-.24.5-.264.799-.47 1.097-.8-.073-.885.704-2.046 1.851-2.046.515 0 .926.205.96.583.068.514-.377.582-.514.582s-.378-.034-.378-.17c-.034-.138.309-.07.275-.378-.035-.206-.24-.274-.446-.274-.72 0-1.131.994-1.029 1.611.035.275.172.549.447.549.205 0 .514-.31.617-.755.068-.308.343-.514.583-.514.102 0 .17.034.205.171v.138c-.034.137-.137.548-.102.651 0 .069.034.171.17.171.092 0 .436-.18.777-.459.117-.59.253-1.298.253-1.357.034-.24.137-.48.617-.48.103 0 .171.034.205.171v.138l-.136.617c.445-.583 1.097-.994 1.508-.994.172 0 .309.102.309.274 0 .103 0 .274-.069.446-.137.377-.309.96-.412 1.474 0 .137.035.274.207.274.171 0 .685-.206 1.096-.754l.007-.004c-.002-.068-.007-.134-.007-.202 0-.411.035-.754.104-.994.068-.274.411-.514.617-.514.103 0 .205.069.205.171 0 .035 0 .103-.034.137-.137.446-.24.857-.24 1.269 0 .24.034.582.102.788 0 .034.035.069.07.069.068 0 .548-.445.89-1.028-.308-.206-.48-.549-.48-.96 0-.72.446-1.097.858-1.097.343 0 .617.24.617.72 0 .308-.103.65-.274.96h.102a.77.77 0 0 0 .584-.24.293.293 0 0 1 .134-.117c.335-.425.83-.74 1.41-.74.48 0 .924.205.959.582.068.515-.378.618-.515.618l-.002-.002c-.138 0-.377-.035-.377-.172 0-.137.309-.068.274-.376-.034-.206-.24-.275-.446-.275-.686 0-1.13.891-1.028 1.611.034.275.171.583.445.583.206 0 .515-.308.652-.754.068-.274.343-.514.583-.514.103 0 .17.034.205.171 0 .069 0 .206-.137.652-.17.308-.171.48-.137.617.034.274.171.48.309.583.034.034.068.102.068.102 0 .069-.034.138-.137.138-.034 0-.068 0-.103-.035-.514-.205-.72-.548-.789-.891-.205.24-.445.377-.72.377-.445 0-.89-.411-.96-.926a1.609 1.609 0 0 1 .075-.649c-.203.13-.422.203-.623.203h-.17c-.447.652-.927 1.098-1.27 1.303a.896.896 0 0 1-.377.104c-.068 0-.171-.035-.205-.104-.095-.152-.156-.392-.193-.667-.481.527-1.145.805-1.453.805-.343 0-.548-.206-.582-.55v-.376c.102-.754.377-1.2.377-1.337a.074.074 0 0 0-.069-.07c-.24 0-1.028.824-1.166 1.373l-.103.445c-.068.309-.377.515-.582.515-.103 0-.172-.035-.206-.172v-.137l.046-.233c-.435.31-.87.508-1.075.508-.308 0-.48-.172-.514-.412-.206.274-.445.412-.754.412-.352 0-.696-.24-.862-.593-.244.275-.523.553-.852.764-.48.309-1.028.549-1.68.549-.582 0-1.097-.309-1.371-.583-.412-.377-.651-.96-.686-1.509-.205-1.68.823-3.84 2.4-4.8.378-.205.755-.343 1.132-.343zm9.77 3.291c-.104 0-.172.172-.172.343 0 .274.137.583.309.755a1.74 1.74 0 0 0 .102-.583c0-.343-.137-.515-.24-.515z"/></svg></span><span class="cn-l">Canva</span></div>
+        <div class="tile"><span class="cn-i"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FF0069" d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></span><span class="cn-l">Instagram</span></div>
+        <div class="tile"><span class="cn-i"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#0B5CFF" d="M5.033 14.649H.743a.74.74 0 0 1-.686-.458.74.74 0 0 1 .16-.808L3.19 10.41H1.06A1.06 1.06 0 0 1 0 9.35h3.957c.301 0 .57.18.686.458a.74.74 0 0 1-.161.808L1.51 13.59h2.464c.585 0 1.06.475 1.06 1.06zM24 11.338c0-1.14-.927-2.066-2.066-2.066-.61 0-1.158.265-1.537.686a2.061 2.061 0 0 0-1.536-.686c-1.14 0-2.066.926-2.066 2.066v3.311a1.06 1.06 0 0 0 1.06-1.06v-2.251a1.004 1.004 0 0 1 2.013 0v2.251c0 .586.474 1.06 1.06 1.06v-3.311a1.004 1.004 0 0 1 2.012 0v2.251c0 .586.475 1.06 1.06 1.06zM16.265 12a2.728 2.728 0 1 1-5.457 0 2.728 2.728 0 0 1 5.457 0zm-1.06 0a1.669 1.669 0 1 0-3.338 0 1.669 1.669 0 0 0 3.338 0zm-4.82 0a2.728 2.728 0 1 1-5.458 0 2.728 2.728 0 0 1 5.457 0zm-1.06 0a1.669 1.669 0 1 0-3.338 0 1.669 1.669 0 0 0 3.338 0z"/></svg></span><span class="cn-l">Zoom</span></div>
+        <div class="tile"><span class="cn-i"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#006BFF" d="M19.655 14.262c.281 0 .557.023.828.064 0 .005-.005.01-.005.014-.105.267-.234.534-.381.786l-1.219 2.106c-1.112 1.936-3.177 3.127-5.411 3.127h-2.432c-2.23 0-4.294-1.191-5.412-3.127l-1.218-2.106a6.251 6.251 0 0 1 0-6.252l1.218-2.106C6.736 4.832 8.8 3.641 11.035 3.641h2.432c2.23 0 4.294 1.191 5.411 3.127l1.219 2.106c.147.252.271.519.381.786 0 .004.005.009.005.014-.267.041-.543.064-.828.064-1.816 0-2.501-.607-3.291-1.306-.764-.676-1.711-1.517-3.44-1.517h-1.029c-1.251 0-2.387.455-3.2 1.278-.796.805-1.233 1.904-1.233 3.099v1.411c0 1.196.437 2.295 1.233 3.099.813.823 1.949 1.278 3.2 1.278h1.034c1.729 0 2.676-.841 3.439-1.517.791-.703 1.471-1.306 3.287-1.301Zm.005-3.237c.399 0 .794-.036 1.179-.11-.002-.004-.002-.01-.002-.014-.073-.414-.193-.823-.349-1.218.731-.12 1.407-.396 1.986-.819 0-.004-.005-.013-.005-.018-.331-1.085-.832-2.101-1.489-3.03-.649-.915-1.435-1.719-2.331-2.395-1.867-1.398-4.088-2.138-6.428-2.138-1.448 0-2.855.28-4.175.841-1.273.543-2.423 1.315-3.407 2.299S2.878 6.552 2.341 7.83c-.557 1.324-.842 2.726-.842 4.175 0 1.448.281 2.855.842 4.174.542 1.274 1.314 2.423 2.298 3.407s2.129 1.761 3.407 2.299c1.324.556 2.727.841 4.175.841 2.34 0 4.561-.74 6.428-2.137a10.815 10.815 0 0 0 2.331-2.396c.652-.929 1.158-1.949 1.489-3.03 0-.004.005-.014.005-.018-.579-.423-1.255-.699-1.986-.819.161-.395.276-.804.349-1.218.005-.009.005-.014.005-.023.869.166 1.692.506 2.404 1.035.685.505.552 1.075.446 1.416C22.184 20.437 17.619 24 12.221 24c-6.625 0-12-5.375-12-12s5.37-12 12-12c5.398 0 9.963 3.563 11.471 8.464.106.341.239.915-.446 1.421-.717.529-1.535.873-2.404 1.034.128.716.128 1.45 0 2.166-.387-.074-.782-.11-1.182-.11-4.184 0-3.968 2.823-6.736 2.823h-1.029c-1.899 0-3.15-1.357-3.15-3.095v-1.411c0-1.738 1.251-3.094 3.15-3.094h1.034c2.768 0 2.552 2.823 6.731 2.827Z"/></svg></span><span class="cn-l">Calendly</span></div>
+      </div>
+      <p class="conecta-n">Lee tu correo, tu calendario, tus tareas y tus documentos. Leer no es actuar: nada sale sin que tú lo apruebes.</p>
+    </div>
+  </div>
+</section>
+
 <!-- TESTIMONIOS: mazo de cartas -->
 <section class="testi">
   <div class="wrap">
@@ -630,9 +803,44 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
       <article class="carta"><span class="tag">Agentes</span><div class="stars">★★★★★</div><q>Se crearon dos sub-agentes, uno de finanzas y otro de ventas y mercadeo, y ambos trabajaron bajo Mía.</q><div class="by"><span class="av">SM</span><div><b>Suzette Mirabal</b><span>Brain Connections Corp.</span></div></div></article>
       <article class="carta"><span class="tag">Automatización</span><div class="stars">★★★★★</div><q>Creé mi agente co-fundador. Javitron ya se conectó a Asana y me armó un playbook por bloques de tiempo.</q><div class="by"><span class="av">FT</span><div><b>Félix J. Torres</b><span>Gen 01</span></div></div></article>
       <article class="carta"><span class="tag">Comunidad</span><div class="stars">★★★★★</div><q>Voy a extrañar nuestras citas semanales. Volvería a participar sin pensarlo dos veces. BIG FAN!!!</q><div class="by"><span class="av">MB</span><div><b>Margarita Blanco</b><span>Gen 01</span></div></div></article>
+      <article class="carta"><span class="tag">Continuidad</span><div class="stars">★★★★★</div><q>Excelente experiencia. Si hubiera una continuación de La Sala, me apunto.</q><div class="by"><span class="av">HR</span><div><b>Heidii Rosa</b><span>Gen 01</span></div></div></article>
+      <article class="carta"><span class="tag">Primera clase</span><div class="stars">★★★★★</div><q>Muchas gracias, somos la primera clase. WooHOO 🎉</q><div class="by"><span class="av">CA</span><div><b>Carlos Alfredo Ortiz</b><span>Gen 01</span></div></div></article>
       <article class="carta"><span class="tag">Proyecto</span><div class="stars">★★★★★</div><q>Gracias por todo lo enseñado, me encantó y sobre todo me ha ayudado muchísimo en mi proyecto!</q><div class="by"><span class="av">AD</span><div><b>Ariel Díaz</b><span>Corporación CAEE</span></div></div></article>
     </div>
-    <div class="mazo-nav"><button type="button" id="mzPrev" aria-label="Anterior">←</button><span id="mzN">1 / 5</span><button type="button" id="mzNext" aria-label="Siguiente">→</button></div>
+    <div class="mazo-nav"><button type="button" id="mzPrev" aria-label="Anterior">←</button><span id="mzN">1 / 7</span><button type="button" id="mzNext" aria-label="Siguiente">→</button></div>
+    <div class="wall rv" aria-label="Mensajes del chat del último en vivo de la Gen 01">
+      <div class="wall-row"><div class="bub"><span class="av" style="background:#5FD3B5">HR</span><div><b>Heidii Rosa</b><span>Excelente experiencia, si hubiera una continuación de la sala me apunto!!!</span></div></div><div class="bub"><span class="av" style="background:#00D26A">CA</span><div><b>Carlos Alfredo Ortiz</b><span>Muchas gracias, somos la primera clase! WooHOO 🎉</span></div></div><div class="bub"><span class="av" style="background:#B5EBCF">AD</span><div><b>Ariel Díaz · Corporación CAEE</b><span>Gracias por todo lo enseñado, me encantó y sobre todo me ha ayudado muchísimo en mi proyecto!</span></div></div><div class="bub"><span class="av" style="background:#F2C46B">CF</span><div><b>Caniel Ferrer</b><span>GRACIAS por todo el conocimiento brindado!!! Agradecido</span></div></div><div class="bub" aria-hidden="true"><span class="av" style="background:#5FD3B5">HR</span><div><b>Heidii Rosa</b><span>Excelente experiencia, si hubiera una continuación de la sala me apunto!!!</span></div></div><div class="bub" aria-hidden="true"><span class="av" style="background:#00D26A">CA</span><div><b>Carlos Alfredo Ortiz</b><span>Muchas gracias, somos la primera clase! WooHOO 🎉</span></div></div><div class="bub" aria-hidden="true"><span class="av" style="background:#B5EBCF">AD</span><div><b>Ariel Díaz · Corporación CAEE</b><span>Gracias por todo lo enseñado, me encantó y sobre todo me ha ayudado muchísimo en mi proyecto!</span></div></div><div class="bub" aria-hidden="true"><span class="av" style="background:#F2C46B">CF</span><div><b>Caniel Ferrer</b><span>GRACIAS por todo el conocimiento brindado!!! Agradecido</span></div></div></div>
+      <div class="wall-row rev"><div class="bub"><span class="av" style="background:#F29B8B">MB</span><div><b>Margarita Blanco</b><span>Volvería a participar sin pensarlo dos veces!!!! BIG FAN!!!</span></div></div><div class="bub"><span class="av" style="background:#E8826B">W</span><div><b>Wendel</b><span>Gracias por todo 🙌</span></div></div><div class="bub"><span class="av" style="background:#3DDC84">F</span><div><b>Felix</b><span>Excelente aprendizaje.</span></div></div><div class="bub"><span class="av" style="background:#8FB7FF">SM</span><div><b>Suzette Mirabal</b><span>Se crearon dos sub-agentes y ambos trabajaron bajo Mía. Esto facilitó mucho el trabajo.</span></div></div><div class="bub" aria-hidden="true"><span class="av" style="background:#F29B8B">MB</span><div><b>Margarita Blanco</b><span>Volvería a participar sin pensarlo dos veces!!!! BIG FAN!!!</span></div></div><div class="bub" aria-hidden="true"><span class="av" style="background:#E8826B">W</span><div><b>Wendel</b><span>Gracias por todo 🙌</span></div></div><div class="bub" aria-hidden="true"><span class="av" style="background:#3DDC84">F</span><div><b>Felix</b><span>Excelente aprendizaje.</span></div></div><div class="bub" aria-hidden="true"><span class="av" style="background:#8FB7FF">SM</span><div><b>Suzette Mirabal</b><span>Se crearon dos sub-agentes y ambos trabajaron bajo Mía. Esto facilitó mucho el trabajo.</span></div></div></div>
+    </div>
+    <p class="wall-cap"><span class="pulse"></span>El chat del último en vivo de la Gen 01</p>
+  </div>
+</section>
+
+<!-- GRADUACION GEN 01 -->
+<section class="grad" id="graduacion">
+  <div class="wrap">
+    <span class="eyebrow">Graduación · Gen 01</span>
+    <h2 class="h2 rv">Se graduaron. <em class="s">Con premio.</em></h2>
+    <p class="lead rv">La Gen 01 cerró con fiesta en el Viejo San Juan, certificado en mano y <b>$1,000 repartidos</b> entre los tres mejores proyectos del reto final.</p>
+    <div class="grad-top">
+      <div class="grad-vid rv">
+        <video id="gradVid" muted loop playsinline preload="none" poster="https://lasaladeia.com/gen2/graduacion/poster.jpg"><source src="https://lasaladeia.com/gen2/graduacion/graduacion-gen01.mp4" type="video/mp4"></video>
+        <span class="grad-cap"><i></i>San Juan · 24 oct</span>
+      </div>
+      <div class="podio rv">
+        <div class="podio-h"><b>$1,000</b><span>en premios · reto final de la Gen 01</span></div>
+        <div class="pr p1"><span class="pr-k">1º</span><div><b>$500</b><span>Ariel Díaz</span></div><img src="https://lasaladeia.com/gen2/graduacion/premio-ariel-diaz.jpg" alt="Ariel Díaz" loading="lazy" style="object-position:54% 42%"></div>
+        <div class="pr p2"><span class="pr-k">2º</span><div><b>$300</b><span>Jane Guzmán</span></div><img src="https://lasaladeia.com/gen2/graduacion/premio-jane-guzman.jpg" alt="Jane Guzmán" loading="lazy" style="object-position:57% 40%"></div>
+        <div class="pr p3"><span class="pr-k">3º</span><div><b>$200</b><span>María Ayala</span></div><img src="https://lasaladeia.com/gen2/graduacion/premio-maria-ayala.jpg" alt="María Ayala" loading="lazy" style="object-position:55% 36%"></div>
+      </div>
+    </div>
+    <div class="fotos rv">
+      <figure><img src="https://lasaladeia.com/gen2/graduacion/premio-ariel-diaz.jpg" alt="Ariel Díaz recibe el primer premio" loading="lazy"><figcaption><b>$500</b>Ariel Díaz · 1er lugar</figcaption></figure>
+      <figure><img src="https://lasaladeia.com/gen2/graduacion/premio-jane-guzman.jpg" alt="Jane Guzmán recibe el segundo premio" loading="lazy"><figcaption><b>$300</b>Jane Guzmán · 2do lugar</figcaption></figure>
+      <figure><img src="https://lasaladeia.com/gen2/graduacion/premio-maria-ayala.jpg" alt="María Ayala recibe el tercer premio" loading="lazy"><figcaption><b>$200</b>María Ayala · 3er lugar</figcaption></figure>
+      <figure><img src="https://lasaladeia.com/gen2/graduacion/certificado-wigberto.jpg" alt="Graduado de la Gen 01 con su certificado" loading="lazy"><figcaption>Certificado de graduación</figcaption></figure>
+    </div>
+    <p class="grad-note rv">En la Gen 02 el reto se repite con <b>$1,000 en premios</b>. El primer lugar paga tu silla y te sobra.</p>
   </div>
 </section>
 
@@ -642,7 +850,7 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
     <span class="eyebrow">Inscripción Gen 02</span>
     <h2 class="h2 rv">150 sillas. <em class="s">Una es tuya.</em></h2>
     <div class="pase-esc"><div class="pase" id="pase">
-      <div class="pase-top"><span>LA SALA DE IA · PASE</span><svg class="logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="15.4" cy="17" r="1.9" fill="#04120b"/><circle cx="24.6" cy="17" r="1.9" fill="#04120b"/><line x1="16.4" y1="23.4" x2="23.6" y2="23.4" stroke="#04120b" stroke-width="2.1" stroke-linecap="round"/></svg></div>
+      <div class="pase-top"><span>LA SALA DE IA · PASE</span><svg class="logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="14.9" cy="17.5" r="1.85" fill="#04120b"/><circle cx="25.1" cy="17.5" r="1.85" fill="#04120b"/><rect x="15.3" y="22.9" width="9.4" height="1.7" fill="#04120b"/></svg></div>
       <div class="pase-gen">GEN <em class="s">02</em></div>
       <div class="pase-row"><div>Silla<b id="pSilla">Nº ___ / 150</b></div><div>Arranca<b>16 · 11 · 26</b></div><div>Acceso<b>De por vida</b></div></div>
       <div class="barcode"></div>
@@ -659,6 +867,9 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
         <li>Tu agente cofundador, tu CRM y tu página web</li>
         <li>Plantillas, prompts y todo grabado</li>
         <li>Demo Day y La Sala de por vida</li>
+        <li>Reto final con <b>$1,000 en premios</b></li>
+        <li>Fiesta de graduación presencial</li>
+        <li>Las próximas generaciones con <b>60% OFF</b> para ti, de por vida</li>
       </ul>
       <a href="#aviso" class="cta js-buy"><span class="js-buy-l">Avísame cuando abra</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <p class="safe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>Pago seguro · acceso inmediato a la academia</p>
@@ -700,7 +911,8 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
       <details><summary>¿Qué herramientas tengo que pagar?<i></i></summary><div class="ans">Te enseñamos a sacarle el máximo a lo que ya pagas y a usar las versiones gratis cuando alcanzan. La idea es terminar pagando <b>menos</b> herramientas, no más.</div></details>
       <details><summary>¿Tengo que salir en cámara?<i></i></summary><div class="ans">No. Ni para aprender ni para aplicarlo en tu negocio.</div></details>
       <details><summary>¿Y si no puedo ir a un en vivo?<i></i></summary><div class="ans">Todo queda grabado. Lo ves cuando puedas y traes tus dudas al siguiente.</div></details>
-      <details><summary>¿Qué pasa cuando termino?<i></i></summary><div class="ans">Te gradúas en el <b>Demo Day</b> y pasas a <b>La Sala</b>: el espacio permanente de todos los graduados, de por vida.</div></details>
+      <details><summary>¿Qué es el reto final?<i></i></summary><div class="ans">En la última semana presentas tu sistema corriendo en el <b>Demo Day</b>. Los tres mejores proyectos se reparten <b>$1,000</b>: $500, $300 y $200. En la Gen 01 ganaron Ariel Díaz, Jane Guzmán y María Ayala.</div></details>
+      <details><summary>¿Qué pasa cuando termino?<i></i></summary><div class="ans">Te gradúas en el <b>Demo Day</b>, celebramos con una fiesta presencial y pasas a <b>La Sala</b>: el espacio permanente de todos los graduados, de por vida. Y cada generación nueva la tienes con <b>60% OFF</b>.</div></details>
     </div>
   </div>
 </section>
@@ -716,7 +928,7 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
 </section>
 
 <footer>
-  <a class="lock" href="#top"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="15.4" cy="17" r="1.9" fill="#04120b"/><circle cx="24.6" cy="17" r="1.9" fill="#04120b"/><line x1="16.4" y1="23.4" x2="23.6" y2="23.4" stroke="#04120b" stroke-width="2.1" stroke-linecap="round"/></svg><span>La Sala <em>de IA</em></span></a>
+  <a class="lock" href="#top"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="14.9" cy="17.5" r="1.85" fill="#04120b"/><circle cx="25.1" cy="17.5" r="1.85" fill="#04120b"/><rect x="15.3" y="22.9" width="9.4" height="1.7" fill="#04120b"/></svg><span>La Sala <em>de IA</em></span></a>
   La IA no te va a reemplazar. Te va a multiplicar.<br><a href="https://instagram.com/lasaladeia" target="_blank" rel="noopener">@lasaladeia</a>
 </footer>
 
@@ -725,7 +937,7 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
 <div class="ver" id="ver" role="dialog" aria-modal="true" aria-labelledby="verT">
   <form class="ver-in" id="verForm" novalidate>
     <button type="button" class="ver-x" id="verX" aria-label="Cerrar">✕</button>
-    <div class="ver-top"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="15.4" cy="17" r="1.9" fill="#04120b"/><circle cx="24.6" cy="17" r="1.9" fill="#04120b"/><line x1="16.4" y1="23.4" x2="23.6" y2="23.4" stroke="#04120b" stroke-width="2.1" stroke-linecap="round"/></svg><span class="tag">Antes de pagar · Gen 02</span></div>
+    <div class="ver-top"><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="14.9" cy="17.5" r="1.85" fill="#04120b"/><circle cx="25.1" cy="17.5" r="1.85" fill="#04120b"/><rect x="15.3" y="22.9" width="9.4" height="1.7" fill="#04120b"/></svg><span class="tag">Antes de pagar · Gen 02</span></div>
     <h3 id="verT">Un paso más y la silla es <em class="s">tuya.</em></h3>
     <p class="s">La Gen 02 es solo para mayores de 18 años. Confírmanos tus datos y te llevamos al pago seguro.</p>
     <label class="l" for="vNombre">Nombre y apellido</label>
@@ -861,6 +1073,17 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
   // ---- Reveal ----
   var io = new IntersectionObserver(function(es){ es.forEach(function(x){ if(x.isIntersecting){ x.target.classList.add('in'); io.unobserve(x.target); } }); }, {threshold:.15, rootMargin:'0px 0px -6% 0px'});
   $$('.rv').forEach(function(el){ io.observe(el); });
+  // ---- Diagnóstico: cuenta lo marcado ----
+  var dgR = $('#diagR');
+  if(dgR){ $$('#diag input').forEach(function(c){ c.addEventListener('change', function(){
+    var k = $$('#diag input:checked').length;
+    dgR.classList.toggle('on', k > 0);
+    dgR.innerHTML = k === 0 ? 'Con una basta.' : k === 1 ? 'Marcaste <b>1</b>. Esa sola ya te cuesta horas cada semana. <b>Esto es lo que resuelve la Gen 02.</b>' : 'Marcaste <b>' + k + '</b>. Todas tienen la misma causa: tu negocio no está en un mismo cerebro. <b>Eso es lo que construyes en la Gen 02.</b>';
+  }); }); }
+  var rv2 = $('#realVid');
+  if(rv2){ var rvo = new IntersectionObserver(function(es){ es.forEach(function(x){ if(x.isIntersecting){ var pr = rv2.play(); if(pr && pr.catch) pr.catch(function(){}); } else rv2.pause(); }); }, {threshold:.25}); rvo.observe(rv2); }
+  var gv = $('#gradVid');
+  if(gv){ var gvo = new IntersectionObserver(function(es){ es.forEach(function(x){ if(x.isIntersecting){ var pr = gv.play(); if(pr && pr.catch) pr.catch(function(){}); } else gv.pause(); }); }, {threshold:.25}); gvo.observe(gv); }
 
   // ---- Manifiesto: se ilumina palabra por palabra ----
   var mani = $('#mani'), verdes = ['contesta','publica','cobra','trabajando'];
