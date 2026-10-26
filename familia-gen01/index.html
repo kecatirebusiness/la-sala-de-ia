@@ -124,6 +124,9 @@ section{position:relative;padding:72px 0}
 .safe{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;font-size:13px;color:var(--dim)}
 .safe svg{width:15px;height:15px}
 
+.aviso-mail{display:flex;gap:12px;align-items:flex-start;margin-top:22px;padding:16px;border-radius:16px;background:rgba(242,196,107,.1);border:1.5px solid rgba(242,196,107,.55);color:#f6dfae;font-size:15px;line-height:1.45}
+.aviso-mail .i{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--gold);color:#1a1204;display:grid;place-items:center;font-weight:800;font-size:16px}
+.aviso-mail b{color:#fff}
 /* faq */
 .faq{margin-top:22px;display:grid;gap:10px}
 .faq details{border-radius:16px;background:var(--card);border:1px solid var(--line);padding:0 18px}
@@ -155,6 +158,7 @@ footer a{color:var(--muted);text-decoration:none}
     <p class="lead">Por ser de la Gen 01, las próximas generaciones te salen con 60% de descuento. Empezamos con esta: <b>la Gen 02 completa por $150</b> en vez de $375.</p>
     <a href="#reclamar" class="cta">Reclamar mi precio Gen 01<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     <p class="mini">Este enlace es solo para ti y tu Generación. No lo compartas.</p>
+    <div class="aviso-mail"><span class="i">!</span><p><b>Usa el mismo correo con el que entras a Circle</b>, aquí y en el pago. Si pagas con otro correo, Circle te crea una cuenta nueva y no te reconoce como Gen 01.</p></div>
 
     <div class="pase" id="pase">
       <div class="pase-top"><span>LA SALA DE IA · PASE</span><svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="14.9" cy="17.5" r="1.85" fill="#04120b"/><circle cx="25.1" cy="17.5" r="1.85" fill="#04120b"/><rect x="15.3" y="22.9" width="9.4" height="1.7" fill="#04120b"/></svg></div>
@@ -207,15 +211,16 @@ footer a{color:var(--muted);text-decoration:none}
     <span class="eyebrow">Reclama tu lugar</span>
     <h2 class="h2 rv">Confirmamos que eres <em class="s">de la Gen 01.</em></h2>
     <p class="lead rv">Pon el correo con el que entras a Circle. Si estás en la Gen 01, te pasamos directo al pago de $150.</p>
+    <div class="aviso-mail rv"><span class="i">!</span><p><b>Usa el mismo correo con el que entras a Circle</b>, aquí y en el pago. Si pagas con otro correo, Circle te crea una cuenta nueva y no te reconoce como Gen 01.</p></div>
     <div class="fcard rv">
       <form id="f" novalidate>
         <label for="fn">Tu nombre</label>
         <input id="fn" name="nombre" placeholder="¿Cómo te llamas?" autocomplete="name" required>
-        <label for="fe">Tu correo de Circle</label>
+        <label for="fe"><b style="color:var(--gold)">Tu correo de Circle</b> (el mismo con el que entras a La Sala)</label>
         <input id="fe" name="email" type="email" inputmode="email" placeholder="el que usas en La Sala" autocomplete="email" required>
         <p class="err" id="err"></p>
         <button class="cta" type="submit" id="fb"><span id="fbl">Ir a mi pago de $150</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-        <p class="nota">En el pago, entra con esa misma cuenta de Circle para que la Gen 02 se sume a tu perfil.</p>
+        <p class="nota" style="color:#f6dfae">⚠️ En el pago, entra con <b>esa misma cuenta de Circle</b>. Así la Gen 02 se suma a tu perfil.</p>
       </form>
       <p class="safe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>Pago seguro en Circle · acceso inmediato</p>
     </div>
@@ -230,6 +235,7 @@ footer a{color:var(--muted);text-decoration:none}
       <details><summary>¿Ocupo una de las 150 sillas?<i></i></summary><div class="ans"><b>No.</b> Los de la Gen 01 van aparte. Las 150 sillas son para gente nueva y tu lugar no cuenta entre ellas.</div></details>
       <details><summary>¿Cuánto pago y cómo?<i></i></summary><div class="ans"><b>$150, pago único</b> en el checkout de Circle, con tarjeta o Apple Pay. Es el precio de $375 con el 60% OFF de la Gen 01.</div></details>
       <details><summary>¿Pierdo lo que tengo de la Gen 01?<i></i></summary><div class="ans">No. Todo lo de la Gen 01 sigue en tu cuenta. La Gen 02 se suma con sus propios espacios: anuncios, el programa, en vivos, dudas y wins.</div></details>
+      <details open><summary>¿Con qué correo pago?<i></i></summary><div class="ans"><b>Con el mismo correo con el que entras a Circle.</b> Si usas otro, Circle te abre una cuenta nueva aparte y no te reconoce como Gen 01.</div></details>
       <details><summary>¿Cuándo empieza?<i></i></summary><div class="ans">La Gen 02 arranca el <b>16 de noviembre de 2026</b>. Desde que pagas ya ves los espacios de la Gen 02 en Circle.</div></details>
       <details><summary>Me dice que mi correo no es de la Gen 01<i></i></summary><div class="ans">Usa el mismo correo con el que entras a Circle. Si aun así no pasa, escríbenos a <a href="mailto:lasaladeia@gmail.com">lasaladeia@gmail.com</a> y lo arreglamos.</div></details>
       <details><summary>¿Puedo compartir este enlace?<i></i></summary><div class="ans">Es solo para la Gen 01. Si alguien de afuera lo intenta, no pasa la verificación. Para gente nueva está la inscripción normal en <a href="https://lasaladeia.com">lasaladeia.com</a>.</div></details>
