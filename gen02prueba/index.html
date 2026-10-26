@@ -467,12 +467,12 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
 .ba-box.despues li::before{top:4px;width:12px;height:12px;background:none;border-radius:0;border:solid var(--em);border-width:0 2px 2px 0;transform:rotate(45deg) scale(.7)}
 @media (min-width:600px){.ba{grid-template-columns:1fr 1fr}}
 .real-s{padding:80px 0 0}
-.real-vid{position:relative;margin-top:24px;border-radius:22px;overflow:hidden;border:1px solid var(--line2);background:#000;aspect-ratio:1662/1080;box-shadow:0 24px 50px -24px rgba(0,0,0,.9)}
-.real-vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.real-vid{position:relative;margin-top:24px;border-radius:22px;overflow:hidden;isolation:isolate;-webkit-mask-image:-webkit-radial-gradient(#fff,#000);border:1px solid var(--line2);background:#000 url(https://lasaladeia.com/gen2/obsidian/poster.jpg) center/cover no-repeat;aspect-ratio:1662/1080;box-shadow:0 24px 50px -24px rgba(0,0,0,.9);-webkit-transform:translateZ(0);transform:translateZ(0)}
+.real-vid video{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;display:block;background:transparent}
 .grad{padding:80px 0 0}
 .grad-top{margin-top:26px;display:grid;grid-template-columns:140px 1fr;gap:18px;align-items:stretch}
-.grad-vid{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--line2);background:#000;aspect-ratio:9/16;box-shadow:0 24px 50px -24px rgba(0,0,0,.9)}
-.grad-vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.grad-vid{position:relative;border-radius:22px;overflow:hidden;isolation:isolate;-webkit-mask-image:-webkit-radial-gradient(#fff,#000);border:1px solid var(--line2);background:#000 url(https://lasaladeia.com/gen2/graduacion/poster.jpg) center/cover no-repeat;min-height:250px;box-shadow:0 24px 50px -24px rgba(0,0,0,.9);-webkit-transform:translateZ(0);transform:translateZ(0)}
+.grad-vid video{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;display:block;background:transparent}
 .grad-cap{position:absolute;left:10px;right:10px;bottom:10px;display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(5,11,8,.62);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:6px 8px;border-radius:9px;white-space:nowrap;overflow:hidden}
 .grad-cap i{width:6px;height:6px;border-radius:50%;background:var(--em);box-shadow:0 0 8px var(--em);flex-shrink:0}
 .podio{display:flex;flex-direction:column;gap:8px;min-width:0}
@@ -484,12 +484,12 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
 .pr>div{flex:1;min-width:0}
 .pr>div b{display:block;font-size:18px;letter-spacing:-.03em;line-height:1}
 .pr>div span{display:block;font-size:11.5px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pr img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,210,106,.5);flex-shrink:0}
+.pr img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,210,106,.5);flex-shrink:0;-webkit-transform:translateZ(0);transform:translateZ(0)}
 .pr.p1{border-color:rgba(242,196,107,.45)}.pr.p1>div b{color:var(--gold)}
 .fotos{margin-top:12px;display:grid;grid-auto-flow:column;grid-auto-columns:74%;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 var(--pad) 6px;margin-left:calc(var(--pad)*-1);margin-right:calc(var(--pad)*-1);scrollbar-width:none}
 .fotos::-webkit-scrollbar{display:none}
-.fotos figure{scroll-snap-align:start;position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);aspect-ratio:3/2;background:var(--card)}
-.fotos img{width:100%;height:100%;object-fit:cover;display:block}
+.fotos figure{scroll-snap-align:start;position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);aspect-ratio:3/2;background:var(--card);isolation:isolate;-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-mask-image:-webkit-radial-gradient(#fff,#000)}
+.fotos img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;display:block}
 .fotos figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 12px 10px;font-size:12.5px;color:#fff;background:linear-gradient(180deg,transparent,rgba(5,11,8,.88))}
 .fotos figcaption b{color:var(--gold);margin-right:6px}
 .grad-note{margin-top:16px;font-size:15px;line-height:1.5;color:var(--muted);padding:14px 16px;border-radius:16px;border:1px solid rgba(0,210,106,.3);background:rgba(0,210,106,.06);text-wrap:pretty}
@@ -625,8 +625,8 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
     <span class="eyebrow">Un segundo cerebro real</span>
     <h2 class="h2 rv">Así se ve <em class="s">el de Elsa.</em></h2>
     <p class="lead rv">Este es el cerebro de Maia, el agente cofundador de Elsa: cada nota es un cliente, un proyecto o una decisión, y lo escribe ella sola mientras trabaja. <b>En la Gen 02 construyes el tuyo.</b></p>
-    <div class="real-vid rv">
-      <video id="realVid" muted loop playsinline preload="none" poster="https://lasaladeia.com/gen2/obsidian/poster.jpg"><source src="https://lasaladeia.com/gen2/obsidian/obsidian-second-brain.mp4" type="video/mp4"></video>
+    <div class="real-vid">
+      <video id="realVid" muted loop playsinline preload="none"><source src="https://lasaladeia.com/gen2/obsidian/obsidian-second-brain.mp4" type="video/mp4"></video>
       <span class="grad-cap"><i></i>El cerebro de Maia · Obsidian</span>
     </div>
   </div>
@@ -823,8 +823,8 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
     <h2 class="h2 rv">Se graduaron. <em class="s">Con premio.</em></h2>
     <p class="lead rv">La Gen 01 cerró con fiesta en el Viejo San Juan, certificado en mano y <b>$1,000 repartidos</b> entre los tres mejores proyectos del reto final.</p>
     <div class="grad-top">
-      <div class="grad-vid rv">
-        <video id="gradVid" muted loop playsinline preload="none" poster="https://lasaladeia.com/gen2/graduacion/poster.jpg"><source src="https://lasaladeia.com/gen2/graduacion/graduacion-gen01.mp4" type="video/mp4"></video>
+      <div class="grad-vid">
+        <video id="gradVid" muted loop playsinline preload="none"><source src="https://lasaladeia.com/gen2/graduacion/graduacion-gen01.mp4" type="video/mp4"></video>
         <span class="grad-cap"><i></i>San Juan · 24 oct</span>
       </div>
       <div class="podio rv">
@@ -834,7 +834,7 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
         <div class="pr p3"><span class="pr-k">3º</span><div><b>$200</b><span>María Ayala</span></div><img src="https://lasaladeia.com/gen2/graduacion/premio-maria-ayala.jpg" alt="María Ayala" loading="lazy" style="object-position:55% 36%"></div>
       </div>
     </div>
-    <div class="fotos rv">
+    <div class="fotos">
       <figure><img src="https://lasaladeia.com/gen2/graduacion/premio-ariel-diaz.jpg" alt="Ariel Díaz recibe el primer premio" loading="lazy"><figcaption><b>$500</b>Ariel Díaz · 1er lugar</figcaption></figure>
       <figure><img src="https://lasaladeia.com/gen2/graduacion/premio-jane-guzman.jpg" alt="Jane Guzmán recibe el segundo premio" loading="lazy"><figcaption><b>$300</b>Jane Guzmán · 2do lugar</figcaption></figure>
       <figure><img src="https://lasaladeia.com/gen2/graduacion/premio-maria-ayala.jpg" alt="María Ayala recibe el tercer premio" loading="lazy"><figcaption><b>$200</b>María Ayala · 3er lugar</figcaption></figure>
