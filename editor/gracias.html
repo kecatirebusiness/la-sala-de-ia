@@ -25,6 +25,8 @@ p b{color:var(--text)}
 .box li span{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--em);color:#04120b;font-weight:700;font-size:13px;display:grid;place-items:center}
 .fail{display:none}
 .small{font-size:13px;margin-top:20px}
+.up{margin-top:12px;border-color:rgba(0,210,106,.45)}
+.up li{padding:0}
 a{color:var(--em)}
 </style>
 </head>
@@ -35,9 +37,10 @@ a{color:var(--em)}
   <p>En menos de un minuto te llega un correo con <b>el editor (.zip)</b> y <b>tu código de licencia</b>.</p>
   <ul class="box">
     <li><span>1</span>Abre el correo de <b>La Sala de IA</b> (revisa promociones o spam si no lo ves).</li>
-    <li><span>2</span>Descarga el .zip y ábrelo con Claude Code: «instala el editor de La Sala».</li>
+    <li><span>2</span>Descarga el .zip y súbelo a tu chat de Claude (o ábrelo con Claude Code): «instala el editor de La Sala».</li>
     <li><span>3</span>Pega tu código y dile: «edítame este video estilo kecatire».</li>
   </ul>
+  <div class="box up" id="up" hidden><li><span>★</span><div><b>Cuéntalo bien</b> quedó agregada a tu pedido. Te llega en <b>otro correo</b> con el enlace para descargar la guía en PDF.</div></li></div>
   <p class="small">¿No te llegó en 10 minutos? Escríbenos a <a href="mailto:lasaladeia@gmail.com">lasaladeia@gmail.com</a>.</p>
 </div>
 <div class="c fail" id="failv">
@@ -49,7 +52,8 @@ a{color:var(--em)}
   // Stripe agrega redirect_status a la URL al volver del pago
   var st = new URLSearchParams(location.search).get('redirect_status');
   if (st && st !== 'succeeded' && st !== 'processing') { document.getElementById('okv').style.display = 'none'; document.getElementById('failv').style.display = 'block'; }
-  if (location.search) history.replaceState(null, '', '/editor/gracias');
+  if ((new URLSearchParams(location.search).get('c') || '').split(',').indexOf('historia') > -1) document.getElementById('up').hidden = false;
+  if (location.search) history.replaceState(null, '', location.pathname);
 </script>
 </body>
 </html>
