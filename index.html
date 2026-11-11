@@ -969,7 +969,8 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
     CIERRA: new Date('2026-11-15T23:59:59-04:00').getTime(), // cierre de la matrícula: dom 15 nov, 11:59 p.m. hora de Puerto Rico
     VENTA_ABIERTA: true,   // true = la página vende ya (botones al checkout); false = espera la fecha con "Avísame"
     TOTAL: 150,
-    VENDIDAS: 44,   // lo que marca el CRM al publicar (2 nov 2026), para que no pinte 150 libres antes de que conteste. El número real llega de ?accion=cupos y manda. Gen 01 y Cohort Limitado no ocupan sillas
+    FUERA_CIRCLE: 45,   // inscritos que pagaron por fuera de Circle (Kevin, 11 nov 2026). Se suman al conteo de Circle
+    VENDIDAS: 100,   // lo que marca el CRM al publicar (2 nov 2026), para que no pinte 150 libres antes de que conteste. El número real llega de ?accion=cupos y manda. Gen 01 y Cohort Limitado no ocupan sillas
     PIXEL: '',   // ID del píxel de Meta (Events Manager › Data sources). Vacío = el píxel no carga. Ej.: '1234567890123456'
     CHECKOUT: 'https://la-sala-de-ia-3829bf.circle.so/checkout/gen-02'   // checkout de Circle de la Gen 02 (cobra al Stripe conectado a Circle)
   };
@@ -1205,7 +1206,7 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
     }
     sillas.forEach(function(s, k){ s.classList.toggle('x', k < CFG.VENDIDAS); });
   }
-  fetch(CRM_URL + '?accion=cupos').then(function(r){ return r.json(); }).then(function(d){ if(d && typeof d.vendidas === 'number') pintaCupos(d.vendidas); }).catch(function(){});
+  fetch(CRM_URL + '?accion=cupos').then(function(r){ return r.json(); }).then(function(d){ if(d && typeof d.vendidas === 'number') pintaCupos(d.vendidas + CFG.FUERA_CIRCLE); }).catch(function(){});
 
   // ---- Dock ----
   var dock = $('#dock');
