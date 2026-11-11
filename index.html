@@ -473,6 +473,10 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
 .grad-vid{position:relative;border-radius:22px;overflow:hidden;isolation:isolate;-webkit-mask-image:-webkit-radial-gradient(#fff,#000);border:1px solid var(--line2);background:#000 url(https://lasaladeia.com/gen2/graduacion/poster.jpg) center/cover no-repeat;min-height:250px;box-shadow:0 24px 50px -24px rgba(0,0,0,.9);-webkit-transform:translateZ(0);transform:translateZ(0)}
 .grad-vid video{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;display:block;background:transparent}
 .grad-cap{position:absolute;left:10px;right:10px;bottom:10px;display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(5,11,8,.62);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);padding:6px 8px;border-radius:9px;white-space:nowrap;overflow:hidden}
+.grad-vid .grad-cap{right:auto;max-width:calc(100% - 20px);letter-spacing:.03em;font-size:8.5px;white-space:normal;line-height:1.3;z-index:2}
+.vplay{position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(5,11,8,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:3;cursor:pointer;transition:opacity .3s}
+.vplay:before{content:'';margin-left:4px;border-style:solid;border-width:10px 0 10px 16px;border-color:transparent transparent transparent #fff}
+.vplay.off{opacity:0;pointer-events:none}
 .grad-cap i{width:6px;height:6px;border-radius:50%;background:var(--em);box-shadow:0 0 8px var(--em);flex-shrink:0}
 .podio{display:flex;flex-direction:column;gap:8px;min-width:0}
 .podio-h{border-radius:18px;padding:14px;border:1px solid rgba(242,196,107,.38);background:linear-gradient(160deg,rgba(242,196,107,.14),rgba(255,255,255,.015))}
@@ -1104,10 +1108,19 @@ footer .lock{justify-content:center;margin-bottom:10px;color:var(--text)}
     dgR.classList.toggle('on', k > 0);
     dgR.innerHTML = k === 0 ? 'Con una basta.' : k === 1 ? 'Marcaste <b>1</b>. Esa sola ya te cuesta horas cada semana. <b>Esto es lo que resuelve la Gen 02.</b>' : 'Marcaste <b>' + k + '</b>. Todas tienen la misma causa: tu negocio no está en un mismo cerebro. <b>Eso es lo que construyes en la Gen 02.</b>';
   }); }); }
-  var rv2 = $('#realVid');
-  if(rv2){ var rvo = new IntersectionObserver(function(es){ es.forEach(function(x){ if(x.isIntersecting){ var pr = rv2.play(); if(pr && pr.catch) pr.catch(function(){}); } else rv2.pause(); }); }, {threshold:.25}); rvo.observe(rv2); }
-  var gv = $('#gradVid');
-  if(gv){ var gvo = new IntersectionObserver(function(es){ es.forEach(function(x){ if(x.isIntersecting){ var pr = gv.play(); if(pr && pr.catch) pr.catch(function(){}); } else gv.pause(); }); }, {threshold:.25}); gvo.observe(gv); }
+  // ---- Videos: autoplay al verse; si el iPhone lo bloquea (modo ahorro de batería), botón de play ----
+  ['#realVid', '#gradVid'].forEach(function(sel){
+    var v = $(sel); if(!v) return;
+    var caja = v.parentNode, btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'vplay off'; btn.setAttribute('aria-label', 'Reproducir video');
+    caja.appendChild(btn);
+    var visto = false;
+    function intenta(){ var pr = v.play(); if(pr && pr.catch) pr.catch(function(){ btn.classList.remove('off'); }); }
+    v.addEventListener('playing', function(){ btn.classList.add('off'); });
+    v.addEventListener('pause', function(){ if(visto) btn.classList.remove('off'); });
+    caja.addEventListener('click', function(){ if(v.paused){ v.muted = true; intenta(); } else v.pause(); });
+    new IntersectionObserver(function(es){ es.forEach(function(x){ visto = x.isIntersecting; if(visto) intenta(); else v.pause(); }); }, {threshold:.25}).observe(v);
+  });
 
   // ---- Manifiesto: se ilumina palabra por palabra ----
   var mani = $('#mani'), verdes = ['contesta','publica','cobra','trabajando'];
