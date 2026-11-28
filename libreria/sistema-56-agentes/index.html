@@ -1,0 +1,266 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>El plano: 56 agentes de IA que manejan una empresa de una sola persona · Librería de La Sala</title><meta name="description" content="Marketing, ventas y un orquestador que lo conecta todo. Aquí está el plano completo que prometí en el video, con los prompts para montarlo, y cómo hicimos el reel animado.">
+<meta property="og:title" content="El plano: 56 agentes de IA que manejan una empresa de una sola persona · Librería de La Sala"><meta property="og:description" content="Marketing, ventas y un orquestador que lo conecta todo. Aquí está el plano completo que prometí en el video, con los prompts para montarlo, y cómo hicimos el reel animado."><meta property="og:image" content="poster.jpg"><meta name="theme-color" content="#000000">
+<link rel="icon" href="../logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--ink:#F3F3F3;--mut:#A3A3A3;--card:#111;--card2:#161616;--line:#262626;--ac:#00D26A;--ac2:#3DFF9A}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Manrope,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.top{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 24px;background:rgba(0,0,0,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.who{display:flex;align-items:center;gap:12px;min-width:0}
+.who img{width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;background:#222}
+.who b{font-weight:700;font-size:15px;display:flex;align-items:center;gap:5px;white-space:nowrap}
+.who b svg{width:15px;height:15px;flex-shrink:0}
+.who small{display:block;color:var(--mut);font-size:12.5px;line-height:1.2}
+.sub{margin-left:8px;padding:8px 16px;border-radius:999px;background:#fff;color:#000;font-weight:700;font-size:13.5px;text-decoration:none;white-space:nowrap}
+.join{padding:9px 18px;border-radius:999px;border:1px solid #3a3a3a;font-weight:700;font-size:13.5px;text-decoration:none;white-space:nowrap}
+.join:hover{border-color:var(--ac)}
+@media(max-width:640px){.join{display:none}.top{padding:10px 16px}}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:minmax(0,1fr);gap:56px}
+@media(min-width:1040px){.wrap{grid-template-columns:minmax(0,1fr) 260px}}
+main{min-width:0;max-width:880px}
+.hero{padding:56px 0 30px}
+.eyb{font-size:14px;color:var(--mut);font-weight:600}
+h1{font:800 clamp(46px,7.4vw,76px)/1.02 Montserrat,Manrope,sans-serif;letter-spacing:-.02em;margin:14px 0 22px;text-transform:uppercase}
+h1 span{display:block;color:var(--ac)}
+.lead{font-size:17px;color:#d4d4d4;max-width:780px}
+.lead a{color:var(--ac);text-underline-offset:3px}
+h2{font:800 clamp(28px,4vw,38px)/1.15 Montserrat,sans-serif;letter-spacing:-.01em;margin:64px 0 18px}
+h2 .n{color:var(--ac);margin-right:10px}
+h3{font:700 19px/1.3 Montserrat,sans-serif;margin:34px 0 12px}
+h4{margin:0 0 8px;font:700 16px Montserrat,sans-serif}
+.lbl{font-weight:800;font-size:15.5px;margin:4px 0 8px}
+ul.b{margin:0 0 8px;padding-left:22px;color:#d4d4d4}ul.b li{margin:4px 0}
+ul.b li::marker{color:var(--ac)}
+.tools{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.tool p{margin:0 0 12px;color:var(--mut);font-size:14px;line-height:1.55}
+.tool a{color:var(--ac);font-weight:700;font-size:14px;text-decoration:none}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px 18px;margin:12px 0}
+.box>h4{font-size:17px;margin-bottom:12px}
+.g6{display:grid;gap:10px;grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:600px){.g6{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.g6 figure{margin:0}.g6 figcaption{font-size:12.5px;font-weight:700;color:#e5e5e5;margin-bottom:6px}
+.g6 img,.im{width:100%;display:block;border-radius:10px;background:#1a1a1a;aspect-ratio:3/4;object-fit:cover}
+.pr{background:var(--card2);border:1px solid var(--line);border-radius:14px;margin:12px 0;overflow:hidden}
+.pr .ph{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.pr .ph span{font-size:12.5px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.08em}
+.pr pre{margin:0;padding:14px 16px;white-space:pre-wrap;word-break:break-word;font:500 13.5px/1.7 "JetBrains Mono",ui-monospace,Menlo,monospace;color:#e8e8e8}
+.pr.cut pre{max-height:150px;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
+.pr .more{display:none;width:100%;border:0;border-top:1px solid var(--line);background:#141414;color:var(--ac);font:700 13px Manrope;padding:10px;cursor:pointer}
+.pr.cut .more{display:block}
+.bt{display:flex;gap:8px;flex-wrap:wrap}
+.cp{border:0;border-radius:999px;padding:6px 13px;background:var(--ac);color:#03130B;font:800 12.5px Manrope;cursor:pointer}
+.cp.ok{background:#fff}
+.gh{border:1px solid #3a3a3a;border-radius:999px;padding:6px 13px;font:700 12.5px Manrope;text-decoration:none;color:var(--ink)}
+.gh:hover{border-color:var(--ac);color:var(--ac)}
+.ex{display:grid;gap:16px;grid-template-columns:minmax(0,1fr);align-items:start}
+@media(min-width:720px){.ex{grid-template-columns:280px minmax(0,1fr)}}
+.ex .pr{margin:0}
+table.t{width:100%;border-collapse:collapse;font-size:14.5px;background:linear-gradient(160deg,#0b1d17,#050b08);border:1px solid #1d3b2e;border-radius:16px;overflow:hidden}
+.t th,.t td{border:1px solid #1d3b2e;padding:12px 14px;text-align:left;vertical-align:top}
+.t th{font:700 14px Montserrat;color:#fff;background:rgba(0,210,106,.08)}
+.t td:first-child{font:700 15px Montserrat;color:var(--ac);white-space:nowrap}
+.t td{color:#d9e6df}
+.scroll{overflow-x:auto;border-radius:16px}
+.quote{border-left:3px solid var(--ac);background:var(--card);border-radius:0 12px 12px 0;padding:12px 16px;color:#e5e5e5;font-style:italic}
+.st{display:grid;gap:10px;grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:640px){.st{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.st figure{margin:0}.st figcaption{margin-top:6px;font-size:13px;color:var(--mut)}.st figcaption b{display:block;color:var(--ac);font:800 12px Montserrat;letter-spacing:.08em}
+.v{display:grid;gap:16px;grid-template-columns:minmax(0,1fr);align-items:start}
+@media(min-width:720px){.v{grid-template-columns:220px minmax(0,1fr)}}
+.v .im{aspect-ratio:9/16}.v .pr{margin:0}
+.tip{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;color:#d4d4d4;margin:14px 0}
+.tip b{color:var(--ac)}
+aside{display:none}
+@media(min-width:1040px){aside{display:block}.toc{position:sticky;top:84px;padding:56px 0 40px;max-height:calc(100vh - 84px);overflow:auto}}
+.toc h5{margin:0 0 12px;font:700 12px Manrope;letter-spacing:.14em;color:var(--mut)}
+.toc a{display:block;text-decoration:none;font-size:13.5px;color:#d4d4d4;padding:5px 0 5px 12px;border-left:2px solid var(--line)}
+.toc a .n{color:var(--ac);font-weight:800;margin-right:6px}
+.toc a.s{padding-left:24px;font-size:12.5px;color:var(--mut)}
+.toc a.on{border-color:var(--ac);color:#fff}
+footer{border-top:1px solid var(--line);margin-top:70px;padding:26px 24px 40px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;color:var(--mut);font-size:13.5px}
+footer a{color:#d4d4d4;margin-left:16px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,90px);background:var(--ac);color:#03130B;font-weight:800;padding:10px 18px;border-radius:999px;transition:transform .25s;z-index:60}
+.toast.on{transform:translate(-50%,0)}
+
+@media(max-width:640px){
+  body{font-size:15px}.wrap{padding:0 16px;gap:0}.hero{padding:34px 0 16px}
+  h1{font-size:40px;margin:10px 0 16px}h2{font-size:26px;margin:46px 0 14px}h3{font-size:17px;margin:26px 0 10px}
+  .lead{font-size:15.5px}.who img{width:38px;height:38px}.who b{font-size:14px}.sub{padding:7px 13px;font-size:12.5px;margin-left:4px}
+  .box{padding:12px}.g6{gap:8px}.g6 figcaption{font-size:11.5px}
+  .pr pre{font-size:12.5px;padding:12px}.pr .ph{flex-wrap:wrap;padding:9px 12px}.gh,.cp{padding:6px 11px;font-size:12px}
+  .ex .im{max-width:340px}.v .im{max-width:260px}
+  .t th,.t td{padding:9px 10px;font-size:13px}.t td:first-child{font-size:13.5px}
+  .tools{grid-template-columns:1fr}footer{padding:22px 16px 36px}footer a{margin:0 14px 0 0}
+}
+
+.who .lg{width:44px;height:44px;flex-shrink:0}.who .lg svg{width:100%;height:100%}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));margin:10px 0 30px}
+.card{display:block;text-decoration:none;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--ac);transform:translateY(-3px)}
+.card img{width:100%;aspect-ratio:9/12;object-fit:cover;object-position:top;display:block;background:#1a1a1a}
+.card .ci{padding:14px 16px 18px}.card .num{font:800 12px Montserrat;color:var(--ac);letter-spacing:.1em}
+.card h3{margin:6px 0 6px;font-size:19px}.card p{margin:0;color:var(--mut);font-size:14px;line-height:1.5}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.tags span{font-size:11.5px;font-weight:700;border:1px solid #2f2f2f;border-radius:999px;padding:3px 9px;color:#cfcfcf}
+.nuevo{display:inline-block;background:var(--ac);color:#03130B;font:800 11px Montserrat;border-radius:999px;padding:2px 8px;margin-left:8px;vertical-align:2px}
+.top3{display:grid;gap:22px;grid-template-columns:minmax(0,1fr);align-items:start;margin-top:8px}
+@media(min-width:760px){.top3{grid-template-columns:300px minmax(0,1fr)}}
+video.vid{width:100%;max-width:300px;aspect-ratio:9/16;border-radius:16px;background:#111;border:1px solid var(--line);display:block}
+.meta{display:grid;gap:10px;grid-template-columns:repeat(2,minmax(0,1fr));margin:14px 0}
+.meta div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.meta b{display:block;font:800 11px Montserrat;color:var(--ac);letter-spacing:.1em;text-transform:uppercase}.meta span{font-size:14px;color:#e5e5e5}
+.repo{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:12px 0}
+.repo h4{display:flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:15px}
+.repo h4 svg{width:18px;height:18px;flex-shrink:0}
+.repo p{margin:0 0 10px;color:var(--mut);font-size:14px}
+.repo .pr{margin:10px 0 0}
+.paso{counter-increment:paso}
+.fig{margin:12px 0}.fig img{width:100%;border-radius:12px;border:1px solid var(--line);display:block;background:#111}
+.fig figcaption{font-size:12.5px;color:var(--mut);margin-top:6px}
+.dl{display:flex;align-items:center;justify-content:space-between;gap:14px;background:linear-gradient(160deg,#0b1d17,#050b08);border:1px solid #1d3b2e;border-radius:14px;padding:16px 18px;margin:12px 0}
+.dl p{margin:4px 0 0;color:#bcd3c6;font-size:14px}.dl a{flex-shrink:0;background:var(--ac);color:#03130B;font:800 13.5px Manrope;border-radius:999px;padding:10px 18px;text-decoration:none}
+.back{display:inline-block;margin-top:26px;color:var(--mut);font-size:14px;text-decoration:none}.back:hover{color:var(--ac)}
+@media(max-width:640px){.dl{flex-direction:column;align-items:flex-start}video.vid{max-width:260px}.meta{grid-template-columns:1fr 1fr}}
+/* pop-up de email: sale una sola vez por navegador (localStorage ls_lib) y manda el lead al CRM de La Sala */
+.pop{position:fixed;inset:0;z-index:99;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .3s}
+.pop.on{opacity:1;pointer-events:auto}
+.pop .bx{position:relative;width:100%;max-width:420px;background:linear-gradient(160deg,#0c1c16,#050b08);border:1px solid #1d3b2e;border-radius:20px;padding:30px 26px 24px;text-align:center;transform:translateY(16px) scale(.97);transition:transform .35s cubic-bezier(.2,1.4,.4,1)}
+.pop.on .bx{transform:none}
+.pop .x{position:absolute;top:10px;right:12px;background:none;border:0;color:var(--mut);font-size:26px;line-height:1;cursor:pointer;padding:6px}
+.pop .lg{width:52px;height:52px;margin:0 auto 14px}.pop .lg svg{width:100%;height:100%}
+.pop .eb{display:inline-block;border:1px solid var(--ac);color:var(--ac);border-radius:999px;font:800 11px Montserrat;letter-spacing:.12em;padding:5px 12px}
+.pop h3{margin:14px 0 8px;font:800 25px/1.15 Montserrat;color:#fff}.pop h3 span{color:var(--ac)}
+.pop p{margin:0 0 18px;color:#bcd3c6;font-size:15px;line-height:1.5}
+.pop input{width:100%;box-sizing:border-box;background:#000;border:1px solid #2a3a33;border-radius:12px;color:#fff;font:500 16px Manrope;padding:14px 16px;outline:none}
+.pop input:focus{border-color:var(--ac)}.pop input.bad{border-color:#ff5a5a}
+.pop .go{width:100%;margin-top:10px;background:var(--ac);color:#03130B;border:0;border-radius:12px;font:800 16px Manrope;padding:14px;cursor:pointer}
+.pop .go:disabled{opacity:.6}
+.pop .no{margin-top:12px;background:none;border:0;color:var(--mut);font-size:13px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.pop .er{min-height:18px;margin-top:8px;color:#ff7a7a;font-size:13px}
+.pop .ok{display:none}.pop.done .fm{display:none}.pop.done .ok{display:block}
+.pop .ok .ck{width:56px;height:56px;margin:4px auto 12px;border-radius:50%;background:var(--ac);color:#03130B;font:800 30px/56px Montserrat}
+/* ---------- v2: logos, Higgsfield destacado, móvil ---------- */
+.lgo{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:28px;height:28px;border-radius:8px;background:#1b1b1b;border:1px solid #2c2c2c;overflow:hidden}
+.lgo img,.lgo svg{width:64%;height:64%;object-fit:contain;display:block}
+.lgo.full img,.lgo.full svg{width:100%;height:100%}
+.lgo.mono{font:800 13px Montserrat;color:#fff}
+.stack{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px}
+.stack .it{display:inline-flex;align-items:center;gap:8px;background:#0e0e0e;border:1px solid var(--line);border-radius:999px;padding:5px 13px 5px 5px;font:700 13px Manrope;color:#e8e8e8;text-decoration:none}
+.stack .it .lgo{width:26px;height:26px;border-radius:999px}
+.stack .it.hfm{border-color:#D1FE17;background:rgba(209,254,23,.08);color:#D1FE17}
+.stack .lb{width:100%;font:800 11px Montserrat;letter-spacing:.14em;color:var(--mut);margin-bottom:2px}
+.hf{position:relative;overflow:hidden;border-radius:20px;padding:22px 22px 20px;margin:26px 0 8px;background:radial-gradient(120% 140% at 100% 0%,rgba(209,254,23,.20),transparent 55%),linear-gradient(160deg,#161a07,#070803);border:1px solid rgba(209,254,23,.45)}
+.hf .hd{display:flex;align-items:center;gap:14px}
+.hf .hd .lgo{width:54px;height:54px;border-radius:14px;border:0;background:none}
+.hf .eb{display:inline-block;font:800 10.5px Montserrat;letter-spacing:.14em;color:#0b0b0b;background:#D1FE17;border-radius:999px;padding:3px 9px}
+.hf h3{margin:7px 0 0;font:800 22px/1.15 Montserrat;color:#fff}
+.hf p{margin:14px 0 12px;color:#dfe6c4;font-size:15px;line-height:1.55}
+.hf ul{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:7px}
+.hf li{display:flex;gap:9px;align-items:flex-start;color:#eef3d9;font-size:14.5px}
+.hf li:before{content:"";flex-shrink:0;width:7px;height:7px;margin-top:8px;border-radius:2px;background:#D1FE17}
+.hf .go{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#D1FE17;color:#0b0b0b;font:800 16px Manrope;border-radius:14px;padding:15px 18px;text-decoration:none;box-shadow:0 10px 30px -10px rgba(209,254,23,.6)}
+.hf .go:hover{filter:brightness(1.05)}
+.hf small{display:block;text-align:center;margin-top:9px;color:#a9b18c;font-size:12.5px}
+@media(min-width:760px){.hf{padding:26px 28px}.hf .go{width:auto;display:inline-flex}.hf small{text-align:left}}
+.tool{display:flex;flex-direction:column}
+.tool .th{display:flex;align-items:center;gap:12px;margin-bottom:10px}.tool .th h4{margin:0}
+.tool .th .lgo{width:40px;height:40px;border-radius:11px}
+.tool a{margin-top:auto}
+.tool.main{border-color:rgba(209,254,23,.55);background:linear-gradient(160deg,#141805,#0b0b0b)}
+.tool.main a{color:#D1FE17}
+.tool .pb{margin-left:auto;font:800 10px Montserrat;letter-spacing:.12em;color:#0b0b0b;background:#D1FE17;border-radius:999px;padding:3px 8px}
+.hero h1.rt{font-size:clamp(34px,4.4vw,52px);line-height:1.05}
+.mtoc{display:none}
+.hfbar{display:none}
+video.vid{box-shadow:0 20px 60px -20px rgba(0,210,106,.35)}
+.card .ls{display:flex;gap:4px;margin-top:9px}.card .ls .lgo{width:22px;height:22px;border-radius:6px}
+@media(max-width:1039px){
+  .mtoc{display:flex;gap:8px;overflow-x:auto;position:sticky;top:64px;z-index:20;margin:0 -16px;padding:10px 16px;background:rgba(0,0,0,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);scrollbar-width:none}
+  .mtoc::-webkit-scrollbar{display:none}
+  .mtoc a{flex-shrink:0;text-decoration:none;font:700 12.5px Manrope;color:#d4d4d4;border:1px solid #2c2c2c;border-radius:999px;padding:6px 12px;white-space:nowrap}
+  .mtoc a .n{color:var(--ac);margin-right:5px}
+  .mtoc a.on{background:var(--ac);border-color:var(--ac);color:#03130B}.mtoc a.on .n{color:#03130B}
+}
+@media(max-width:640px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:4px 0 24px}.card{border-radius:12px}.card:hover{transform:none}
+  .card img{aspect-ratio:4/5}.card .ci{padding:9px 10px 12px}.card .num{font-size:10.5px;letter-spacing:.06em}.nuevo{font-size:9px;padding:1px 6px;margin-left:5px}
+  .card h3{font-size:14px;line-height:1.25;margin:4px 0 0}.card p,.card .tags{display:none}.card .ls .lgo{width:20px;height:20px}
+  .mtoc{top:58px}
+  .hero h1.rt{font-size:30px;line-height:1.08;margin:8px 0 12px}
+  .top3{gap:16px}video.vid{max-width:none;width:78%;margin:0 auto}
+  .meta{gap:8px}.meta div{padding:9px 12px}.meta span{font-size:13px}
+  .hf{margin:22px -4px 6px;padding:18px 16px}.hf h3{font-size:19px}.hf .hd .lgo{width:46px;height:46px}
+  .tool{padding:16px}
+  .hfbar{display:flex;align-items:center;gap:10px;position:fixed;left:10px;right:10px;bottom:10px;z-index:40;background:#D1FE17;color:#0b0b0b;border-radius:14px;padding:9px 10px 9px 12px;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.55);transform:translateY(130%);transition:transform .3s}
+  .hfbar.on{transform:none}
+  .hfbar .lgo{width:30px;height:30px;border:0;background:#0b0b0b;border-radius:8px}
+  .hfbar b{font:800 13.5px Manrope;line-height:1.2}.hfbar b small{display:block;font:600 11.5px Manrope;opacity:.75}
+  .hfbar span.cta{margin-left:auto;background:#0b0b0b;color:#D1FE17;font:800 12.5px Manrope;border-radius:10px;padding:8px 11px;white-space:nowrap}
+  footer{padding-bottom:90px}
+}
+</style></head><body>
+<header class="top"><div class="who"><span class="lg"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="#00D26A"/><circle cx="14" cy="16" r="2.6" fill="#000"/><circle cx="26" cy="16" r="2.6" fill="#000"/><rect x="13" y="25" width="14" height="2.6" rx="1.3" fill="#000"/></svg></span><div><b>La Sala de IA <svg viewBox="0 0 24 24"><path fill="#A3A3A3" d="M12 2l2.4 2.2 3.2-.4.9 3.1 2.9 1.5-1.1 3 1.1 3-2.9 1.5-.9 3.1-3.2-.4L12 22l-2.4-2.2-3.2.4-.9-3.1-2.9-1.5 1.1-3-1.1-3 2.9-1.5.9-3.1 3.2.4z"/><path fill="#000" d="M10.6 15.4l-3-3 1.4-1.4 1.6 1.6 4.4-4.4 1.4 1.4z"/></svg></b><small>Librería de videos</small></div>
+<a class="sub" href="https://instagram.com/lasaladeia" target="_blank" rel="noopener">Seguir</a></div>
+<a class="join" href="https://lasaladeia.com/?utm_source=libreria" target="_blank" rel="noopener">Únete a La Sala de IA</a></header><div class="wrap"><main><a class="back" href="../">← Toda la librería</a>
+<div class="hero" style="padding-top:22px"><div class="eyb">Receta #010 · 2026-11-28</div>
+<h1 class="rt">El plano: 56 agentes de IA que manejan una empresa de una sola persona</h1><p class="lead">Marketing, ventas y un orquestador que lo conecta todo. Aquí está el plano completo que prometí en el video, con los prompts para montarlo, y cómo hicimos el reel animado.</p><div class="stack"><div class="lb">HECHO CON</div><a class="it hfm" href="https://higgsfield.ai?fpr=kecatire" target="_blank" rel="noopener"><span class="lgo full"><img src="../logos/higgsfield.svg" alt="" loading="lazy"></span>Higgsfield</a><span class="it"><span class="lgo "><img src="../logos/claude.svg" alt="" loading="lazy"></span>Claude Code</span><span class="it"><span class="lgo "><img src="../logos/elevenlabs.svg" alt="" loading="lazy"></span>ElevenLabs</span><span class="it"><span class="lgo mono">M</span>ManyChat</span><span class="it"><span class="lgo mono">H</span>HubSpot</span></div>
+<div class="top3"><video class="vid" src="video.mp4" poster="poster.jpg" controls playsinline preload="metadata"></video>
+<div><p class="lead" style="margin-top:0">Ventas y marketing no es un embudo, es un ciclo. Marketing detecta lo que está en tendencia, crea el contenido y lo publica; ventas atrapa cada lead en un solo lugar, lo califica, agenda la llamada y cobra el depósito; y el orquestador (Claude Code por MCP) lee lo que de verdad se vendió y se lo devuelve a investigación para que la semana siguiente haga más de lo que funcionó. Tú solo das el sí final, la marca y el presupuesto.</p><div class="meta"><div><b>Formato</b><span>Reel 9:16 · 2:08 · motion graphics</span></div><div><b>Costo</b><span>14 créditos de Higgsfield (7 fotos con Nano Banana Pro) · la voz sale de tu plan de ElevenLabs (≈4,600 caracteres) · la animación es código, no cuesta créditos</span></div><div><b>Tiempo</b><span>El video: unas 4 horas con Claude Code. El sistema: un fin de semana para la primera versión</span></div><div><b>Pasos</b><span>6</span></div></div>
+<div class="tip"><b>Referencia:</b> Réplica en español de un reel en inglés de puro motion graphic: plano general de los agentes, rueda de 6 equipos y tres módulos (marketing naranja, ventas verde, orquestador morado). Lo rehicimos escena por escena en Remotion con la voz clonada de Kevin.</div><div class="tags"><span>Claude Code</span><span>MCP</span><span>Agentes</span><span>Ventas</span><span>Marketing</span><span>Remotion</span></div></div></div></div>
+<section class="hf"><div class="hd"><span class="lgo full"><img src="../logos/higgsfield.svg" alt="" loading="lazy"></span><div><span class="eb">LA HERRAMIENTA PRINCIPAL</span><h3>Este video se hizo en Higgsfield</h3></div></div>
+<p>Es la plataforma que más usamos en La Sala para crear video con IA: todos los modelos importantes en un solo lugar, sin tener que pagar cada uno por separado.</p>
+<ul><li>Video con Seedance 2.5 y otros modelos de video</li><li>Imágenes y hojas de personaje con Nano Banana Pro</li><li>Lip-sync, voces y efectos de sonido</li></ul>
+<a class="go" href="https://higgsfield.ai?fpr=kecatire" target="_blank" rel="noopener">Crear mi cuenta en Higgsfield →</a>
+<small>Con este link nos apoyas a seguir subiendo recetas gratis.</small></section><nav class="mtoc"><a href="#herramientas">Herramientas</a><a href="#repos">Repos para descargar</a><a href="#paso-1"><span class="n">01</span>El plano completo: 56 ag…</a><a href="#paso-2"><span class="n">02</span>Escribe tus archivos una…</a><a href="#paso-3"><span class="n">03</span>Marketing: de la tendenc…</a><a href="#paso-4"><span class="n">04</span>Ventas: todo cae en una…</a><a href="#paso-5"><span class="n">05</span>El orquestador: Claude C…</a><a href="#paso-6"><span class="n">06</span>Cómo hicimos el video</a><a href="#descargas">Descargas</a></nav>
+<h2 id="herramientas">Herramientas</h2><div class="tools"><div class="tool main"><div class="th"><span class="lgo full"><img src="../logos/higgsfield.svg" alt="" loading="lazy"></span><h4>Higgsfield</h4><span class=pb>PRINCIPAL</span></div><p>Crea los visuales de cada post (y las fotos de este video).</p><a href="https://higgsfield.ai?fpr=kecatire" target="_blank" rel="noopener">Crear mi cuenta →</a></div><div class="tool"><div class="th"><span class="lgo "><img src="../logos/claude.svg" alt="" loading="lazy"></span><h4>Claude Code</h4></div><p>El orquestador: lee tus archivos, habla con tus herramientas por MCP y le asigna cada tarea al agente que toca.</p><a href="https://claude.com/claude-code" target="_blank" rel="noopener">Instalar Claude Code →</a></div><div class="tool"><div class="th"><span class="lgo "><img src="../logos/elevenlabs.svg" alt="" loading="lazy"></span><h4>ElevenLabs</h4></div><p>La voz en off del video, con el clon de tu voz.</p><a href="https://elevenlabs.io" target="_blank" rel="noopener">Abrir ElevenLabs →</a></div><div class="tool"><div class="th"><span class="lgo mono">M</span><h4>ManyChat</h4></div><p>Responde DMs y comentarios con tu voz y entrega lo que prometes.</p><a href="https://manychat.com" target="_blank" rel="noopener">Abrir ManyChat →</a></div><div class="tool"><div class="th"><span class="lgo mono">H</span><h4>HubSpot</h4></div><p>La bandeja única: CRM donde caen todos los leads y donde se califican.</p><a href="https://www.hubspot.com" target="_blank" rel="noopener">Abrir HubSpot →</a></div><div class="tool"><div class="th"><span class="lgo full" style="border:0;background:none"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="#00D26A"/><circle cx="14" cy="16" r="2.6" fill="#000"/><circle cx="26" cy="16" r="2.6" fill="#000"/><rect x="13" y="25" width="14" height="2.6" rx="1.3" fill="#000"/></svg></span><h4>La Sala de IA</h4></div><p>Aquí montamos estos sistemas juntos, paso a paso.</p><a href="https://lasaladeia.com/?utm_source=libreria" target="_blank" rel="noopener">Unirme a La Sala →</a></div></div><h2 id="repos">Repos para descargar</h2><div class="repo"><h4><svg viewBox="0 0 16 16"><path fill="#A3A3A3" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>remotion-dev/remotion</h4><p>El motor del video: todas las escenas son componentes de React que se animan con el tiempo de la voz.</p><div class="bt"><a class="gh" href="https://github.com/remotion-dev/remotion" target="_blank" rel="noopener">Abrir en GitHub →</a></div><div class="pr"><div class="ph"><span>instalar</span><div class="bt"><button class="cp">Copiar comando</button></div></div><pre>npx create-video@latest</pre></div></div><div class="repo"><h4><svg viewBox="0 0 16 16"><path fill="#A3A3A3" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>modelcontextprotocol/servers</h4><p>Servidores MCP oficiales para conectar Claude Code a tus archivos, Google Drive, Slack y más.</p><div class="bt"><a class="gh" href="https://github.com/modelcontextprotocol/servers" target="_blank" rel="noopener">Abrir en GitHub →</a></div><div class="pr"><div class="ph"><span>instalar</span><div class="bt"><button class="cp">Copiar comando</button></div></div><pre>npx @modelcontextprotocol/server-filesystem ~/mi-empresa</pre></div></div><div class="repo"><h4><svg viewBox="0 0 16 16"><path fill="#A3A3A3" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>facebookresearch/demucs</h4><p>Separa la voz de la música de un video de referencia para quedarte solo con la música y los efectos.</p><div class="bt"><a class="gh" href="https://github.com/facebookresearch/demucs" target="_blank" rel="noopener">Abrir en GitHub →</a></div><div class="pr"><div class="ph"><span>instalar</span><div class="bt"><button class="cp">Copiar comando</button></div></div><pre>pip install demucs</pre></div></div><div class="repo"><h4><svg viewBox="0 0 16 16"><path fill="#A3A3A3" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.34.66.07-.52.28-.87.51-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>SYSTRAN/faster-whisper</h4><p>Transcribe la referencia palabra por palabra para copiar los tiempos de cada escena.</p><div class="bt"><a class="gh" href="https://github.com/SYSTRAN/faster-whisper" target="_blank" rel="noopener">Abrir en GitHub →</a></div><div class="pr"><div class="ph"><span>instalar</span><div class="bt"><button class="cp">Copiar comando</button></div></div><pre>pip install faster-whisper</pre></div></div><h2 id="paso-1"><span class="n">01</span>El plano completo: 56 agentes en 6 equipos</h2><p class="lead">Marketing tiene 28 agentes en 5 equipos (investigación, contenido, distribución, comunidad y anuncios). Ventas tiene 22 (captura de leads, calificación, citas, cotizaciones y reseñas). Encima va el orquestador. Cada agente es una tarea pequeña con una herramienta: no hace falta montarlos todos el primer día. Empieza por los que más tiempo te quitan.</p><figure class="fig"><img src="plano.jpg" alt="El plano general con los 56 agentes" loading="lazy"><figcaption>El plano general con los 56 agentes</figcaption></figure><h2 id="paso-2"><span class="n">02</span>Escribe tus archivos una sola vez</h2><p class="lead">Todo el sistema lee los mismos archivos de texto: cómo hablas, qué vendes, qué necesita tu permiso y qué le importa a tu cliente. No es una base de datos, son archivos simples en una carpeta. Pídele a Claude que te los arme haciéndote preguntas.</p><figure class="fig"><img src="archivos.jpg" alt="voz.md, oferta.md y reglas.md" loading="lazy"><figcaption>voz.md, oferta.md y reglas.md</figcaption></figure><div class="pr cut"><div class="ph"><span>Prompt para Claude Code: crear tus archivos de conocimiento</span><div class="bt"><button class="cp">Copiar prompt</button></div></div><pre>Quiero montar un sistema de agentes para mi negocio. Antes de nada, hazme una entrevista corta (una pregunta a la vez, máximo 12 preguntas) y con mis respuestas crea esta carpeta:
+
+conocimiento/
+  voz.md       → cómo hablo: tono, frases que uso, palabras que nunca uso, ejemplos de mis mejores posts
+  oferta.md    → qué vendo, precios, paquetes, garantías, tiempos de entrega
+  clientes.md  → quién me compra, qué le importa, objeciones típicas, palabras que usa
+  reglas.md    → qué puede hacer el sistema solo y qué necesita mi sí (ej: cotizaciones de más de $[MONTO], publicar, responder quejas)
+  tendencias.md → temas de mi nicho que vale la pena vigilar
+
+Mi negocio: [DESCRIBE TU NEGOCIO EN 2 LÍNEAS]. Escribe todo en español, corto y concreto.</pre><button class="more">Ver completo</button></div><h2 id="paso-3"><span class="n">03</span>Marketing: de la tendencia al post publicado</h2><p class="lead">Un tema se dispara en Google Trends, Semrush o SparkToro y el mismo cerebro lo cruza con clientes.md para sacar 3 ángulos. Claude escribe el post, Higgsfield crea el visual, Remotion renderiza el video y Metricool lo publica en cada red a la hora en que pega. ManyChat responde comentarios y DMs con tu voz. Nada sale sin tu sí.</p><figure class="fig"><img src="marketing.jpg" alt="Módulo 01 · Marketing" loading="lazy"><figcaption>Módulo 01 · Marketing</figcaption></figure><div class="pr"><div class="ph"><span>Prompt para Claude Code: agente de investigación + contenido</span><div class="bt"><button class="cp">Copiar prompt</button></div></div><pre>Lee conocimiento/clientes.md y conocimiento/tendencias.md. Busca qué temas de mi nicho están subiendo esta semana [PEGA AQUÍ LO QUE TE DIO GOOGLE TRENDS / SEMRUSH] y crúzalos con lo que le importa a mis clientes. Dame 3 ángulos para esta semana, y por cada ángulo: un hook de una línea, el guion de un reel de 30 segundos con mi voz (conocimiento/voz.md) y el prompt de imagen en inglés para el visual. No publiques nada: déjalo en borradores/ y avísame por Slack con un resumen para que yo diga sí o editar.</pre></div><div class="pr"><div class="ph"><span>Prompt de imagen para el visual del post (Higgsfield · Nano Banana Pro · 3:4)</span><div class="bt"><a class="gh" href="https://higgsfield.ai?fpr=kecatire" target="_blank" rel="noopener">Abrir →</a><button class="cp">Copiar prompt</button></div></div><pre>Interior photo of [TU PRODUCTO O RESULTADO, ej. a small narrow modern kitchen with sage green cabinets and a white quartz worktop], soft daylight from a window, clean and minimal, realistic architectural photography, natural light, no text.</pre></div><h2 id="paso-4"><span class="n">04</span>Ventas: todo cae en una sola bandeja</h2><p class="lead">Llamadas (CallRail), formularios y DMs (ManyChat) caen en HubSpot. HubSpot califica cada lead, te pasa el contacto de los que están listos y nutre al resto. Cuando dicen que sí, Calendly agenda la llamada en tu calendario y Twilio les escribe para confirmar. Después la cotización (PandaDoc) y el depósito (Stripe). Nadie persigue a nadie.</p><figure class="fig"><img src="ventas.jpg" alt="Módulo 02 · Ventas" loading="lazy"><figcaption>Módulo 02 · Ventas</figcaption></figure><div class="pr"><div class="ph"><span>Prompt para Claude Code: reglas de calificación de leads</span><div class="bt"><button class="cp">Copiar prompt</button></div></div><pre>Lee conocimiento/oferta.md y conocimiento/clientes.md. Escríbeme las reglas para calificar leads de 0 a 100 (qué suma y qué resta: presupuesto, urgencia, encaje con lo que vendo, si pidió llamada). Con 80 o más → me mandas su ficha por Slack y le mandas mi link de Calendly [TU LINK]. De 50 a 79 → secuencia de nutrición de 3 mensajes con mi voz. Menos de 50 → respuesta amable y cierre. Guárdalo en conocimiento/calificacion.md y dime qué propiedades tengo que crear en HubSpot.</pre></div><h2 id="paso-5"><span class="n">05</span>El orquestador: Claude Code por MCP</h2><p class="lead">Claude Code va arriba y lo conecta todo: por MCP entra a tu CRM, tu calendario y tus canales, y antes de cada tarea lee tus archivos. Cada venta alimenta Looker Studio; el orquestador lee qué cerró de verdad y se lo devuelve a investigación, así la semana siguiente hace más de lo que funcionó. Cero hojas de cálculo.</p><figure class="fig"><img src="orquestador.jpg" alt="Módulo 03 · Orquestador" loading="lazy"><figcaption>Módulo 03 · Orquestador</figcaption></figure><div class="pr"><div class="ph"><span>Prompt para Claude Code: el ciclo semanal</span><div class="bt"><button class="cp">Copiar prompt</button></div></div><pre>Cada lunes a las 8:00: 1) lee las ventas cerradas y perdidas de la semana en [HUBSPOT / TU CRM]; 2) dime qué tipo de cliente y qué ángulo cerró más (con números); 3) actualiza conocimiento/tendencias.md con lo que funcionó; 4) planifica los 5 posts de la próxima semana dándole más espacio al ángulo ganador; 5) mándame por Slack un resumen de 5 líneas: posts listos, leads, llamadas, ventas y lo que está esperando mi sí. No hagas nada que conocimiento/reglas.md diga que necesita mi permiso.</pre></div><h2 id="paso-6"><span class="n">06</span>Cómo hicimos el video</h2><p class="lead">Claude separó la música de la referencia con Demucs, la transcribió con faster-whisper para sacar el tiempo de cada frase y reconstruyó las 25 escenas en Remotion como componentes (contadores, péndulo, relojes de arena, rampa de leads, dominó, interruptor…). La voz es el clon de Kevin en ElevenLabs y cada animación está anclada a la palabra exacta. Las fotos de la clienta, los leads y la cocina salieron de Higgsfield.</p><figure class="fig"><img src="rueda.jpg" alt="La rueda: 56 agentes · 6 equipos" loading="lazy"><figcaption>La rueda: 56 agentes · 6 equipos</figcaption></figure><div class="pr"><div class="ph"><span>Prompt para Claude Code: replicar un reel de motion graphics</span><div class="bt"><button class="cp">Copiar prompt</button></div></div><pre>Replica este video en español: [RUTA DEL VIDEO]. Pasos: 1) sácale fotogramas cada 0.5 s y hazme una hoja de contacto para ver todas las escenas; 2) transcríbelo con faster-whisper con tiempos por palabra; 3) separa la música con Demucs (htdemucs) y guarda todo menos la voz; 4) traduce el guion a español latino frase por frase y genera la voz con mi clon de ElevenLabs (modelo eleven_v4) con tiempos por carácter; 5) monta un proyecto de Remotion 1080x1920 donde cada escena sea un componente y cada animación se dispare en el segundo de la frase que le toca; 6) usa los logos reales de cada herramienta que se menciona. Muéstrame fotogramas de cada escena antes de renderizar.</pre></div><h2 id="descargas">Descargas</h2><div class="dl"><div><h4>Kit del video</h4><p>El proyecto de Remotion completo de este reel (plano de 56 agentes, rueda, los 3 módulos con sus 15 escenas animadas y los subtítulos) + los scripts de voz, tiempos y música. Incluye los logos. No incluye la voz ni la música: pon las tuyas en public/.</p></div><a href="kit-sistema-56-agentes.zip" download>Descargar</a></div>
+<a class="back" href="../">← Volver a la librería</a></main><aside><nav class="toc"><h5>CONTENIDO</h5><a href="#herramientas">Herramientas</a><a href="#repos">Repos para descargar</a><a href="#paso-1"><span class="n">01</span>El plano completo: 56 agentes en 6 equipos</a><a href="#paso-2"><span class="n">02</span>Escribe tus archivos una sola vez</a><a href="#paso-3"><span class="n">03</span>Marketing: de la tendencia al post publicado</a><a href="#paso-4"><span class="n">04</span>Ventas: todo cae en una sola bandeja</a><a href="#paso-5"><span class="n">05</span>El orquestador: Claude Code por MCP</a><a href="#paso-6"><span class="n">06</span>Cómo hicimos el video</a><a href="#descargas">Descargas</a></nav></aside></div><a class="hfbar" id="hfbar" href="https://higgsfield.ai?fpr=kecatire" target="_blank" rel="noopener"><span class="lgo full"><img src="../logos/higgsfield.svg" alt="" loading="lazy"></span><b>Hecho con Higgsfield<small>Crea tu cuenta y hazlo tú</small></b><span class="cta">Empezar →</span></a><footer><span>© 2026 La Sala de IA</span><span><a href="https://lasaladeia.com/?utm_source=libreria" target="_blank" rel="noopener">La Sala de IA</a><a href="https://instagram.com/lasaladeia" target="_blank" rel="noopener">Instagram</a></span></footer>
+<div class="toast" id="toast">¡Copiado!</div><div class="pop" id="pop" role="dialog" aria-modal="true" aria-labelledby="pop-t"><div class="bx"><button class="x" aria-label="Cerrar">×</button>
+<div class="fm"><div class="lg"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="#00D26A"/><circle cx="14" cy="16" r="2.6" fill="#000"/><circle cx="26" cy="16" r="2.6" fill="#000"/><rect x="13" y="25" width="14" height="2.6" rx="1.3" fill="#000"/></svg></div><span class="eb">LIBRERÍA GRATIS</span>
+<h3 id="pop-t">Te mandamos cada <span>receta nueva</span></h3>
+<p>Cada video que hacemos con IA, desarmado: los prompts exactos y los repos. Déjanos tu email y te llega apenas lo subimos.</p>
+<form novalidate><input type="email" name="email" placeholder="tu@email.com" autocomplete="email" inputmode="email" required>
+<button class="go" type="submit">Quiero las recetas</button><div class="er"></div></form>
+<button class="no" type="button">Ahora no, solo quiero mirar</button></div>
+<div class="ok"><div class="ck">✓</div><h3>¡Listo, ya estás <span>dentro</span>!</h3><p>Disfruta la librería. La próxima receta te llega al correo.</p></div>
+</div></div><script>
+document.querySelectorAll('.pr').forEach(function(b){var pre=b.querySelector('pre'),c=b.querySelector('.cp'),m=b.querySelector('.more');
+ c&&c.addEventListener('click',function(){var t=pre.innerText,l=c.textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).catch(function(){var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();});
+  c.textContent='¡Copiado!';c.classList.add('ok');var o=document.getElementById('toast');o.classList.add('on');setTimeout(function(){c.textContent=l;c.classList.remove('ok');o.classList.remove('on');},1500);});
+ m&&m.addEventListener('click',function(){b.classList.remove('cut');});});
+var L=[].slice.call(document.querySelectorAll('.toc a')),S=L.map(function(a){return document.querySelector(a.getAttribute('href'));});
+(function(){var K='ls_lib',st;try{st=localStorage.getItem(K);}catch(e){}if(st)return;
+ var P=document.getElementById('pop'),F=P.querySelector('form'),I=F.querySelector('input'),B=F.querySelector('.go'),R=P.querySelector('.er');
+ function marca(v){try{localStorage.setItem(K,v);}catch(e){}}
+ function cierra(){P.classList.remove('on');document.body.style.overflow='';}
+ setTimeout(function(){P.classList.add('on');document.body.style.overflow='hidden';},1500);
+ P.querySelector('.x').onclick=P.querySelector('.no').onclick=function(){marca('cerrado');cierra();};
+ P.addEventListener('click',function(ev){if(ev.target===P){marca('cerrado');cierra();}});
+ F.addEventListener('submit',function(ev){ev.preventDefault();var m=I.value.trim().toLowerCase();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(m)){I.classList.add('bad');R.textContent='Revisa tu email.';return;}
+  I.classList.remove('bad');R.textContent='';B.disabled=true;B.textContent='Enviando…';
+  var q=new URLSearchParams(location.search),src=q.get('utm_source')||q.get('src')||'',pg=location.pathname.replace(/^\/libreria\/?/,'').replace(/\/$/,'')||'portada';
+  fetch('https://script.google.com/macros/s/AKfycbx4lMpMjSD4aGnMNOdu3DwnnV8XITHB6t2smF7vh5KYa-OdztslQIxufsgmWrbaI32J/exec',{method:'POST',mode:'no-cors',body:JSON.stringify({nombre:'',email:m,phone:'',goal:'Librería · '+pg+(src?' · src:'+src:'')})}).catch(function(){});
+  marca('email');setTimeout(function(){P.classList.add('done');setTimeout(cierra,2200);},600);});
+})();
+addEventListener('scroll',function(){var y=scrollY+130,k=0;S.forEach(function(s,i){if(s&&s.getBoundingClientRect().top+scrollY<=y)k=i;});L.forEach(function(a,i){a.classList.toggle('on',i===k);});},{passive:true});
+
+(function(){var b=document.getElementById('hfbar');if(!b)return;var f=document.querySelector('footer');
+ function u(){var y=scrollY,fy=f?f.getBoundingClientRect().top:1e9;b.classList.toggle('on',y>520&&fy>innerHeight-40);}
+ addEventListener('scroll',u,{passive:true});u();})();
+var ML=[].slice.call(document.querySelectorAll('.mtoc a'));
+if(ML.length){addEventListener('scroll',function(){var y=scrollY+150,k=0;ML.forEach(function(a,i){var s=document.querySelector(a.getAttribute('href'));if(s&&s.getBoundingClientRect().top+scrollY<=y)k=i;});
+ ML.forEach(function(a,i){var on=i===k;if(on&&!a.classList.contains('on')){var p=a.parentNode;p.scrollTo({left:a.offsetLeft-16,behavior:'smooth'});}a.classList.toggle('on',on);});},{passive:true});}
+</script></body></html>
